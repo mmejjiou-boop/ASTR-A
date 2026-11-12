@@ -1,0 +1,628 @@
+[
+  {
+    "id": "chevalier",
+    "texte": "classe.chevalier",
+    "statPrincipale": "defense",
+    "armePredilection": "epee",
+    "statsBase": {
+      "force": 9,
+      "intelligence": 3,
+      "agilite": 5,
+      "endurance": 10,
+      "defense": 8,
+      "chance": 4,
+      "vie": 150,
+      "mana": 40
+    },
+    "attaqueBase": {
+      "statUtilisee": "force",
+      "coefficient": 1.0,
+      "recharge": 0.55,
+      "forme": {
+        "type": "melee",
+        "portee": 2.8,
+        "angle": 100
+      }
+    },
+    "competences": {
+      "actives": [
+        "chev_charge"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "epee_rouillee",
+      "bouclier_bois",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#8a9bb0",
+      "secondaire": "#c9a227"
+    }
+  },
+  {
+    "id": "sorcier",
+    "texte": "classe.sorcier",
+    "statPrincipale": "intelligence",
+    "armePredilection": "baton",
+    "statsBase": {
+      "force": 3,
+      "intelligence": 11,
+      "agilite": 5,
+      "endurance": 5,
+      "defense": 3,
+      "chance": 5,
+      "vie": 95,
+      "mana": 110
+    },
+    "attaqueBase": {
+      "statUtilisee": "intelligence",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "sorc_boule_feu"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "baton_apprenti",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#3b4fa8",
+      "secondaire": "#e0e6ff"
+    }
+  },
+  {
+    "id": "mage_noir",
+    "texte": "classe.mage_noir",
+    "statPrincipale": "intelligence",
+    "armePredilection": "grimoire",
+    "statsBase": {
+      "force": 3,
+      "intelligence": 11,
+      "agilite": 4,
+      "endurance": 6,
+      "defense": 3,
+      "chance": 5,
+      "vie": 100,
+      "mana": 105
+    },
+    "attaqueBase": {
+      "statUtilisee": "intelligence",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "mn_malediction"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "grimoire_use",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#2b1e3a",
+      "secondaire": "#8f3fd1"
+    }
+  },
+  {
+    "id": "archer",
+    "texte": "classe.archer",
+    "statPrincipale": "agilite",
+    "armePredilection": "arc",
+    "statsBase": {
+      "force": 4,
+      "intelligence": 4,
+      "agilite": 11,
+      "endurance": 6,
+      "defense": 4,
+      "chance": 6,
+      "vie": 105,
+      "mana": 60
+    },
+    "attaqueBase": {
+      "statUtilisee": "agilite",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "arch_tir_puissant"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "arc_long_simple",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#3f6b35",
+      "secondaire": "#c9b37a"
+    }
+  },
+  {
+    "id": "assassin",
+    "texte": "classe.assassin",
+    "statPrincipale": "chance",
+    "armePredilection": "dagues",
+    "statsBase": {
+      "force": 6,
+      "intelligence": 4,
+      "agilite": 9,
+      "endurance": 5,
+      "defense": 3,
+      "chance": 11,
+      "vie": 100,
+      "mana": 60
+    },
+    "attaqueBase": {
+      "statUtilisee": "agilite",
+      "coefficient": 1.0,
+      "recharge": 0.55,
+      "forme": {
+        "type": "melee",
+        "portee": 2.8,
+        "angle": 100
+      }
+    },
+    "competences": {
+      "actives": [
+        "ass_pas_ombre"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "dagues_usees",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#1f1f24",
+      "secondaire": "#b3263a"
+    }
+  },
+  {
+    "id": "paladin",
+    "texte": "classe.paladin",
+    "statPrincipale": "endurance",
+    "armePredilection": "masse",
+    "statsBase": {
+      "force": 8,
+      "intelligence": 6,
+      "agilite": 4,
+      "endurance": 10,
+      "defense": 7,
+      "chance": 4,
+      "vie": 140,
+      "mana": 70
+    },
+    "attaqueBase": {
+      "statUtilisee": "force",
+      "coefficient": 1.0,
+      "recharge": 0.55,
+      "forme": {
+        "type": "melee",
+        "portee": 2.8,
+        "angle": 100
+      }
+    },
+    "competences": {
+      "actives": [
+        "pal_lumiere"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "masse_fer",
+      "bouclier_bois",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#e8e2d0",
+      "secondaire": "#d4af37"
+    }
+  },
+  {
+    "id": "berserker",
+    "texte": "classe.berserker",
+    "statPrincipale": "force",
+    "armePredilection": "hache",
+    "statsBase": {
+      "force": 12,
+      "intelligence": 2,
+      "agilite": 5,
+      "endurance": 8,
+      "defense": 4,
+      "chance": 5,
+      "vie": 135,
+      "mana": 40
+    },
+    "attaqueBase": {
+      "statUtilisee": "force",
+      "coefficient": 1.0,
+      "recharge": 0.55,
+      "forme": {
+        "type": "melee",
+        "portee": 2.8,
+        "angle": 100
+      }
+    },
+    "competences": {
+      "actives": [
+        "bers_tourbillon"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "hache_lourde",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#7a2e1d",
+      "secondaire": "#b0b0b0"
+    }
+  },
+  {
+    "id": "druide",
+    "texte": "classe.druide",
+    "statPrincipale": "intelligence",
+    "armePredilection": "baton",
+    "statsBase": {
+      "force": 5,
+      "intelligence": 10,
+      "agilite": 5,
+      "endurance": 7,
+      "defense": 4,
+      "chance": 4,
+      "vie": 115,
+      "mana": 95
+    },
+    "attaqueBase": {
+      "statUtilisee": "intelligence",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "dru_racines"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "baton_bois_vivant",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#4f7d2c",
+      "secondaire": "#a0d468"
+    }
+  },
+  {
+    "id": "necromancien",
+    "texte": "classe.necromancien",
+    "statPrincipale": "intelligence",
+    "armePredilection": "faux",
+    "statsBase": {
+      "force": 4,
+      "intelligence": 11,
+      "agilite": 4,
+      "endurance": 6,
+      "defense": 4,
+      "chance": 5,
+      "vie": 105,
+      "mana": 100
+    },
+    "attaqueBase": {
+      "statUtilisee": "intelligence",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "necro_drain"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "faux_rouillee",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#2f3a2f",
+      "secondaire": "#9fe0a0"
+    }
+  },
+  {
+    "id": "pretre",
+    "texte": "classe.pretre",
+    "statPrincipale": "intelligence",
+    "armePredilection": "sceptre",
+    "statsBase": {
+      "force": 3,
+      "intelligence": 11,
+      "agilite": 4,
+      "endurance": 7,
+      "defense": 5,
+      "chance": 5,
+      "vie": 110,
+      "mana": 110
+    },
+    "attaqueBase": {
+      "statUtilisee": "intelligence",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "pre_bouclier"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "sceptre_apprenti",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#f5f5f0",
+      "secondaire": "#7fb8ff"
+    }
+  },
+  {
+    "id": "samourai",
+    "texte": "classe.samourai",
+    "statPrincipale": "agilite",
+    "armePredilection": "katana",
+    "statsBase": {
+      "force": 8,
+      "intelligence": 3,
+      "agilite": 10,
+      "endurance": 6,
+      "defense": 5,
+      "chance": 6,
+      "vie": 120,
+      "mana": 50
+    },
+    "attaqueBase": {
+      "statUtilisee": "agilite",
+      "coefficient": 1.0,
+      "recharge": 0.55,
+      "forme": {
+        "type": "melee",
+        "portee": 2.8,
+        "angle": 100
+      }
+    },
+    "competences": {
+      "actives": [
+        "sam_iai"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "katana_simple",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#8b1e1e",
+      "secondaire": "#1c1c1c"
+    }
+  },
+  {
+    "id": "invocateur",
+    "texte": "classe.invocateur",
+    "statPrincipale": "intelligence",
+    "armePredilection": "orbe",
+    "statsBase": {
+      "force": 3,
+      "intelligence": 11,
+      "agilite": 5,
+      "endurance": 6,
+      "defense": 3,
+      "chance": 5,
+      "vie": 100,
+      "mana": 110
+    },
+    "attaqueBase": {
+      "statUtilisee": "intelligence",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "inv_orbe_arcanique"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "orbe_terne",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#2a5d7a",
+      "secondaire": "#7ff0ff"
+    }
+  },
+  {
+    "id": "chasseur",
+    "texte": "classe.chasseur",
+    "statPrincipale": "agilite",
+    "armePredilection": "arc",
+    "statsBase": {
+      "force": 5,
+      "intelligence": 4,
+      "agilite": 10,
+      "endurance": 7,
+      "defense": 4,
+      "chance": 6,
+      "vie": 115,
+      "mana": 60
+    },
+    "attaqueBase": {
+      "statUtilisee": "agilite",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "chas_fleche_piegee"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "arc_court",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#6b4a2b",
+      "secondaire": "#9bbf5a"
+    }
+  },
+  {
+    "id": "elementaliste",
+    "texte": "classe.elementaliste",
+    "statPrincipale": "intelligence",
+    "armePredilection": "gantelets",
+    "statsBase": {
+      "force": 4,
+      "intelligence": 10,
+      "agilite": 6,
+      "endurance": 6,
+      "defense": 4,
+      "chance": 5,
+      "vie": 105,
+      "mana": 105
+    },
+    "attaqueBase": {
+      "statUtilisee": "intelligence",
+      "coefficient": 0.9,
+      "recharge": 0.7,
+      "forme": {
+        "type": "projectile",
+        "vitesse": 30,
+        "portee": 30,
+        "rayon": 0.3
+      }
+    },
+    "competences": {
+      "actives": [
+        "elem_eclair"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "gantelets_runiques",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#2f4f6f",
+      "secondaire": "#ffd84a"
+    }
+  },
+  {
+    "id": "paladin_noir",
+    "texte": "classe.paladin_noir",
+    "statPrincipale": "force",
+    "armePredilection": "epee2m",
+    "statsBase": {
+      "force": 11,
+      "intelligence": 4,
+      "agilite": 4,
+      "endurance": 8,
+      "defense": 6,
+      "chance": 4,
+      "vie": 130,
+      "mana": 50
+    },
+    "attaqueBase": {
+      "statUtilisee": "force",
+      "coefficient": 1.0,
+      "recharge": 0.55,
+      "forme": {
+        "type": "melee",
+        "portee": 2.8,
+        "angle": 100
+      }
+    },
+    "competences": {
+      "actives": [
+        "pn_frappe_sanglante"
+      ],
+      "passive": null,
+      "ultime": null
+    },
+    "equipementDepart": [
+      "epee_noire",
+      "tunique_cuir"
+    ],
+    "couleurs": {
+      "principale": "#1a1a1f",
+      "secondaire": "#a0141e"
+    }
+  }
+]

@@ -1,7 +1,7 @@
 # Étape 0 — Cadrage
 
 Ce document propose l'organisation du projet avant d'écrire le code. Rien n'est codé à cette étape.
-Les points marqués **[à valider]** sont des décisions que le cahier des charges ne fixe pas : dis-moi si tu es d'accord ou ce que tu veux changer.
+Les décisions que le cahier des charges ne fixait pas ont été validées par Mohamed Amine le 12 novembre 2026 (récapitulatif en section 6).
 
 ---
 
@@ -158,7 +158,7 @@ Les formules du cahier des charges, à un seul endroit. Si on veut rééquilibre
 }
 ```
 
-**[à valider] Décisions ajoutées ici, que ton document ne précise pas :**
+**Décisions ajoutées ici, que ton document ne précisait pas (validées) :**
 
 - **« Attaque »** dans la formule des dégâts = attaque de l'arme + 2 × la statistique utilisée par la compétence (force pour le physique, intelligence pour la magie, agilité pour la distance).
 - **Défense des monstres** = 2 + 1,5 × N (ton document donne leur vie et leur attaque, mais pas leur défense).
@@ -185,7 +185,7 @@ Les formules du cahier des charges, à un seul endroit. Si on veut rééquilibre
 }
 ```
 
-**[à valider] Statistique principale de chaque classe** (elle reçoit +2 par niveau) :
+**Statistique principale de chaque classe** (validée) (elle reçoit +2 par niveau) :
 
 | Classe | Stat principale | Arme de prédilection |
 |---|---|---|
@@ -278,7 +278,7 @@ Exemple de **boss**, avec phases et attaques annoncées (`annonce` = délai en s
 
 La **famille** sert au comptage des 50 familles exigées (5 par monde). Une famille peut avoir plusieurs variantes (loup gris, loup alpha).
 
-**[à valider] Cinquième famille du monde 1.** Ton document en cite 4 (loups, sangliers, gobelins, bandits). Je propose les **frelons géants**, un ennemi volant qui oblige à viser en hauteur. On peut aussi prendre les **slimes des rivières**.
+**Cinquième famille du monde 1 (validée : frelons géants).** Ton document en cite 4 (loups, sangliers, gobelins, bandits). Je propose les **frelons géants**, un ennemi volant qui oblige à viser en hauteur. On peut aussi prendre les **slimes des rivières**.
 
 ### 2.6 Objets — `data/objets.json`
 
@@ -486,7 +486,7 @@ Un donjon est une suite de salles reliées par des couloirs. Elles sont construi
 ```
 
 - Le relief est **généré à partir de la graine** : même graine, même monde, à chaque partie. Le fichier reste petit.
-- **Pour que 10 km² ne soient pas vides** : chaque monde aura au moins 25 lieux à découvrir (camps, ruines, points de vue, grottes, sanctuaires d'énigme) et au moins 30 coffres. Le script de vérification les compte. **[à valider]**
+- **Pour que 10 km² ne soient pas vides** : chaque monde aura au moins 25 lieux à découvrir (camps, ruines, points de vue, grottes, sanctuaires d'énigme) et au moins 30 coffres. Le script de vérification les compte.
 - Les camps, ruines et avant-postes sont dans `zones` et `lieux` : ils n'ont pas de PNJ ni de service. Le script vérifie qu'il y a exactement 1 village par monde.
 - `tour.acces` : `escalade` (monde 1, sans danger), `gardee`, `obstacles` ou `enigme` pour les mondes suivants.
 
@@ -543,7 +543,7 @@ Stockée dans le navigateur (`localStorage`, clé `astrea.sauvegarde`), en JSON.
 - **Brouillard** : chaque monde est découpé en 256 × 256 cases d'environ 12,5 m. Une case révélée vaut 1, et le joueur révèle un cercle de 60 m autour de lui. La tour met toute la grille à 1. Ça prend environ 11 Ko par monde, donc environ 110 Ko pour les 10 mondes, ce qui tient largement dans le navigateur.
 - **Export** : bouton « Exporter » qui télécharge `astrea-<nom>-<date>.json`. **Import** : on choisit le fichier, le jeu vérifie la `version` et la structure, puis refuse proprement un fichier invalide.
 - **Version** : si le format change plus tard, une fonction de migration convertit l'ancienne sauvegarde au lieu de la casser.
-- **[à valider]** Un seul emplacement de sauvegarde (une partie à la fois, plus l'export pour garder des copies). On peut passer à 3 emplacements si tu préfères.
+- **Validé :** un seul emplacement de sauvegarde (une partie à la fois, plus l'export pour garder des copies). On peut passer à 3 emplacements si tu préfères.
 - « Continuer » n'apparaît sur l'écran titre que s'il existe une sauvegarde valide.
 
 ---
@@ -629,4 +629,4 @@ Validé par Mohamed Amine le 12 novembre 2026 :
 - **Taille de la carte : 100 km² au total**, soit 10 mondes d'environ 3,2 km × 3,2 km.
 - **Page admin complète** (section 5), construite à l'étape 1b puis enrichie à chaque étape.
 - Les totaux du cahier des charges sont des **minimums**, sauf 1 village et 1 tour par monde (strict).
-- **[à valider]** Au moins 25 lieux et 30 coffres par monde, pour remplir les 10 km².
+- Au moins 25 lieux et 30 coffres par monde, pour remplir les 10 km² : **ok**.

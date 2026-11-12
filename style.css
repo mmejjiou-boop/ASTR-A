@@ -1,0 +1,179 @@
+/* ASTRÉA — interface. Polices système uniquement (aucune police téléchargée). */
+:root {
+  --or: #e8c35a;
+  --or-sombre: #9c7b2c;
+  --fond: rgba(14, 18, 28, 0.86);
+  --fond-clair: rgba(30, 38, 56, 0.9);
+  --texte: #f2eee4;
+  --texte-doux: #b9b4a7;
+  --vie: #d9433b;
+  --mana: #3b7fd9;
+  --endurance: #7cc94a;
+  --xp: #c9a227;
+  --police-titre: Georgia, 'Times New Roman', serif;
+  --police: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0e16;
+  color: var(--texte);
+  font-family: var(--police);
+  user-select: none;
+}
+#jeu, #surcouche, #ui { position: fixed; inset: 0; }
+#jeu canvas { display: block; }
+#surcouche { pointer-events: none; overflow: hidden; }
+#ui { pointer-events: none; }
+#ui > * { pointer-events: auto; }
+#ui > .hud, #ui > .messages { pointer-events: none; }
+[hidden] { display: none !important; }
+
+#chargement {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  font-family: var(--police-titre); font-size: 1.4rem; letter-spacing: 0.2em; color: var(--or);
+  background: #0b0e16;
+}
+#chargement.erreur { color: #ff8a7a; font-family: var(--police); font-size: 1rem; letter-spacing: 0; padding: 2rem; text-align: center; white-space: pre-line; }
+
+/* Boutons */
+.bouton {
+  font: inherit; font-size: 1.05rem; color: var(--texte);
+  background: linear-gradient(180deg, rgba(60, 70, 96, 0.9), rgba(32, 38, 56, 0.95));
+  border: 1px solid var(--or-sombre); border-radius: 6px;
+  padding: 0.75rem 1.6rem; min-width: 260px; cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+.bouton:hover, .bouton:focus-visible { border-color: var(--or); box-shadow: 0 0 14px rgba(232, 195, 90, 0.35); outline: none; }
+.bouton:active { transform: translateY(1px); }
+.bouton:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+.bouton.principal { border-color: var(--or); background: linear-gradient(180deg, #8a6a24, #5a4316); }
+.bouton.discret { min-width: 0; font-size: 0.95rem; padding: 0.55rem 1.1rem; }
+
+/* Écran titre */
+.ecran {
+  position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 35%, rgba(40, 52, 84, 0.55), rgba(8, 10, 18, 0.92));
+}
+.ecran-titre h1 {
+  font-family: var(--police-titre); font-weight: normal; font-size: clamp(3rem, 9vw, 6.5rem);
+  letter-spacing: 0.25em; margin: 0 0 0 0.25em; color: var(--or);
+  text-shadow: 0 0 30px rgba(232, 195, 90, 0.35), 0 4px 0 #3d2e0c;
+}
+.ecran-titre .sous-titre { font-family: var(--police-titre); font-style: italic; color: var(--texte-doux); font-size: 1.2rem; margin: 0.4rem 0 3rem; }
+.ecran-titre .boutons { display: flex; flex-direction: column; gap: 0.8rem; }
+.ecran-titre .version { position: absolute; bottom: 1rem; right: 1.2rem; font-size: 0.8rem; color: var(--texte-doux); }
+
+/* Création du personnage */
+.ecran-creation { justify-content: flex-start; padding: 2rem; overflow-y: auto; }
+.ecran-creation h2 { font-family: var(--police-titre); font-weight: normal; color: var(--or); font-size: 2rem; margin: 0 0 1.2rem; letter-spacing: 0.08em; }
+.creation-corps { display: grid; grid-template-columns: minmax(280px, 1.25fr) minmax(300px, 1fr); gap: 1.5rem; width: min(1150px, 100%); }
+.champ-nom label { display: block; color: var(--texte-doux); margin-bottom: 0.4rem; }
+.champ-nom input {
+  font: inherit; font-size: 1.1rem; width: 100%; padding: 0.6rem 0.8rem; color: var(--texte);
+  background: var(--fond-clair); border: 1px solid var(--or-sombre); border-radius: 6px; user-select: text;
+}
+.champ-nom input:focus { outline: none; border-color: var(--or); }
+.champ-nom .erreur { color: #ff8a7a; font-size: 0.9rem; min-height: 1.3em; margin-top: 0.3rem; }
+.grille-classes { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.55rem; margin-top: 0.6rem; }
+.carte-classe {
+  font: inherit; text-align: left; color: var(--texte); cursor: pointer;
+  background: var(--fond-clair); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; padding: 0.6rem 0.7rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.carte-classe:hover { border-color: var(--or-sombre); }
+.carte-classe.choisie { border-color: var(--or); box-shadow: 0 0 0 1px var(--or) inset, 0 0 14px rgba(232, 195, 90, 0.25); }
+.carte-classe .pastille { width: 22px; height: 22px; border-radius: 50%; flex: none; border: 2px solid rgba(255, 255, 255, 0.5); }
+.carte-classe .nom { font-weight: 600; }
+.carte-classe .role { font-size: 0.75rem; color: var(--texte-doux); }
+.fiche-classe { background: var(--fond); border: 1px solid var(--or-sombre); border-radius: 8px; padding: 1.2rem 1.4rem; align-self: start; position: sticky; top: 0; }
+.fiche-classe h3 { font-family: var(--police-titre); font-weight: normal; font-size: 1.7rem; color: var(--or); margin: 0 0 0.2rem; }
+.fiche-classe .role { color: var(--texte-doux); font-style: italic; margin-bottom: 0.9rem; }
+.fiche-classe dt { color: var(--or); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.7rem; }
+.fiche-classe dd { margin: 0.2rem 0 0; line-height: 1.4; }
+.fiche-classe .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; margin-top: 0.9rem; font-size: 0.92rem; }
+.fiche-classe .stats span:nth-child(even) { text-align: right; font-variant-numeric: tabular-nums; }
+.fiche-classe .stats .principale { color: var(--or); font-weight: 600; }
+.creation-actions { display: flex; gap: 0.8rem; margin-top: 1.4rem; width: min(1150px, 100%); justify-content: flex-end; }
+
+/* HUD */
+.hud { position: fixed; inset: 0; }
+.hud-perso { position: absolute; top: 1rem; left: 1rem; width: 300px; }
+.hud-ligne { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.4rem; text-shadow: 0 1px 3px #000; }
+.hud-nom { font-family: var(--police-titre); font-size: 1.15rem; }
+.hud-niveau { color: var(--or); font-weight: 600; }
+.barre { position: relative; height: 16px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
+.barre .remplissage { position: absolute; inset: 0 auto 0 0; transition: width 0.12s linear; }
+.barre .texte { position: absolute; inset: 0; font-size: 0.72rem; line-height: 15px; text-align: center; text-shadow: 0 1px 2px #000; font-variant-numeric: tabular-nums; }
+.barre.vie .remplissage { background: linear-gradient(180deg, #ef5a50, #a82a24); }
+.barre.mana .remplissage { background: linear-gradient(180deg, #5a9bef, #2a5aa8); }
+.barre.endurance { height: 8px; }
+.barre.endurance .remplissage { background: linear-gradient(180deg, #9be06a, #5a9a30); }
+.barre.endurance.epuise .remplissage { background: #c96a3a; }
+.barre.bouclier .remplissage { background: rgba(159, 208, 255, 0.85); }
+.hud-or { color: var(--or); font-variant-numeric: tabular-nums; text-shadow: 0 1px 3px #000; margin-top: 0.3rem; }
+.hud-effets { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.35rem; }
+.hud-effets span { font-size: 0.75rem; padding: 0.1rem 0.4rem; border-radius: 3px; background: rgba(120, 30, 160, 0.7); }
+.hud-xp { position: absolute; left: 50%; bottom: 0.6rem; transform: translateX(-50%); width: min(560px, 60vw); }
+.hud-xp .barre { height: 10px; }
+.hud-xp .barre .remplissage { background: linear-gradient(180deg, #e8c35a, #9c7b2c); }
+.hud-xp .barre .texte { font-size: 0.62rem; line-height: 9px; }
+.hud-actions { position: absolute; left: 50%; bottom: 1.8rem; transform: translateX(-50%); display: flex; gap: 0.5rem; }
+.emplacement { position: relative; width: 58px; height: 58px; border: 1px solid var(--or-sombre); border-radius: 6px; background: var(--fond); overflow: hidden; display: grid; place-items: center; }
+.emplacement .icone { font-size: 0.68rem; text-align: center; padding: 0 3px; line-height: 1.1; }
+.emplacement .touche { position: absolute; top: 2px; left: 4px; font-size: 0.65rem; color: var(--or); }
+.emplacement .recharge { position: absolute; inset: auto 0 0 0; background: rgba(0, 0, 0, 0.7); }
+.emplacement .chrono { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 700; text-shadow: 0 1px 3px #000; }
+.emplacement.sans-mana { border-color: #3b5fa8; }
+.emplacement.sans-mana .icone { opacity: 0.4; }
+.hud-cible { position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); width: 340px; text-align: center; text-shadow: 0 1px 3px #000; }
+.hud-cible .nom { margin-bottom: 0.25rem; }
+.hud-cible .nom em { color: var(--or); font-style: normal; font-size: 0.85rem; }
+.hud-aide { position: absolute; right: 1rem; bottom: 1rem; max-width: 330px; font-size: 0.74rem; color: var(--texte-doux); text-align: right; line-height: 1.5; text-shadow: 0 1px 2px #000; }
+.hud-viseur { position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%; background: rgba(255, 255, 255, 0.6); }
+.hud-cliquer { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--police-titre); font-size: 1.6rem; color: var(--or); background: rgba(0, 0, 0, 0.35); text-shadow: 0 2px 6px #000; }
+
+/* Surcouche : barres de vie des monstres et nombres de dégâts */
+.barre-monstre { position: absolute; width: 70px; margin-left: -35px; transform: translateY(-100%); }
+.barre-monstre .barre { height: 7px; margin: 0; border-radius: 2px; }
+.barre-monstre .niveau { font-size: 0.65rem; text-align: center; text-shadow: 0 1px 2px #000; color: var(--texte); margin-bottom: 1px; }
+.barre-monstre.cible .barre { border-color: var(--or); box-shadow: 0 0 6px var(--or); }
+.marque-cible { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border: 2px solid var(--or); transform: rotate(45deg); box-shadow: 0 0 8px var(--or); }
+.flottant { position: absolute; font-weight: 800; font-size: 1.05rem; text-shadow: 0 2px 3px #000, 0 0 2px #000; white-space: nowrap; transform: translate(-50%, -50%); }
+.flottant.heros { color: #ff6a5a; }
+.flottant.monstre { color: #fff; }
+.flottant.critique { color: #ffd23a; font-size: 1.4rem; }
+.flottant.soin { color: #7cf07a; }
+.flottant.info { color: #cfe0ff; font-size: 0.9rem; font-weight: 600; }
+.flottant.xp { color: var(--or); font-size: 0.9rem; }
+
+/* Messages */
+.messages { position: fixed; top: 22%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.message { padding: 0.45rem 1.1rem; background: var(--fond); border: 1px solid var(--or-sombre); border-radius: 6px; animation: apparaitre 2.4s forwards; }
+.message.grand { font-family: var(--police-titre); font-size: 1.8rem; color: var(--or); background: none; border: none; text-shadow: 0 2px 8px #000; }
+@keyframes apparaitre { 0% { opacity: 0; transform: translateY(8px); } 10%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+/* Écran de mort */
+.ecran-mort { position: fixed; inset: 0; display: grid; place-items: center; background: radial-gradient(ellipse, rgba(60, 0, 0, 0.35), rgba(20, 0, 0, 0.75)); pointer-events: none; }
+.ecran-mort p { font-family: var(--police-titre); font-size: 2.4rem; color: #e8a090; text-shadow: 0 2px 10px #000; }
+
+/* Menu pause */
+.menu { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(5, 7, 12, 0.7); }
+.menu-boite { background: var(--fond); border: 1px solid var(--or-sombre); border-radius: 10px; padding: 1.8rem 2.2rem; display: flex; flex-direction: column; gap: 0.7rem; min-width: 340px; }
+.menu-boite h2 { font-family: var(--police-titre); font-weight: normal; color: var(--or); text-align: center; margin: 0 0 0.6rem; letter-spacing: 0.1em; }
+.menu-boite label { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.menu-boite input[type=range] { width: 160px; }
+.menu-boite .note { font-size: 0.8rem; color: var(--texte-doux); text-align: center; }
+
+/* Outil de test */
+.debug { position: fixed; top: 1rem; right: 1rem; background: rgba(0, 0, 0, 0.75); border: 1px dashed #c96; border-radius: 6px; padding: 0.6rem; font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.35rem; min-width: 170px; }
+.debug strong { color: #fc9; }
+.debug button { font: inherit; padding: 0.25rem 0.5rem; cursor: pointer; }
+
+@media (max-width: 800px) {
+  .creation-corps { grid-template-columns: 1fr; }
+  .hud-aide { display: none; }
+}

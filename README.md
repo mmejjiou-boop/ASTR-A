@@ -6,7 +6,7 @@ Jeu d'aventure et de rôle fantasy en 3D, solo et en monde ouvert, jouable dans 
 
 ## État
 
-En développement : étape 0 (cadrage). Voir [ETAT.md](ETAT.md).
+En développement : étape 1 (prototype jouable). Voir [ETAT.md](ETAT.md).
 
 ## Lancer le jeu
 
@@ -14,6 +14,26 @@ Le jeu utilise des modules JavaScript, il faut donc un petit serveur local :
 
 - **VS Code** : extension *Live Server*, puis clic droit sur `index.html` → *Open with Live Server* ;
 - ou en ligne via **GitHub Pages**.
+
+Ajoute `?debug=1` à l'adresse pour afficher l'outil de test (FPS, triche).
+
+## Commandes
+
+| Action | Touche |
+|---|---|
+| Se déplacer | ZQSD (AZERTY) ou WASD (QWERTY) |
+| Courir | Maj gauche |
+| Sauter | Espace |
+| Roulade d'esquive | C |
+| Attaquer | Clic gauche |
+| Bloquer | Clic droit |
+| Compétence | 1 ou E |
+| Verrouiller une cible | Tab ou clic molette |
+| Menu | Échap |
+
+## Vérifier le contenu
+
+`node outils/verifier.mjs`, ou ouvrir `outils/verification.html` avec le serveur local.
 
 ## Documentation
 

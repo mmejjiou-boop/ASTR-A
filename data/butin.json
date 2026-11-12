@@ -1,0 +1,20 @@
+[
+  {
+    "id": "butin_loup",
+    "or": [
+      2,
+      6
+    ],
+    "tirages": 1,
+    "entrees": []
+  },
+  {
+    "id": "butin_gobelin",
+    "or": [
+      4,
+      10
+    ],
+    "tirages": 1,
+    "entrees": []
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "id": "test",
+  "texte": "monde.test",
+  "test": true,
+  "niveaux": [
+    1,
+    4
+  ],
+  "taille": 400,
+  "terrain": {
+    "graine": 1001,
+    "relief": "collines",
+    "hauteurMax": 14,
+    "echelle": 90,
+    "palette": {
+      "sol": "#7fb34a",
+      "sol2": "#a9c95a",
+      "roche": "#8d8576",
+      "eau": "#3f88c5",
+      "ciel": "#9fd4ff",
+      "brume": "#cfe8f5"
+    },
+    "vegetation": {
+      "arbres": 260,
+      "rochers": 90
+    },
+    "zonePlate": {
+      "centre": [
+        0,
+        0
+      ],
+      "rayon": 25
+    }
+  },
+  "depart": [
+    0,
+    0
+  ],
+  "zones": [
+    {
+      "id": "clairiere_loups",
+      "centre": [
+        70,
+        40
+      ],
+      "rayon": 45,
+      "monstres": [
+        [
+          "loup_gris",
+          5
+        ]
+      ]
+    },
+    {
+      "id": "bois_gobelins",
+      "centre": [
+        -70,
+        -60
+      ],
+      "rayon": 45,
+      "monstres": [
+        [
+          "gobelin_eclaireur",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "colline_mixte",
+      "centre": [
+        40,
+        -110
+      ],
+      "rayon": 40,
+      "monstres": [
+        [
+          "loup_gris",
+          2
+        ],
+        [
+          "gobelin_eclaireur",
+          2
+        ]
+      ]
+    }
+  ]
+}

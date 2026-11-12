@@ -31,6 +31,11 @@ Ce fichier est relu au début de chaque session. Il remplace le « contexte perm
 - Maintenir `outils/verification.html` (et `outils/verifier.mjs`) qui compte le contenu et signale tout écart avec les totaux exigés.
 - Ne pas modifier ce qui fonctionne sans le signaler.
 
+## Tests
+
+- Vérification du contenu : `node outils/verifier.mjs` (doit sortir sans erreur).
+- Test dans un navigateur sans écran : Playwright + Chrome (`/usr/bin/google-chrome`, options SwiftShader), serveur `python3 -m http.server`. `window.astrea.jeu` donne accès au héros et au monde pour les tests.
+
 ## Totaux exigés à la fin (minimums, sauf village et tour : exactement 1 par monde)
 
 15 classes, niveau max 100 · exactement 10 mondes et 10 villages (1 par monde) · 100 quêtes (20 principales, 30 secondaires, 20 chasse, 15 donjon, 15 légendaires) · 20 donjons · 50 familles de monstres · 10 boss · 10 tours.

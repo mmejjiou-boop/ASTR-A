@@ -1,0 +1,375 @@
+[
+  {
+    "id": "epee_rouillee",
+    "texte": "objet.epee_rouillee",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "epee",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 7
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "epee",
+      "couleurs": [
+        "#c9a227",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "baton_apprenti",
+    "texte": "objet.baton_apprenti",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "baton",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "baton",
+      "couleurs": [
+        "#e0e6ff",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "grimoire_use",
+    "texte": "objet.grimoire_use",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "grimoire",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "grimoire",
+      "couleurs": [
+        "#8f3fd1",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "arc_long_simple",
+    "texte": "objet.arc_long_simple",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "arc",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 7
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "arc",
+      "couleurs": [
+        "#c9b37a",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "dagues_usees",
+    "texte": "objet.dagues_usees",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "dagues",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "dagues",
+      "couleurs": [
+        "#b3263a",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "masse_fer",
+    "texte": "objet.masse_fer",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "masse",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 7
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "masse",
+      "couleurs": [
+        "#d4af37",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "hache_lourde",
+    "texte": "objet.hache_lourde",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "hache",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 9
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "hache",
+      "couleurs": [
+        "#b0b0b0",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "baton_bois_vivant",
+    "texte": "objet.baton_bois_vivant",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "baton",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "baton",
+      "couleurs": [
+        "#a0d468",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "faux_rouillee",
+    "texte": "objet.faux_rouillee",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "faux",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "faux",
+      "couleurs": [
+        "#9fe0a0",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "sceptre_apprenti",
+    "texte": "objet.sceptre_apprenti",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "sceptre",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 5
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "sceptre",
+      "couleurs": [
+        "#7fb8ff",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "katana_simple",
+    "texte": "objet.katana_simple",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "katana",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 8
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "katana",
+      "couleurs": [
+        "#1c1c1c",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "orbe_terne",
+    "texte": "objet.orbe_terne",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "orbe",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "orbe",
+      "couleurs": [
+        "#7ff0ff",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "arc_court",
+    "texte": "objet.arc_court",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "arc",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "arc",
+      "couleurs": [
+        "#9bbf5a",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "gantelets_runiques",
+    "texte": "objet.gantelets_runiques",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "gantelets",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "gantelets",
+      "couleurs": [
+        "#ffd84a",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "epee_noire",
+    "texte": "objet.epee_noire",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "epee2m",
+    "niveauRequis": 1,
+    "stats": {
+      "attaque": 9
+    },
+    "statsAleatoires": 0,
+    "prix": 20,
+    "pileMax": 1,
+    "modele": {
+      "forme": "epee2m",
+      "couleurs": [
+        "#a0141e",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "bouclier_bois",
+    "texte": "objet.bouclier_bois",
+    "type": "armure",
+    "emplacement": "armeSecondaire",
+    "categorie": "bouclier",
+    "niveauRequis": 1,
+    "stats": {
+      "defense": 4
+    },
+    "statsAleatoires": 0,
+    "prix": 18,
+    "pileMax": 1,
+    "modele": {
+      "forme": "bouclier",
+      "couleurs": [
+        "#8b5a2b",
+        "#5a3d2b"
+      ]
+    }
+  },
+  {
+    "id": "tunique_cuir",
+    "texte": "objet.tunique_cuir",
+    "type": "armure",
+    "emplacement": "torse",
+    "categorie": "cuir",
+    "niveauRequis": 1,
+    "stats": {
+      "defense": 2
+    },
+    "statsAleatoires": 0,
+    "prix": 12,
+    "pileMax": 1,
+    "modele": {
+      "forme": "torse",
+      "couleurs": [
+        "#8b6b4a"
+      ]
+    }
+  },
+  {
+    "id": "potion_vie_petite",
+    "texte": "objet.potion_vie_petite",
+    "type": "consommable",
+    "effet": {
+      "soin": 60
+    },
+    "recharge": 3,
+    "prix": 15,
+    "pileMax": 20,
+    "modele": {
+      "forme": "fiole",
+      "couleurs": [
+        "#d33"
+      ]
+    }
+  }
+]

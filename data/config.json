@@ -1,0 +1,130 @@
+{
+  "niveauMax": 100,
+  "xpNiveau": {
+    "base": 100,
+    "exposant": 1.5
+  },
+  "parNiveau": {
+    "vieMana": 0.05,
+    "statPrincipale": 2,
+    "autresStats": 1
+  },
+  "degats": {
+    "diviseurDefense": 2,
+    "variation": 0.1,
+    "multiplicateurCritique": 1.5,
+    "critiqueBase": 0.05,
+    "critiqueParChance": 0.001,
+    "critiqueMax": 0.5,
+    "facteurStatAttaque": 2
+  },
+  "monstre": {
+    "vie": [
+      40,
+      22
+    ],
+    "attaque": [
+      6,
+      2.4
+    ],
+    "xp": [
+      12,
+      5
+    ],
+    "defense": [
+      2,
+      1.5
+    ]
+  },
+  "boss": {
+    "vie": 12,
+    "xp": 20
+  },
+  "raretes": [
+    {
+      "id": "commun",
+      "chance": 0.6,
+      "multiplicateur": 1.0,
+      "couleur": "#c8c8c8"
+    },
+    {
+      "id": "inhabituel",
+      "chance": 0.25,
+      "multiplicateur": 1.15,
+      "couleur": "#5bd16a"
+    },
+    {
+      "id": "rare",
+      "chance": 0.1,
+      "multiplicateur": 1.3,
+      "couleur": "#4a8cff"
+    },
+    {
+      "id": "epique",
+      "chance": 0.04,
+      "multiplicateur": 1.5,
+      "couleur": "#b05bff"
+    },
+    {
+      "id": "legendaire",
+      "chance": 0.009,
+      "multiplicateur": 1.75,
+      "couleur": "#ff9a1f"
+    },
+    {
+      "id": "mythique",
+      "chance": 0.001,
+      "multiplicateur": 2.0,
+      "couleur": "#ff3d5a"
+    }
+  ],
+  "mort": {
+    "perteOr": 0.05,
+    "mondeSansPenalite": [
+      1,
+      "test"
+    ],
+    "delaiReapparition": 2.5
+  },
+  "deplacement": {
+    "marche": 4.5,
+    "course": 8,
+    "vitesseBlocage": 2.2,
+    "saut": 7.5,
+    "gravite": 22,
+    "enduranceMax": 100,
+    "coutCourseParSeconde": 12,
+    "coutRoulade": 20,
+    "coutBlocageParCoup": 15,
+    "recuperationParSeconde": 25,
+    "delaiRecuperation": 0.8,
+    "roulade": {
+      "distance": 5.5,
+      "duree": 0.45,
+      "invincibilite": 0.35
+    }
+  },
+  "monstres": {
+    "reapparition": 60,
+    "distanceActivation": 120
+  },
+  "camera": {
+    "distance": 6,
+    "distanceMin": 2.5,
+    "distanceMax": 12,
+    "hauteur": 1.6,
+    "sensibilite": 0.0025
+  },
+  "sauvegarde": {
+    "cle": "astrea.sauvegarde",
+    "intervalle": 30,
+    "version": 1
+  },
+  "tailleMonde": 3200,
+  "tailleTroncon": 200,
+  "distanceVue": 900,
+  "brouillard": {
+    "grille": 256,
+    "rayonRevele": 60
+  }
+}

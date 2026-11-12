@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>ASTRÉA — Vérification du contenu</title>
+  <link rel="icon" href="data:,">
+  <style>
+    body { font-family: system-ui, sans-serif; background: #12161f; color: #eee; max-width: 860px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-family: Georgia, serif; color: #e8c35a; font-weight: normal; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0 2rem; }
+    td, th { padding: 0.5rem 0.8rem; border-bottom: 1px solid #2a3142; text-align: left; }
+    td.nb { text-align: right; font-variant-numeric: tabular-nums; }
+    .ok { color: #7cd66a; } .encours { color: #e8c35a; } .ko { color: #ff7a6a; }
+    li { margin: 0.3rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Vérification du contenu</h1>
+  <p>Compte le contenu des fichiers de <code>data/</code> et signale les erreurs. Les totaux sont exigés à la fin du projet.</p>
+  <div id="resultat">Vérification…</div>
+  <script type="module">
+    import { verifier, FICHIERS, MONDES } from './verification.js';
+    const lire = async (c) => (await fetch(`../data/${c}`, { cache: 'no-cache' })).json();
+    const zone = document.getElementById('resultat');
+    try {
+      const [config, textes, classes, competences, monstres, objets, butin] = await Promise.all(FICHIERS.map(lire));
+      const mondes = await Promise.all(MONDES.map(lire));
+      const r = verifier({ config, textes, classes, competences, monstres, objets, butin, mondes });
+      const lignes = r.totaux.map((t) => `<tr><td>${t.libelle}</td><td class="nb">${t.actuel}</td><td class="nb">${t.exige} ${t.exact ? '(exactement)' : '(minimum)'}</td><td class="${t.depasse ? 'ko' : t.ok ? 'ok' : 'encours'}">${t.depasse ? 'Trop' : t.ok ? 'OK' : 'En cours'}</td></tr>`).join('');
+      const liste = (items, classe) => items.length ? `<ul>${items.map((e) => `<li class="${classe}">${e}</li>`).join('')}</ul>` : '<p class="ok">Aucune.</p>';
+      zone.innerHTML = `<table><tr><th>Élément</th><th>Actuel</th><th>Exigé</th><th>État</th></tr>${lignes}</table>
+        <h2>Erreurs (${r.erreurs.length})</h2>${liste(r.erreurs, 'ko')}
+        <h2>Avertissements (${r.avertissements.length})</h2>${liste(r.avertissements, 'encours')}`;
+    } catch (e) {
+      zone.innerHTML = `<p class="ko">Impossible de lire les données : ${e.message}. Lance cette page avec un serveur local.</p>`;
+    }
+  </script>
+</body>
+</html>
