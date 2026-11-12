@@ -168,6 +168,13 @@ html, body {
 .menu-boite input[type=range] { width: 160px; }
 .menu-boite .note { font-size: 0.8rem; color: var(--texte-doux); text-align: center; }
 
+/* Fenêtres intégrées */
+.fenetre { z-index: 10; }
+.fenetre p { max-width: 420px; line-height: 1.5; margin: 0; }
+.fenetre-boutons { display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 0.8rem; }
+.fenetre-boutons .bouton { min-width: 110px; }
+.zone-copie { width: 100%; min-width: 380px; margin-top: 0.6rem; font: 0.75rem ui-monospace, monospace; color: var(--texte); background: #0b0e16; border: 1px solid var(--or-sombre); border-radius: 4px; padding: 0.5rem; user-select: text; }
+
 /* Outil de test */
 .debug { position: fixed; top: 1rem; right: 1rem; background: rgba(0, 0, 0, 0.75); border: 1px dashed #c96; border-radius: 6px; padding: 0.6rem; font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.35rem; min-width: 170px; }
 .debug strong { color: #fc9; }

@@ -25,7 +25,7 @@ export function creerEntrees(canvas) {
   canvas.addEventListener('mousedown', (e) => {
     if (!actif) return;
     if (!verrouille) {
-      canvas.requestPointerLock();
+      demanderVerrouillage();
       return;
     }
     if (e.button === 0) { souris.gauche = true; souris.clicGauche = true; }
@@ -54,13 +54,21 @@ export function creerEntrees(canvas) {
     for (const f of surVerrouillage) f(verrouille);
   });
 
+  // Le navigateur peut refuser (délai après Échap, page intégrée) : on réessaiera au prochain clic.
+  function demanderVerrouillage() {
+    try {
+      const promesse = canvas.requestPointerLock();
+      promesse?.catch?.(() => {});
+    } catch { /* refusé */ }
+  }
+
   return {
     souris,
     appuye: (code) => touches.has(code),
     // Vrai une seule fois, au moment où la touche est enfoncée.
     vientDAppuyer: (code) => appuisDuTour.has(code),
     get verrouille() { return verrouille; },
-    verrouiller: () => canvas.requestPointerLock(),
+    verrouiller: demanderVerrouillage,
     liberer: () => document.exitPointerLock(),
     surChangementVerrouillage: (f) => surVerrouillage.add(f),
     definirActif(valeur) {

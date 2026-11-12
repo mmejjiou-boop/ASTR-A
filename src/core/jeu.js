@@ -12,6 +12,7 @@ import { creerHud } from '../ui/hud.js';
 import { creerSurcouche } from '../ui/surcouche.js';
 import { afficherPause } from '../ui/menuPause.js';
 import { el, ui } from '../ui/dom.js';
+import { informer, texteACopier } from '../ui/dialogue.js';
 import { t } from './textes.js';
 import { ecouter } from './evenements.js';
 import * as sauvegarde from './sauvegarde.js';
@@ -64,7 +65,7 @@ export function creerJeu(donnees) {
           fermerTitre();
           demarrerDepuisSauvegarde(s);
         } catch (e) {
-          window.alert(t('msg.importErreur', { e: e.message }));
+          informer(t('msg.importErreur', { e: e.message }));
         }
       },
     });
@@ -172,11 +173,14 @@ export function creerJeu(donnees) {
       surReprendre: () => {
         jeu.pause = null;
         // Peut échouer si le navigateur refuse (délai après Échap) : on affiche alors « Clique pour jouer ».
-        try { entrees.verrouiller()?.catch?.(() => {}); } catch { /* « Clique pour jouer » reste affiché */ }
+        entrees.verrouiller();
       },
       surExporter: () => {
         const s = sauvegarder();
-        if (s) sauvegarde.exporter(s);
+        if (!s) return;
+        // Le téléchargement peut être bloqué (page intégrée) : on propose aussi de copier.
+        try { sauvegarde.exporter(s); } catch { /* proposé en copie ci-dessous */ }
+        texteACopier(t('pause.exporter'), t('export.explication'), JSON.stringify(s, null, 2));
       },
       surImporter: async (fermerMenu) => {
         try {
@@ -189,7 +193,7 @@ export function creerJeu(donnees) {
           demarrerDepuisSauvegarde(s);
           jeu.surcouche.message(t('msg.importOk'));
         } catch (e) {
-          window.alert(t('msg.importErreur', { e: e.message }));
+          informer(t('msg.importErreur', { e: e.message }));
         }
       },
       surQuitter: () => {

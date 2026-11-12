@@ -2,6 +2,7 @@
 // et « Importer une sauvegarde ».
 import { el, ui } from './dom.js';
 import { t } from '../core/textes.js';
+import { confirmer } from './dialogue.js';
 
 export function afficherEcranTitre({ sauvegardeExiste, surNouvelle, surContinuer, surImporter }) {
   const boutonContinuer = sauvegardeExiste
@@ -14,8 +15,8 @@ export function afficherEcranTitre({ sauvegardeExiste, surNouvelle, surContinuer
       boutonContinuer,
       el('button', {
         class: sauvegardeExiste ? 'bouton' : 'bouton principal',
-        onclick: () => {
-          if (sauvegardeExiste && !window.confirm(t('titre.confirmerEcraser'))) return;
+        onclick: async () => {
+          if (sauvegardeExiste && !(await confirmer(t('titre.confirmerEcraser'), t('titre.nouvelle')))) return;
           fermer();
           surNouvelle();
         },

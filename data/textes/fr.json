@@ -110,6 +110,7 @@
   "effet.poison": "Poison",
   "effet.ralentissement": "Ralenti",
   "effet.saignement": "Saignement",
+  "export.explication": "Un fichier de sauvegarde a été téléchargé. S'il n'apparaît pas, copie ce texte et colle-le dans un fichier .json pour le garder.",
   "hud.aide": "ZQSD/WASD : bouger · Maj : courir · Espace : sauter · C : roulade · Clic gauche : attaquer · Clic droit : bloquer · 1 ou E : compétence · Tab : verrouiller · Échap : menu",
   "hud.cliquer": "Clique pour jouer",
   "hud.niveau": "Niv.",
