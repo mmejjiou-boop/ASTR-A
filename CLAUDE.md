@@ -18,9 +18,10 @@ Ce fichier est relu au début de chaque session. Il remplace le « contexte perm
 - Combat en temps réel : attaque, compétences, esquive, blocage, verrouillage de la cible.
 - Jeu solo avec PNJ. Sauvegarde locale dans le navigateur + export/import d'un fichier. Pas de serveur avant l'étape 9.
 - Graphismes : 3D low poly générée par le code. Aucun modèle, image, musique ou police téléchargé ou protégé. Inspiré de Zelda BotW sans rien reprendre de Nintendo.
-- Chaque monde est une zone ouverte traversable à pied en 3 à 5 minutes, reliée aux autres par des portails. Le jeu doit rester fluide.
+- Carte de 100 km² au total : 10 mondes d'environ 3,2 km × 3,2 km (~12 min à pied par monde), chargés par tronçons de 200 m, reliés par des portails. Le jeu doit rester fluide (c'est le plus gros risque technique).
 - Langue : français. Tous les textes affichés sont dans `data/textes/fr.json`.
 - Tout le contenu est dans `data/`. Ajouter un monde ne demande pas de nouveau code.
+- Page admin (`admin/`) qui permet de tout créer, modifier et supprimer sans coder. Ses formulaires sont générés depuis `data/schemas/`. Chaque nouveau type de donnée doit être ajouté à l'admin dans la même étape. Détails : section 5 de `docs/etape-0-cadrage.md`.
 
 ## Règles de travail
 
@@ -30,7 +31,7 @@ Ce fichier est relu au début de chaque session. Il remplace le « contexte perm
 - Maintenir `outils/verification.html` (et `outils/verifier.mjs`) qui compte le contenu et signale tout écart avec les totaux exigés.
 - Ne pas modifier ce qui fonctionne sans le signaler.
 
-## Totaux exigés à la fin
+## Totaux exigés à la fin (minimums, sauf village et tour : exactement 1 par monde)
 
 15 classes, niveau max 100 · exactement 10 mondes et 10 villages (1 par monde) · 100 quêtes (20 principales, 30 secondaires, 20 chasse, 15 donjon, 15 légendaires) · 20 donjons · 50 familles de monstres · 10 boss · 10 tours.
 

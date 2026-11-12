@@ -67,6 +67,8 @@ astr-a/
 │
 ├── data/                      TOUT le contenu du jeu (aucun code)
 │   ├── textes/fr.json         Tous les textes affichés
+│   ├── schemas/               Description de chaque type de donnée
+│   │                          (utilisée par la page admin ET la vérification)
 │   ├── config.json            Formules et réglages globaux
 │   ├── classes.json
 │   ├── competences.json
@@ -78,6 +80,12 @@ astr-a/
 │   ├── donjons.json
 │   ├── mondes/monde-01.json … monde-10.json
 │   └── quetes/monde-01.json … monde-10.json
+│
+├── admin/                     Page admin : modifier tout le contenu sans coder
+│   ├── index.html
+│   ├── admin.js               Formulaires générés à partir des schémas
+│   ├── apercu3d.js            Aperçu 3D d'un monstre, d'une classe, d'un objet
+│   └── editeurMonde.js        Vue de dessus pour placer village, tour, zones…
 │
 ├── outils/
 │   ├── verification.html      Ouvre-la dans le navigateur : compte le contenu
@@ -143,7 +151,10 @@ Les formules du cahier des charges, à un seul endroit. Si on veut rééquilibre
   ],
   "mort": { "perteOr": 0.05, "mondeSansPenalite": [1] },
   "deplacement": { "marche": 4.5, "course": 8, "enduranceMax": 100, "coutCourseParSeconde": 12, "coutRoulade": 20, "coutEscaladeParSeconde": 10, "recuperationParSeconde": 25 },
-  "tailleMonde": 800
+  "tailleMonde": 3200,
+  "tailleTroncon": 200,
+  "distanceVue": 900,
+  "brouillard": { "grille": 256, "rayonRevele": 60 }
 }
 ```
 
@@ -153,7 +164,7 @@ Les formules du cahier des charges, à un seul endroit. Si on veut rééquilibre
 - **Défense des monstres** = 2 + 1,5 × N (ton document donne leur vie et leur attaque, mais pas leur défense).
 - **Chance de critique** = 5 % + 0,1 % par point de chance, plafonnée à 50 %.
 - **Multiplicateurs de rareté** des statistiques d'objets : de ×1 (commun) à ×2 (mythique).
-- **Taille d'un monde** : 800 m × 800 m. À 4,5 m/s en marchant, on le traverse en environ 3 minutes, et en un peu moins de 2 minutes en courant. Ça respecte la règle des 3 à 5 minutes à pied tout en restant fluide.
+- **Taille d'un monde (validé)** : environ 3,2 km × 3,2 km, soit 10 km² par monde et **100 km² au total**. On traverse un monde en environ 12 minutes en marchant et 7 minutes en courant. Cela remplace la règle « 3 à 5 minutes » du cahier des charges. Le monde est chargé par tronçons de 200 m autour du joueur, et le relief lointain est affiché en version simplifiée.
 
 ### 2.3 Classes — `data/classes.json`
 
@@ -405,7 +416,7 @@ Les conditions possibles sont `queteDisponible`, `queteActive`, `queteTerminable
   "texte": "donjon.d-m01-b",
   "monde": 1,
   "niveau": 9,
-  "entree": [-210, 260],
+  "entree": [-840, 1040],
   "style": "caverne",
   "graine": 1102,
   "salles": [
@@ -449,32 +460,33 @@ Un donjon est une suite de salles reliées par des couloirs. Elles sont construi
   },
   "tour": {
     "id": "tour_m01",
-    "position": [230, -160],
+    "position": [920, -640],
     "hauteur": 45,
     "acces": "escalade",
     "gardiens": [],
     "enigme": null
   },
   "zones": [
-    { "id": "prairie_est", "centre": [200, 50], "rayon": 120, "monstres": [ ["loup_gris", 6], ["sanglier", 4] ] },
-    { "id": "camp_bandits", "type": "camp", "centre": [-180, -120], "rayon": 40, "monstres": [ ["bandit_brute", 5] ] }
+    { "id": "prairie_est", "centre": [800, 200], "rayon": 450, "monstres": [ ["loup_gris", 24], ["sanglier", 16] ] },
+    { "id": "camp_bandits", "type": "camp", "centre": [-720, -480], "rayon": 60, "monstres": [ ["bandit_brute", 5] ] }
   ],
   "lieux": [
-    { "id": "ruines_aube", "type": "ruines", "position": [-60, 240] },
-    { "id": "pont_vieux", "type": "point_interet", "position": [90, -40] }
+    { "id": "ruines_aube", "type": "ruines", "position": [-240, 960] },
+    { "id": "pont_vieux", "type": "point_interet", "position": [360, -160] }
   ],
   "coffres": [
-    { "id": "coffre_m01_01", "position": [-75, 250], "butin": "butin_coffre_m01", "visibleDeLoin": true }
+    { "id": "coffre_m01_01", "position": [-300, 1000], "butin": "butin_coffre_m01", "visibleDeLoin": true }
   ],
   "donjons": ["d-m01-a", "d-m01-b"],
   "boss": "chef_gobelin",
   "portails": [
-    { "vers": 2, "position": [380, 0], "condition": { "queteTerminee": "m01-p02" } }
+    { "vers": 2, "position": [1520, 0], "condition": { "queteTerminee": "m01-p02" } }
   ]
 }
 ```
 
 - Le relief est **généré à partir de la graine** : même graine, même monde, à chaque partie. Le fichier reste petit.
+- **Pour que 10 km² ne soient pas vides** : chaque monde aura au moins 25 lieux à découvrir (camps, ruines, points de vue, grottes, sanctuaires d'énigme) et au moins 30 coffres. Le script de vérification les compte. **[à valider]**
 - Les camps, ruines et avant-postes sont dans `zones` et `lieux` : ils n'ont pas de PNJ ni de service. Le script vérifie qu'il y a exactement 1 village par monde.
 - `tour.acces` : `escalade` (monde 1, sans danger), `gardee`, `obstacles` ou `enigme` pour les mondes suivants.
 
@@ -515,7 +527,7 @@ Stockée dans le navigateur (`localStorage`, clé `astrea.sauvegarde`), en JSON.
   },
   "carte": {
     "1": {
-      "brouillard": "<image 128×128 en base64, 1 bit par case>",
+      "brouillard": "<grille 256×256 en base64, 1 bit par case>",
       "toursActivees": ["tour_m01"],
       "lieuxVisites": ["valdor", "ruines_aube"]
     }
@@ -528,7 +540,7 @@ Stockée dans le navigateur (`localStorage`, clé `astrea.sauvegarde`), en JSON.
 ```
 
 - **Récompenses uniques** : une quête dans `terminees` ne peut plus être rendue, un coffre dans `coffresOuverts` reste vide. C'est ce qui garantit que chaque récompense n'est donnée qu'une fois.
-- **Brouillard** : chaque monde est découpé en 128 × 128 cases d'environ 6 m. Une case révélée vaut 1. La tour met toute la grille à 1. Ça prend environ 3 Ko par monde.
+- **Brouillard** : chaque monde est découpé en 256 × 256 cases d'environ 12,5 m. Une case révélée vaut 1, et le joueur révèle un cercle de 60 m autour de lui. La tour met toute la grille à 1. Ça prend environ 11 Ko par monde, donc environ 110 Ko pour les 10 mondes, ce qui tient largement dans le navigateur.
 - **Export** : bouton « Exporter » qui télécharge `astrea-<nom>-<date>.json`. **Import** : on choisit le fichier, le jeu vérifie la `version` et la structure, puis refuse proprement un fichier invalide.
 - **Version** : si le format change plus tard, une fonction de migration convertit l'ancienne sauvegarde au lieu de la casser.
 - **[à valider]** Un seul emplacement de sauvegarde (une partie à la fois, plus l'export pour garder des copies). On peut passer à 3 emplacements si tu préfères.
@@ -542,11 +554,12 @@ Stockée dans le navigateur (`localStorage`, clé `astrea.sauvegarde`), en JSON.
 
 | Risque | Ce qu'on fait |
 |---|---|
-| **Fluidité** : un monde de 800 m en 3D avec ombres, végétation et monstres peut ramer sur un PC moyen. | Terrain découpé en tronçons, arbres et herbe dessinés en une seule fois (*instancing*), seuls les monstres proches sont actifs, ombres limitées autour du héros, compteur d'images par seconde visible en mode test. Tu me donnes ton chiffre : je ne peux pas mesurer sur ton ordinateur. |
+| **Fluidité** : un monde de 3,2 km en 3D avec ombres, végétation et monstres peut ramer sur un PC moyen. C'est le plus gros risque technique du projet. | Seuls les tronçons de 200 m proches du joueur sont chargés en détail, le relief lointain est simplifié, avec un brouillard de distance. Terrain découpé en tronçons, arbres et herbe dessinés en une seule fois (*instancing*), seuls les monstres proches sont actifs, ombres limitées autour du héros, compteur d'images par seconde visible en mode test. Tu me donnes ton chiffre : je ne peux pas mesurer sur ton ordinateur. |
 | **Collisions maison** : pas de moteur physique, donc risques de traverser le sol ou de rester coincé. | Collisions simples et robustes (capsule contre relief et boîtes), téléportation de secours si le héros tombe sous la carte, tests dédiés. |
 | **Escalade** : grimper partout comme dans BotW est très complexe. | Escalade limitée aux tours et aux parois marquées, comme prévu dans ton document. |
 | **Personnages sans modèles 3D** : ils seront faits de formes simples avec des animations calculées. | On assume un style low poly propre et coloré, mais ça restera simple. |
 | **Équilibrage de 15 classes** : les formules donnent une base, pas un jeu parfaitement réglé. | Simulation chiffrée à l'étape 3 et à l'étape 7, puis réglage d'après tes parties. |
+| **Monde vide** : 10 km² avec seulement 10 quêtes par monde, ça peut paraître désert. | Au moins 25 lieux et 30 coffres par monde, des tours visibles de loin. Le voyage rapide limite les longs trajets. Une monture pourra être ajoutée comme option à l'étape 8. |
 | **Volume de contenu** : 100 quêtes, 75 compétences, 50 familles. | Contenu écrit par lots (un monde à la fois), relu par toi, contrôlé par le script. |
 | **Sauvegarde du navigateur** : elle peut être effacée (navigation privée, nettoyage du cache). | Export de fichier, et un avertissement si le stockage n'est pas disponible. |
 | **Lancement** : les modules JavaScript ne marchent pas en double-cliquant sur `index.html`. | Lancer avec Live Server (VS Code) ou jouer sur GitHub Pages. |
@@ -561,18 +574,59 @@ Stockée dans le navigateur (`localStorage`, clé `astrea.sauvegarde`), en JSON.
 
 ---
 
-## 5. Ce que j'attends de toi pour passer à l'étape 1
 
-Réponds simplement point par point (« ok », ou ce que tu veux changer) :
+## 5. Page admin
 
-1. L'arborescence te va ?
-2. Les formats de données te vont ?
-3. Les décisions **[à valider]** :
-   - a. définition de l'« attaque » (arme + 2 × stat) ;
-   - b. défense des monstres (2 + 1,5 × N) ;
-   - c. critique (5 % + 0,1 % par point de chance, max 50 %) ;
-   - d. taille des mondes (800 m) ;
-   - e. statistique principale de chaque classe (tableau du 2.3) ;
-   - f. 5e famille du monde 1 : frelons géants ou slimes ;
-   - g. un seul emplacement de sauvegarde.
-4. Le format de sauvegarde te va ?
+Demandée par Mohamed Amine : une page pour **tout modifier sans toucher au code** (ajouter une classe « Mage blanc », un monstre, un objet, une quête, un monde…).
+
+### Ce qu'elle permet
+
+- **Pour chaque type de donnée** (classes, compétences, monstres, objets, butin, PNJ, dialogues, quêtes, donjons, mondes, textes, réglages et formules) : lister, rechercher, créer, modifier, dupliquer et supprimer.
+- **Les textes se modifient dans le même formulaire** : en créant « Mage blanc », tu remplis son nom, son rôle, ses forces et ses faiblesses, et ils vont automatiquement dans `fr.json`.
+- **Des listes déroulantes plutôt que des identifiants à taper** : pour choisir le butin d'un monstre ou le donneur d'une quête, on choisit dans la liste de ce qui existe.
+- **Une vérification avant d'enregistrer** : identifiant unique, champs obligatoires, valeurs dans les limites (par exemple un multiplicateur de monstre entre 0,7 et 1,3), références qui existent. La page refuse de supprimer un élément encore utilisé (un monstre cité dans une quête, par exemple) et dit où il est utilisé.
+- **Un aperçu 3D** du modèle low poly d'un monstre, d'une classe ou d'un objet pendant qu'on règle ses formes et ses couleurs.
+- **Un éditeur de monde vu du dessus** : la carte du relief, sur laquelle on place ou déplace le village, la tour, les zones de monstres, les lieux, les coffres, les entrées de donjon et les portails en cliquant.
+- **Un bouton « Tester »** qui ouvre le jeu avec l'outil de triche, directement à l'endroit modifié.
+- **Le tableau des totaux** (le même que le script de vérification), toujours visible.
+
+### Comment elle enregistre
+
+Le jeu est un site statique, sans serveur. La page admin écrit donc **directement dans les fichiers du dossier `data/` de ton ordinateur**, grâce à l'accès aux fichiers de Chrome et Edge (tu choisis le dossier du projet une fois, et le navigateur demande ton accord). Ensuite tu fais un commit, et le jeu en ligne est à jour.
+
+Sur un navigateur qui ne permet pas cet accès (Firefox), la page télécharge le fichier JSON modifié, et tu le remplaces dans `data/`.
+
+**Sécurité :** sur GitHub Pages, la page admin ne peut rien modifier, puisqu'elle n'a accès qu'à ton dossier local. Elle ne présente donc pas de danger. À l'étape 9 (comptes en ligne), elle sera réservée à un compte administrateur.
+
+### Comment elle reste à jour
+
+Les formulaires ne sont pas codés à la main : ils sont **générés à partir des schémas** de `data/schemas/`. Le script de vérification utilise les mêmes schémas, donc un nouveau champ ajouté dans un type de donnée apparaît automatiquement dans l'admin.
+
+### Ce qu'elle ne peut pas faire (honnêtement)
+
+L'admin **assemble des briques qui existent déjà dans le code**. Un « Mage blanc » qui soigne, protège et lance des projectiles de lumière est possible uniquement avec l'admin, car toutes ces formes de compétence existent déjà. Une mécanique vraiment nouvelle, comme une classe qui se transforme en dragon volant, demande d'abord d'ajouter cette brique dans le code. Après ça, l'admin peut la réutiliser autant que tu veux.
+
+### Les totaux deviennent des minimums
+
+Puisque tu pourras ajouter du contenu, les totaux du cahier des charges deviennent des **minimums** : au moins 15 classes, 100 quêtes, 20 donjons, 50 familles de monstres. Deux règles restent strictes : **un seul village par monde**, et **une seule tour par monde**. L'admin empêche d'en ajouter un deuxième.
+
+### Quand on la construit
+
+- **Étape 1b** (juste après le prototype) : la base de la page admin, avec les classes, les compétences, les monstres, les objets, les textes et les réglages, plus l'enregistrement dans les fichiers.
+- **Ensuite, à chaque étape**, les nouveaux types de données arrivent dans l'admin dans la même session : PNJ, dialogues, quêtes et l'éditeur de monde à l'étape 2, butin à l'étape 3, etc.
+
+---
+
+## 6. Décisions validées
+
+Validé par Mohamed Amine le 12 novembre 2026 :
+
+- Arborescence, formats des données et format de sauvegarde : **ok**.
+- Attaque = arme + 2 × stat ; défense des monstres = 2 + 1,5 × N ; critique = 5 % + 0,1 % par point de chance (max 50 %) : **ok**.
+- Statistique principale de chaque classe (tableau du 2.3) : **ok**.
+- 5ᵉ famille du monde 1 : **frelons géants** (proposition par défaut).
+- Un seul emplacement de sauvegarde, plus l'export : **ok**.
+- **Taille de la carte : 100 km² au total**, soit 10 mondes d'environ 3,2 km × 3,2 km.
+- **Page admin complète** (section 5), construite à l'étape 1b puis enrichie à chaque étape.
+- Les totaux du cahier des charges sont des **minimums**, sauf 1 village et 1 tour par monde (strict).
+- **[à valider]** Au moins 25 lieux et 30 coffres par monde, pour remplir les 10 km².
