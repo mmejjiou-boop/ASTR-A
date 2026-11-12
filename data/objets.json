@@ -370,6 +370,657 @@
       "couleurs": [
         "#d33"
       ]
-    }
+    },
+    "niveauRequis": 1
+  },
+  {
+    "id": "epee_rouillee_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "epee",
+    "classe": "chevalier",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 13
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "epee",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.epee_rouillee_valdor"
+  },
+  {
+    "id": "baton_apprenti_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "baton",
+    "classe": "sorcier",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "baton",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.baton_apprenti_valdor"
+  },
+  {
+    "id": "grimoire_use_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "grimoire",
+    "classe": "mage_noir",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "grimoire",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.grimoire_use_valdor"
+  },
+  {
+    "id": "arc_long_simple_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "arc",
+    "classe": "archer",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 13
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "arc",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.arc_long_simple_valdor"
+  },
+  {
+    "id": "dagues_usees_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "dagues",
+    "classe": "assassin",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "dagues",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.dagues_usees_valdor"
+  },
+  {
+    "id": "masse_fer_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "masse",
+    "classe": "paladin",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 13
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "masse",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.masse_fer_valdor"
+  },
+  {
+    "id": "hache_lourde_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "hache",
+    "classe": "berserker",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 15
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "hache",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.hache_lourde_valdor"
+  },
+  {
+    "id": "baton_bois_vivant_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "baton",
+    "classe": "druide",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "baton",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.baton_bois_vivant_valdor"
+  },
+  {
+    "id": "faux_rouillee_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "faux",
+    "classe": "necromancien",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "faux",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.faux_rouillee_valdor"
+  },
+  {
+    "id": "sceptre_apprenti_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "sceptre",
+    "classe": "pretre",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 11
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "sceptre",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.sceptre_apprenti_valdor"
+  },
+  {
+    "id": "katana_simple_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "katana",
+    "classe": "samourai",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 14
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "katana",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.katana_simple_valdor"
+  },
+  {
+    "id": "orbe_terne_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "orbe",
+    "classe": "invocateur",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "orbe",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.orbe_terne_valdor"
+  },
+  {
+    "id": "arc_court_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "arc",
+    "classe": "chasseur",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "arc",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.arc_court_valdor"
+  },
+  {
+    "id": "gantelets_runiques_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "gantelets",
+    "classe": "elementaliste",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 12
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "gantelets",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.gantelets_runiques_valdor"
+  },
+  {
+    "id": "epee_noire_valdor",
+    "type": "arme",
+    "emplacement": "armePrincipale",
+    "categorie": "epee2m",
+    "classe": "paladin_noir",
+    "niveauRequis": 4,
+    "stats": {
+      "attaque": 15
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "modele": {
+      "forme": "epee2m",
+      "couleurs": [
+        "#d9dde3",
+        "#5a3d2b"
+      ]
+    },
+    "texte": "objet.epee_noire_valdor"
+  },
+  {
+    "id": "casque_cuir",
+    "type": "armure",
+    "emplacement": "tete",
+    "categorie": "armure",
+    "niveauRequis": 1,
+    "stats": {
+      "defense": 2
+    },
+    "statsAleatoires": 0,
+    "prix": 30,
+    "pileMax": 1,
+    "texte": "objet.casque_cuir"
+  },
+  {
+    "id": "jambieres_cuir",
+    "type": "armure",
+    "emplacement": "jambes",
+    "categorie": "armure",
+    "niveauRequis": 1,
+    "stats": {
+      "defense": 2
+    },
+    "statsAleatoires": 0,
+    "prix": 30,
+    "pileMax": 1,
+    "texte": "objet.jambieres_cuir"
+  },
+  {
+    "id": "bottes_cuir",
+    "type": "armure",
+    "emplacement": "bottes",
+    "categorie": "armure",
+    "niveauRequis": 1,
+    "stats": {
+      "defense": 1,
+      "agilite": 1
+    },
+    "statsAleatoires": 0,
+    "prix": 25,
+    "pileMax": 1,
+    "texte": "objet.bottes_cuir"
+  },
+  {
+    "id": "gants_cuir",
+    "type": "armure",
+    "emplacement": "gants",
+    "categorie": "armure",
+    "niveauRequis": 1,
+    "stats": {
+      "defense": 1,
+      "force": 1
+    },
+    "statsAleatoires": 0,
+    "prix": 25,
+    "pileMax": 1,
+    "texte": "objet.gants_cuir"
+  },
+  {
+    "id": "cotte_mailles",
+    "type": "armure",
+    "emplacement": "torse",
+    "categorie": "armure",
+    "niveauRequis": 5,
+    "stats": {
+      "defense": 6
+    },
+    "statsAleatoires": 0,
+    "prix": 160,
+    "pileMax": 1,
+    "texte": "objet.cotte_mailles"
+  },
+  {
+    "id": "casque_fer",
+    "type": "armure",
+    "emplacement": "tete",
+    "categorie": "armure",
+    "niveauRequis": 5,
+    "stats": {
+      "defense": 4
+    },
+    "statsAleatoires": 0,
+    "prix": 110,
+    "pileMax": 1,
+    "texte": "objet.casque_fer"
+  },
+  {
+    "id": "jambieres_fer",
+    "type": "armure",
+    "emplacement": "jambes",
+    "categorie": "armure",
+    "niveauRequis": 6,
+    "stats": {
+      "defense": 4
+    },
+    "statsAleatoires": 0,
+    "prix": 120,
+    "pileMax": 1,
+    "texte": "objet.jambieres_fer"
+  },
+  {
+    "id": "bouclier_fer",
+    "type": "armure",
+    "emplacement": "armeSecondaire",
+    "categorie": "bouclier",
+    "niveauRequis": 5,
+    "stats": {
+      "defense": 7
+    },
+    "statsAleatoires": 0,
+    "prix": 150,
+    "pileMax": 1,
+    "modele": {
+      "forme": "bouclier",
+      "couleurs": [
+        "#9aa0a8",
+        "#5a5f66"
+      ]
+    },
+    "texte": "objet.bouclier_fer"
+  },
+  {
+    "id": "robe_mage",
+    "type": "armure",
+    "emplacement": "torse",
+    "categorie": "armure",
+    "niveauRequis": 4,
+    "stats": {
+      "defense": 3,
+      "intelligence": 3,
+      "mana": 20
+    },
+    "statsAleatoires": 0,
+    "prix": 140,
+    "pileMax": 1,
+    "texte": "objet.robe_mage"
+  },
+  {
+    "id": "capuche_rodeur",
+    "type": "armure",
+    "emplacement": "tete",
+    "categorie": "armure",
+    "niveauRequis": 4,
+    "stats": {
+      "defense": 2,
+      "agilite": 2
+    },
+    "statsAleatoires": 0,
+    "prix": 90,
+    "pileMax": 1,
+    "texte": "objet.capuche_rodeur"
+  },
+  {
+    "id": "anneau_cuivre",
+    "type": "bijou",
+    "emplacement": "anneau",
+    "categorie": "bijou",
+    "niveauRequis": 1,
+    "stats": {
+      "chance": 2
+    },
+    "statsAleatoires": 0,
+    "prix": 60,
+    "pileMax": 1,
+    "texte": "objet.anneau_cuivre"
+  },
+  {
+    "id": "anneau_vigueur",
+    "type": "bijou",
+    "emplacement": "anneau",
+    "categorie": "bijou",
+    "niveauRequis": 5,
+    "stats": {
+      "endurance": 3,
+      "vie": 25
+    },
+    "statsAleatoires": 0,
+    "prix": 180,
+    "pileMax": 1,
+    "texte": "objet.anneau_vigueur"
+  },
+  {
+    "id": "amulette_chene",
+    "type": "bijou",
+    "emplacement": "collier",
+    "categorie": "bijou",
+    "niveauRequis": 3,
+    "stats": {
+      "defense": 2,
+      "vie": 15
+    },
+    "statsAleatoires": 0,
+    "prix": 120,
+    "pileMax": 1,
+    "texte": "objet.amulette_chene"
+  },
+  {
+    "id": "pendentif_aube",
+    "type": "bijou",
+    "emplacement": "collier",
+    "categorie": "bijou",
+    "niveauRequis": 8,
+    "unique": true,
+    "stats": {
+      "force": 4,
+      "intelligence": 4,
+      "agilite": 4,
+      "defense": 4,
+      "vie": 60,
+      "mana": 30
+    },
+    "statsAleatoires": 0,
+    "prix": 600,
+    "pileMax": 1,
+    "texte": "objet.pendentif_aube"
+  },
+  {
+    "id": "cape_chef_gobelin",
+    "type": "armure",
+    "emplacement": "torse",
+    "categorie": "armure",
+    "niveauRequis": 8,
+    "unique": true,
+    "stats": {
+      "defense": 9,
+      "force": 3,
+      "endurance": 3
+    },
+    "statsAleatoires": 0,
+    "prix": 400,
+    "pileMax": 1,
+    "texte": "objet.cape_chef_gobelin"
+  },
+  {
+    "id": "potion_vie_moyenne",
+    "type": "consommable",
+    "effet": {
+      "soin": 160
+    },
+    "recharge": 3,
+    "prix": 45,
+    "pileMax": 20,
+    "niveauRequis": 1,
+    "texte": "objet.potion_vie_moyenne"
+  },
+  {
+    "id": "potion_mana_petite",
+    "type": "consommable",
+    "effet": {
+      "mana": 50
+    },
+    "recharge": 3,
+    "prix": 20,
+    "pileMax": 20,
+    "niveauRequis": 1,
+    "texte": "objet.potion_mana_petite"
+  },
+  {
+    "id": "peau_loup",
+    "type": "materiau",
+    "prix": 4,
+    "pileMax": 99,
+    "texte": "objet.peau_loup"
+  },
+  {
+    "id": "defense_sanglier",
+    "type": "materiau",
+    "prix": 6,
+    "pileMax": 99,
+    "texte": "objet.defense_sanglier"
+  },
+  {
+    "id": "dard_frelon",
+    "type": "materiau",
+    "prix": 7,
+    "pileMax": 99,
+    "texte": "objet.dard_frelon"
+  },
+  {
+    "id": "oreille_gobelin",
+    "type": "materiau",
+    "prix": 5,
+    "pileMax": 99,
+    "texte": "objet.oreille_gobelin"
+  },
+  {
+    "id": "tissu_bandit",
+    "type": "materiau",
+    "prix": 5,
+    "pileMax": 99,
+    "texte": "objet.tissu_bandit"
+  },
+  {
+    "id": "gelee_royale",
+    "type": "materiau",
+    "prix": 40,
+    "pileMax": 99,
+    "texte": "objet.gelee_royale"
+  },
+  {
+    "id": "croc_loup",
+    "type": "quete",
+    "prix": 0,
+    "pileMax": 20,
+    "texte": "objet.croc_loup"
+  },
+  {
+    "id": "sacoche_tobin",
+    "type": "quete",
+    "prix": 0,
+    "pileMax": 20,
+    "texte": "objet.sacoche_tobin"
+  },
+  {
+    "id": "insigne_gobelin",
+    "type": "quete",
+    "prix": 0,
+    "pileMax": 20,
+    "texte": "objet.insigne_gobelin"
   }
 ]

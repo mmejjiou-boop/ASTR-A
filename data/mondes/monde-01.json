@@ -1,0 +1,926 @@
+{
+  "id": 1,
+  "texte": "monde.m01",
+  "niveaux": [
+    1,
+    10
+  ],
+  "taille": 3200,
+  "terrain": {
+    "graine": 1101,
+    "relief": "collines",
+    "hauteurMax": 55,
+    "echelle": 420,
+    "base": 8,
+    "bords": {
+      "largeur": 180,
+      "hauteur": 90
+    },
+    "eau": {
+      "niveau": 4.0,
+      "rivieres": [
+        {
+          "largeur": 16,
+          "points": [
+            [
+              -1600,
+              420
+            ],
+            [
+              -900,
+              330
+            ],
+            [
+              -640,
+              300
+            ],
+            [
+              -200,
+              200
+            ],
+            [
+              230,
+              180
+            ],
+            [
+              700,
+              300
+            ],
+            [
+              1150,
+              520
+            ],
+            [
+              1600,
+              640
+            ]
+          ]
+        },
+        {
+          "largeur": 10,
+          "points": [
+            [
+              230,
+              180
+            ],
+            [
+              300,
+              600
+            ],
+            [
+              420,
+              820
+            ],
+            [
+              380,
+              1250
+            ],
+            [
+              420,
+              1600
+            ]
+          ]
+        }
+      ]
+    },
+    "palette": {
+      "sol": "#74b84c",
+      "sol2": "#a8cf62",
+      "roche": "#a59c8a",
+      "sable": "#d9cc8f",
+      "eau": "#3f9be0",
+      "ciel": "#5fa8e6",
+      "brume": "#f3e4cf"
+    },
+    "vegetation": {
+      "arbres": 5500,
+      "rochers": 1400,
+      "fleurs": 0
+    }
+  },
+  "depart": [
+    0,
+    -20
+  ],
+  "village": {
+    "id": "valdor",
+    "texte": "village.valdor",
+    "position": [
+      0,
+      0
+    ],
+    "rayon": 75,
+    "batiments": [
+      {
+        "service": "auberge",
+        "position": [
+          22,
+          -14
+        ],
+        "angle": -0.6
+      },
+      {
+        "service": "marchand",
+        "position": [
+          -24,
+          -10
+        ],
+        "angle": 0.5
+      },
+      {
+        "service": "armurier",
+        "position": [
+          -30,
+          16
+        ],
+        "angle": 1.9
+      },
+      {
+        "service": "forgeron",
+        "position": [
+          30,
+          16
+        ],
+        "angle": -1.9
+      },
+      {
+        "service": "alchimiste",
+        "position": [
+          10,
+          32
+        ],
+        "angle": 3.0
+      },
+      {
+        "service": "banque",
+        "position": [
+          -12,
+          32
+        ],
+        "angle": -3.0
+      },
+      {
+        "service": "maitreCompetences",
+        "position": [
+          0,
+          -34
+        ],
+        "angle": 0
+      },
+      {
+        "service": "maison",
+        "position": [
+          42,
+          -36
+        ],
+        "angle": -0.8
+      },
+      {
+        "service": "maison",
+        "position": [
+          -44,
+          -34
+        ],
+        "angle": 0.8
+      },
+      {
+        "service": "maison",
+        "position": [
+          -48,
+          40
+        ],
+        "angle": 2.4
+      },
+      {
+        "service": "maison",
+        "position": [
+          46,
+          40
+        ],
+        "angle": -2.4
+      }
+    ],
+    "places": {
+      "puits": [
+        0,
+        0
+      ],
+      "tableau": [
+        8,
+        -6
+      ],
+      "portail": [
+        -6,
+        -50
+      ]
+    }
+  },
+  "tour": {
+    "id": "tour_m01",
+    "texte": "tour.tour_m01",
+    "position": [
+      560,
+      -420
+    ],
+    "hauteur": 45,
+    "rayon": 4,
+    "acces": "escalade",
+    "gardiens": [],
+    "enigme": null
+  },
+  "zones": [
+    {
+      "id": "prairie_loups",
+      "centre": [
+        320,
+        330
+      ],
+      "rayon": 220,
+      "monstres": [
+        [
+          "loup_gris",
+          14
+        ]
+      ]
+    },
+    {
+      "id": "bois_ouest_loups",
+      "centre": [
+        -620,
+        520
+      ],
+      "rayon": 200,
+      "monstres": [
+        [
+          "loup_gris",
+          10
+        ]
+      ]
+    },
+    {
+      "id": "champs_sangliers",
+      "centre": [
+        -480,
+        -260
+      ],
+      "rayon": 220,
+      "monstres": [
+        [
+          "sanglier",
+          12
+        ]
+      ]
+    },
+    {
+      "id": "lande_sangliers",
+      "centre": [
+        760,
+        640
+      ],
+      "rayon": 230,
+      "monstres": [
+        [
+          "sanglier",
+          10
+        ],
+        [
+          "loup_gris",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "nid_frelons",
+      "centre": [
+        -880,
+        -640
+      ],
+      "rayon": 200,
+      "monstres": [
+        [
+          "frelon_geant",
+          14
+        ]
+      ]
+    },
+    {
+      "id": "camp_bandits_nord",
+      "type": "camp",
+      "centre": [
+        960,
+        -860
+      ],
+      "rayon": 110,
+      "monstres": [
+        [
+          "bandit_brute",
+          6
+        ],
+        [
+          "bandit_archer",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "camp_bandits_est",
+      "type": "camp",
+      "centre": [
+        1160,
+        280
+      ],
+      "rayon": 110,
+      "monstres": [
+        [
+          "bandit_brute",
+          5
+        ],
+        [
+          "bandit_archer",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "colline_gobelins",
+      "type": "camp",
+      "centre": [
+        -200,
+        -1060
+      ],
+      "rayon": 160,
+      "monstres": [
+        [
+          "gobelin_eclaireur",
+          10
+        ],
+        [
+          "gobelin_chaman",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "sanctuaire_alpha",
+      "centre": [
+        -1150,
+        -1130
+      ],
+      "rayon": 40,
+      "monstres": [
+        [
+          "loup_alpha",
+          1
+        ],
+        [
+          "loup_gris",
+          4
+        ]
+      ]
+    }
+  ],
+  "lieux": [
+    {
+      "id": "cercle_pierres_aube",
+      "type": "cercle",
+      "position": [
+        -330,
+        260
+      ]
+    },
+    {
+      "id": "pont_vieux",
+      "type": "pont",
+      "position": [
+        230,
+        180
+      ]
+    },
+    {
+      "id": "ruines_veilleur",
+      "type": "ruines",
+      "position": [
+        760,
+        120
+      ]
+    },
+    {
+      "id": "ferme_abandonnee",
+      "type": "ferme",
+      "position": [
+        -560,
+        -120
+      ]
+    },
+    {
+      "id": "camp_bandits_nord",
+      "type": "camp",
+      "position": [
+        980,
+        -880
+      ]
+    },
+    {
+      "id": "camp_bandits_est",
+      "type": "camp",
+      "position": [
+        1180,
+        260
+      ]
+    },
+    {
+      "id": "point_de_vue_crete",
+      "type": "point_de_vue",
+      "position": [
+        -1050,
+        620
+      ]
+    },
+    {
+      "id": "lac_miroir",
+      "type": "lac",
+      "position": [
+        420,
+        820
+      ]
+    },
+    {
+      "id": "arbre_ancien",
+      "type": "arbre_ancien",
+      "position": [
+        -760,
+        960
+      ]
+    },
+    {
+      "id": "statue_gardien",
+      "type": "statue",
+      "position": [
+        120,
+        -760
+      ]
+    },
+    {
+      "id": "moulin_ruine",
+      "type": "ferme",
+      "position": [
+        -220,
+        620
+      ]
+    },
+    {
+      "id": "autel_lune",
+      "type": "autel",
+      "position": [
+        1320,
+        -420
+      ]
+    },
+    {
+      "id": "tour_guet_ruine",
+      "type": "ruines",
+      "position": [
+        -1280,
+        -260
+      ]
+    },
+    {
+      "id": "colline_gobelins",
+      "type": "camp",
+      "position": [
+        -220,
+        -1060
+      ]
+    },
+    {
+      "id": "puits_sec",
+      "type": "puits",
+      "position": [
+        880,
+        700
+      ]
+    },
+    {
+      "id": "clairiere_fees",
+      "type": "cercle",
+      "position": [
+        1050,
+        1050
+      ]
+    },
+    {
+      "id": "pierre_runique",
+      "type": "statue",
+      "position": [
+        -420,
+        -560
+      ]
+    },
+    {
+      "id": "gue_saules",
+      "type": "pont",
+      "position": [
+        -640,
+        300
+      ]
+    },
+    {
+      "id": "nid_frelons",
+      "type": "camp",
+      "position": [
+        -860,
+        -680
+      ]
+    },
+    {
+      "id": "ruines_chapelle",
+      "type": "ruines",
+      "position": [
+        640,
+        -1100
+      ]
+    },
+    {
+      "id": "point_de_vue_sud",
+      "type": "point_de_vue",
+      "position": [
+        1380,
+        1300
+      ]
+    },
+    {
+      "id": "cairn_voyageurs",
+      "type": "point_de_vue",
+      "position": [
+        -1300,
+        1300
+      ]
+    },
+    {
+      "id": "sanctuaire_aube",
+      "type": "sanctuaire",
+      "position": [
+        -1180,
+        -1180
+      ]
+    },
+    {
+      "id": "vieux_cimetiere",
+      "type": "ruines",
+      "position": [
+        300,
+        1260
+      ]
+    },
+    {
+      "id": "source_claire",
+      "type": "lac",
+      "position": [
+        -950,
+        180
+      ]
+    },
+    {
+      "id": "rocher_geant",
+      "type": "statue",
+      "position": [
+        1300,
+        -1250
+      ]
+    },
+    {
+      "id": "camp_chasseurs",
+      "type": "camp",
+      "position": [
+        -300,
+        1150
+      ]
+    }
+  ],
+  "coffres": [
+    {
+      "id": "coffre_m01_01",
+      "position": [
+        -340,
+        263
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_pont",
+      "position": [
+        240,
+        192
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_02",
+      "position": [
+        764,
+        129
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_03",
+      "position": [
+        -558,
+        -127
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_04",
+      "position": [
+        991,
+        -873
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_05",
+      "position": [
+        1193,
+        264
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_06",
+      "position": [
+        -1056,
+        611
+      ],
+      "butin": "butin_coffre_m01_rare",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_07",
+      "position": [
+        423,
+        825
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_08",
+      "position": [
+        -753,
+        963
+      ],
+      "butin": "butin_coffre_m01_rare",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_09",
+      "position": [
+        120,
+        -754
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_10",
+      "position": [
+        -232,
+        625
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_11",
+      "position": [
+        1314,
+        -428
+      ],
+      "butin": "butin_coffre_m01_rare",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_12",
+      "position": [
+        -1285,
+        -268
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_13",
+      "position": [
+        -206,
+        -1060
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_14",
+      "position": [
+        878,
+        692
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_15",
+      "position": [
+        1048,
+        1056
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_16",
+      "position": [
+        -430,
+        -553
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_17",
+      "position": [
+        -628,
+        297
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_18",
+      "position": [
+        -857,
+        -667
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_19",
+      "position": [
+        649,
+        -1101
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_20",
+      "position": [
+        1372,
+        1291
+      ],
+      "butin": "butin_coffre_m01_rare",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_21",
+      "position": [
+        -1301,
+        1307
+      ],
+      "butin": "butin_coffre_m01_rare",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_22",
+      "position": [
+        -1187,
+        -1168
+      ],
+      "butin": "butin_coffre_m01_rare",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_23",
+      "position": [
+        300,
+        1253
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_24",
+      "position": [
+        -945,
+        184
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_25",
+      "position": [
+        1305,
+        -1241
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_26",
+      "position": [
+        -296,
+        1161
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    },
+    {
+      "id": "coffre_m01_27",
+      "position": [
+        417,
+        -1112
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_28",
+      "position": [
+        -833,
+        -668
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_29",
+      "position": [
+        880,
+        -568
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_30",
+      "position": [
+        -839,
+        -307
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_31",
+      "position": [
+        411,
+        -1159
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_32",
+      "position": [
+        -832,
+        -701
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": false
+    },
+    {
+      "id": "coffre_m01_33",
+      "position": [
+        -496,
+        -591
+      ],
+      "butin": "butin_coffre_m01",
+      "visibleDeLoin": true
+    }
+  ],
+  "donjons": [
+    {
+      "id": "d-m01-a",
+      "position": [
+        -980,
+        -780
+      ]
+    },
+    {
+      "id": "d-m01-b",
+      "position": [
+        -300,
+        -1300
+      ]
+    }
+  ],
+  "boss": "chef_gobelin",
+  "portails": []
+}

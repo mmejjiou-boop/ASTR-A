@@ -41,6 +41,10 @@ export function creerHud() {
   const cibleVie = barre('vie');
   const cible = el('div', { class: 'hud-cible' }, cibleNom, cibleVie.racine);
   const cliquer = el('div', { class: 'hud-cliquer' }, t('hud.cliquer'));
+  const invite = el('div', { class: 'hud-interaction' });
+  const bossNom = el('div', { class: 'nom' });
+  const bossVie = barre('vie');
+  const boss = el('div', { class: 'hud-boss' }, bossNom, bossVie.racine);
 
   const racine = el('div', { class: 'hud' },
     el('div', { class: 'hud-perso' },
@@ -48,6 +52,8 @@ export function creerHud() {
       vie.racine, bouclier.racine, mana.racine, endurance.racine, or, effets,
     ),
     cible,
+    boss,
+    invite,
     el('div', { class: 'hud-actions' }, emplacementBase, emplacementCompetence),
     el('div', { class: 'hud-xp' }, xp.racine),
     el('div', { class: 'hud-aide' }, t('hud.aide')),
@@ -64,7 +70,16 @@ export function creerHud() {
     afficherCliquer(visible) {
       cliquer.hidden = !visible;
     },
-    mettreAJour(heros, monde) {
+    mettreAJour(heros, monde, extra = {}) {
+      // Invite d'interaction (E) et grande barre du boss.
+      const texteInvite = extra.interaction ? `E — ${extra.interaction.texte()}` : '';
+      if (invite.textContent !== texteInvite) invite.textContent = texteInvite;
+      invite.hidden = !texteInvite;
+      boss.hidden = !extra.boss;
+      if (extra.boss) {
+        bossNom.textContent = t(`${extra.boss.def.texte}.nom`);
+        bossVie.definir(extra.boss.vie, extra.boss.stats.vieMax);
+      }
       nom.textContent = heros.nom;
       niveau.textContent = `${t('hud.niveau')} ${heros.niveau} · ${t(`${heros.classe.texte}.nom`)}`;
       vie.definir(heros.vie, heros.stats.vieMax);
@@ -98,7 +113,7 @@ export function creerHud() {
       }
 
       const c = monde.cible;
-      cible.hidden = !c;
+      cible.hidden = !c || extra.boss === c;
       if (c) {
         cibleNom.replaceChildren(t(`${c.def.texte}.nom`), ' ', el('em', {}, `${t('hud.niveau')} ${c.niveau}`));
         cibleVie.definir(c.vie, c.stats.vieMax);

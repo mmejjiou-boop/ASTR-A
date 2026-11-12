@@ -35,6 +35,7 @@ Ce fichier est relu au début de chaque session. Il remplace le « contexte perm
 ## Tests
 
 - Vérification du contenu : `node outils/verifier.mjs` (doit sortir sans erreur).
+- Mondes : ajouter son nom dans `MONDES` de `src/core/donnees.js` et `outils/verification.js`.
 - Test dans un navigateur sans écran : Playwright + Chrome (`/usr/bin/google-chrome`, options SwiftShader), serveur `python3 -m http.server`. `window.astrea.jeu` donne accès au héros et au monde pour les tests.
 
 ## Totaux exigés à la fin (minimums, sauf village et tour : exactement 1 par monde)

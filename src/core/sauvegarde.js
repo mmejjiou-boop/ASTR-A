@@ -27,7 +27,7 @@ export function construireSauvegarde(heros, monde, extra) {
     tempsDeJeu: Math.round(extra.tempsDeJeu),
     personnage: heros.profil(),
     position: {
-      monde: monde.def.id,
+      monde: monde.estDonjon ? monde.def.monde : monde.def.id,
       x: round2(heros.position.x),
       y: round2(heros.position.y),
       z: round2(heros.position.z),
@@ -35,13 +35,9 @@ export function construireSauvegarde(heros, monde, extra) {
     },
     inventaire: heros.inventaire,
     equipement: heros.equipement,
-    banque: extra.banque || { or: 0, objets: [] },
     competences: { debloquees: heros.competencesDebloquees, raccourcis: extra.raccourcis || [] },
-    quetes: extra.quetes || { actives: {}, terminees: [] },
-    carte: extra.carte || {},
-    coffresOuverts: extra.coffresOuverts || [],
-    donjonsTermines: extra.donjonsTermines || [],
-    bossVaincus: extra.bossVaincus || [],
+    // Quêtes, carte, coffres, donjons, boss et banque (voir core/progression.js).
+    ...extra.progression,
     options: extra.options,
   };
 }

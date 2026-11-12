@@ -244,8 +244,7 @@ export function mettreAJourCompetences(monde, dt) {
         }
       }
       sol = monde.collisions.hauteur(pos.x, pos.z);
-      bloque = pos.y <= sol || monde.terrain.obstaclesProches(pos.x, pos.z)
-        .some((o) => Math.hypot(pos.x - o.x, pos.z - o.z) < o.r && pos.y < sol + o.h);
+      bloque = pos.y <= sol || monde.collisions.estBloque(pos.x, pos.y, pos.z);
     }
     p.maillage.lookAt(pos.clone().add(p.vitesse));
     if (impact || bloque || p.parcouru > p.forme.portee) {

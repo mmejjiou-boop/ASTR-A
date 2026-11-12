@@ -41,9 +41,8 @@ export class Heros {
     this.mort = false;
     this.rayon = 0.4;
 
-    const arme = this.objetEquipe('armePrincipale');
-    const secondaire = this.objetEquipe('armeSecondaire');
-    this.modele = creerHeros(this.classe, arme, secondaire?.categorie === 'bouclier' ? secondaire : null);
+    this.escalade = null;   // { angle } pendant l'escalade d'une tour
+    this.modele = this.construireModele();
   }
 
   // L'équipement référence les objets de l'inventaire par leur uid.
@@ -57,6 +56,27 @@ export class Heros {
     const ids = {};
     for (const emplacement of Object.keys(this.equipement)) ids[emplacement] = this.objetEquipe(emplacement)?.id || null;
     return ids;
+  }
+
+  // Après un changement d'équipement : statistiques et apparence (arme, bouclier).
+  changementEquipement() {
+    const ratioVie = this.vie / this.stats.vieMax;
+    const ratioMana = this.mana / this.stats.manaMax;
+    this.calculerStats();
+    this.vie = Math.max(1, Math.round(ratioVie * this.stats.vieMax));
+    this.mana = Math.round(ratioMana * this.stats.manaMax);
+    const ancien = this.modele;
+    this.modele = this.construireModele();
+    if (ancien.parent) {
+      ancien.parent.add(this.modele);
+      ancien.parent.remove(ancien);
+    }
+  }
+
+  construireModele() {
+    const arme = this.objetEquipe('armePrincipale');
+    const secondaire = this.objetEquipe('armeSecondaire');
+    return creerHeros(this.classe, arme, secondaire?.categorie === 'bouclier' ? secondaire : null);
   }
 
   calculerStats() {

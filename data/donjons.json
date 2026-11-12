@@ -1,0 +1,122 @@
+[
+  {
+    "id": "d-m01-a",
+    "texte": "donjon.d-m01-a",
+    "monde": 1,
+    "niveau": 6,
+    "style": "grotte",
+    "palette": {
+      "sol": "#5a4a3a",
+      "mur": "#6e5a44",
+      "accent": "#e8b923",
+      "ciel": "#1a1410",
+      "brume": "#2a2016"
+    },
+    "salles": [
+      {
+        "type": "combat",
+        "vagues": [
+          [
+            [
+              "frelon_geant",
+              3
+            ]
+          ],
+          [
+            [
+              "frelon_geant",
+              3
+            ]
+          ]
+        ]
+      },
+      {
+        "type": "enigme",
+        "enigme": "leviers_ordre",
+        "parametres": {
+          "nombre": 3
+        }
+      },
+      {
+        "type": "combat",
+        "vagues": [
+          [
+            [
+              "frelon_geant",
+              4
+            ]
+          ]
+        ]
+      },
+      {
+        "type": "gardien",
+        "monstre": "reine_frelons"
+      }
+    ],
+    "coffreFinal": "butin_donjon_a"
+  },
+  {
+    "id": "d-m01-b",
+    "texte": "donjon.d-m01-b",
+    "monde": 1,
+    "niveau": 9,
+    "style": "repaire",
+    "palette": {
+      "sol": "#4a4038",
+      "mur": "#5a5048",
+      "accent": "#c0392b",
+      "ciel": "#120e0c",
+      "brume": "#201814"
+    },
+    "salles": [
+      {
+        "type": "combat",
+        "vagues": [
+          [
+            [
+              "gobelin_eclaireur",
+              3
+            ]
+          ],
+          [
+            [
+              "gobelin_eclaireur",
+              2
+            ],
+            [
+              "gobelin_chaman",
+              1
+            ]
+          ]
+        ]
+      },
+      {
+        "type": "combat",
+        "vagues": [
+          [
+            [
+              "gobelin_eclaireur",
+              3
+            ],
+            [
+              "gobelin_chaman",
+              1
+            ]
+          ]
+        ]
+      },
+      {
+        "type": "enigme",
+        "enigme": "leviers_ordre",
+        "parametres": {
+          "nombre": 4
+        }
+      },
+      {
+        "type": "boss",
+        "boss": "chef_gobelin"
+      }
+    ],
+    "coffreFinal": "butin_donjon_b"
+  }
+]

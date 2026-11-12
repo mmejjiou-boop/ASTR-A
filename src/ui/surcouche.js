@@ -14,6 +14,7 @@ export function creerSurcouche(camera) {
   marque.hidden = true;
   conteneur.append(marque);
   const flottants = [];
+  const marques = new Map();
   const v = new THREE.Vector3();
   const desabonnements = [];
 
@@ -47,12 +48,34 @@ export function creerSurcouche(camera) {
       if (e.or > 0) message(t('msg.or', { n: e.or }));
     }),
     ecouter('niveau', (e) => message(t('msg.niveau', { n: e.niveau }), true)),
-    ecouter('message', (e) => message(t(e.cle, e.valeurs))),
+    ecouter('message', (e) => message(t(e.cle, e.valeurs), e.grand)),
   );
 
   return {
     message,
-    mettreAJour(dt, monde) {
+    mettreAJour(dt, monde, quetes) {
+      // Marqueurs « ! » (quête à prendre) et « ? » (quête à rendre) au-dessus des PNJ.
+      const marquesVues = new Set();
+      for (const p of monde.pnjs) {
+        const symbole = quetes?.marqueur(p.id);
+        if (!symbole || p.position.distanceTo(monde.heros.position) > 70) continue;
+        const ecran = versEcran(p.positionTete());
+        if (!ecran) continue;
+        marquesVues.add(p.id);
+        let m = marques.get(p.id);
+        if (!m) {
+          m = el('div', { class: 'marque-pnj' });
+          conteneur.append(m);
+          marques.set(p.id, m);
+        }
+        m.textContent = symbole;
+        m.classList.toggle('rendre', symbole === '?');
+        m.style.transform = `translate(${ecran.x}px, ${ecran.y}px)`;
+      }
+      for (const [id, m] of marques) {
+        if (!marquesVues.has(id)) { m.remove(); marques.delete(id); }
+      }
+
       // Barres de vie : monstres blessés, en chasse ou ciblés, à moins de 40 m.
       const vus = new Set();
       for (const m of monde.monstres) {
@@ -109,6 +132,7 @@ export function creerSurcouche(camera) {
     detruire() {
       desabonnements.forEach((d) => d());
       for (const b of barres.values()) b.element.remove();
+      for (const m of marques.values()) m.remove();
       for (const f of flottants) f.element.remove();
       marque.remove();
       messages.remove();

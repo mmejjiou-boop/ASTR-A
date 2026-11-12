@@ -1,7 +1,6 @@
 [
   {
     "id": "loup_gris",
-    "texte": "monstre.loup_gris",
     "famille": "loups",
     "monde": 1,
     "niveaux": [
@@ -46,23 +45,338 @@
         "#4a4a50"
       ]
     },
-    "butin": "butin_loup"
+    "butin": "butin_loup",
+    "texte": "monstre.loup_gris"
   },
   {
-    "id": "gobelin_eclaireur",
-    "texte": "monstre.gobelin_eclaireur",
-    "famille": "gobelins",
+    "id": "loup_alpha",
+    "famille": "loups",
+    "monde": 1,
+    "elite": true,
+    "niveaux": [
+      8,
+      8
+    ],
+    "multiplicateurs": {
+      "vie": 1.2,
+      "attaque": 1.2
+    },
+    "comportement": {
+      "type": "meute",
+      "vision": 24,
+      "abandon": 50,
+      "vitesse": 7.5,
+      "vitessePatrouille": 2.4,
+      "patrouille": 8
+    },
+    "attaques": [
+      {
+        "id": "morsure",
+        "coefficient": 1.1,
+        "portee": 2.4,
+        "recharge": 1.4,
+        "annonce": 0.4,
+        "forme": "cone"
+      },
+      {
+        "id": "bond",
+        "coefficient": 1.5,
+        "portee": 8,
+        "recharge": 5,
+        "annonce": 0.7,
+        "forme": "ligne"
+      },
+      {
+        "id": "hurlement",
+        "coefficient": 0.8,
+        "portee": 5,
+        "recharge": 9,
+        "annonce": 1.0,
+        "forme": "cercle"
+      }
+    ],
+    "modele": {
+      "forme": "quadrupede",
+      "taille": 1.5,
+      "couleurs": [
+        "#e8e6e0",
+        "#8a8a96"
+      ]
+    },
+    "butin": "butin_loup_alpha",
+    "texte": "monstre.loup_alpha"
+  },
+  {
+    "id": "sanglier",
+    "famille": "sangliers",
     "monde": 1,
     "niveaux": [
       2,
-      4
+      5
+    ],
+    "multiplicateurs": {
+      "vie": 1.15,
+      "attaque": 0.95
+    },
+    "comportement": {
+      "type": "solitaire",
+      "vision": 13,
+      "abandon": 35,
+      "vitesse": 6.2,
+      "vitessePatrouille": 1.6,
+      "patrouille": 12
+    },
+    "attaques": [
+      {
+        "id": "coup_boutoir",
+        "coefficient": 1.0,
+        "portee": 2.0,
+        "recharge": 1.8,
+        "annonce": 0.5,
+        "forme": "cone"
+      },
+      {
+        "id": "charge",
+        "coefficient": 1.5,
+        "portee": 9,
+        "recharge": 5,
+        "annonce": 0.9,
+        "forme": "ligne"
+      }
+    ],
+    "modele": {
+      "forme": "sanglier",
+      "taille": 1.0,
+      "couleurs": [
+        "#6b4a32",
+        "#3d2a1c"
+      ]
+    },
+    "butin": "butin_sanglier",
+    "texte": "monstre.sanglier"
+  },
+  {
+    "id": "frelon_geant",
+    "famille": "frelons",
+    "monde": 1,
+    "niveaux": [
+      4,
+      7
+    ],
+    "volant": true,
+    "multiplicateurs": {
+      "vie": 0.75,
+      "attaque": 1.1
+    },
+    "comportement": {
+      "type": "meute",
+      "vision": 16,
+      "abandon": 40,
+      "vitesse": 7.2,
+      "vitessePatrouille": 3,
+      "patrouille": 12
+    },
+    "attaques": [
+      {
+        "id": "dard",
+        "coefficient": 1.0,
+        "portee": 2.4,
+        "recharge": 1.5,
+        "annonce": 0.45,
+        "forme": "cone",
+        "effets": [
+          {
+            "id": "poison",
+            "chance": 0.35,
+            "duree": 4,
+            "degatsParSeconde": 0.15
+          }
+        ]
+      }
+    ],
+    "modele": {
+      "forme": "insecte",
+      "taille": 1.0,
+      "couleurs": [
+        "#e8b923",
+        "#2a2420"
+      ]
+    },
+    "butin": "butin_frelon",
+    "texte": "monstre.frelon_geant"
+  },
+  {
+    "id": "reine_frelons",
+    "famille": "frelons",
+    "monde": 1,
+    "elite": true,
+    "volant": true,
+    "niveaux": [
+      7,
+      7
+    ],
+    "multiplicateurs": {
+      "vie": 1.3,
+      "attaque": 1.1
+    },
+    "comportement": {
+      "type": "gardien",
+      "vision": 30,
+      "abandon": 999,
+      "vitesse": 5,
+      "vitessePatrouille": 1.5,
+      "patrouille": 4
+    },
+    "attaques": [
+      {
+        "id": "dard",
+        "coefficient": 1.2,
+        "portee": 2.8,
+        "recharge": 1.6,
+        "annonce": 0.5,
+        "forme": "cone",
+        "effets": [
+          {
+            "id": "poison",
+            "chance": 0.5,
+            "duree": 5,
+            "degatsParSeconde": 0.15
+          }
+        ]
+      },
+      {
+        "id": "pluie_dards",
+        "coefficient": 0.9,
+        "portee": 5,
+        "recharge": 7,
+        "annonce": 1.1,
+        "forme": "cercle"
+      }
+    ],
+    "invocation": {
+      "monstre": "frelon_geant",
+      "nombre": 2,
+      "recharge": 14
+    },
+    "modele": {
+      "forme": "insecte",
+      "taille": 1.9,
+      "couleurs": [
+        "#f2c94c",
+        "#5a1e6e"
+      ]
+    },
+    "butin": "butin_reine",
+    "texte": "monstre.reine_frelons"
+  },
+  {
+    "id": "bandit_brute",
+    "famille": "bandits",
+    "monde": 1,
+    "niveaux": [
+      4,
+      7
+    ],
+    "multiplicateurs": {
+      "vie": 1.1,
+      "attaque": 1.0
+    },
+    "comportement": {
+      "type": "meute",
+      "vision": 15,
+      "abandon": 35,
+      "vitesse": 5.4,
+      "vitessePatrouille": 1.6,
+      "patrouille": 10
+    },
+    "attaques": [
+      {
+        "id": "coup_gourdin",
+        "coefficient": 1.0,
+        "portee": 2.3,
+        "recharge": 1.8,
+        "annonce": 0.55,
+        "forme": "cone"
+      },
+      {
+        "id": "frappe_lourde",
+        "coefficient": 1.6,
+        "portee": 3.0,
+        "recharge": 7,
+        "annonce": 1.1,
+        "forme": "cercle"
+      }
+    ],
+    "modele": {
+      "forme": "humanoide",
+      "taille": 1.05,
+      "couleurs": [
+        "#5a4a3a",
+        "#8b2e2e"
+      ],
+      "arme": "masse"
+    },
+    "butin": "butin_bandit",
+    "texte": "monstre.bandit_brute"
+  },
+  {
+    "id": "bandit_archer",
+    "famille": "bandits",
+    "monde": 1,
+    "niveaux": [
+      5,
+      7
+    ],
+    "multiplicateurs": {
+      "vie": 0.8,
+      "attaque": 1.0
+    },
+    "comportement": {
+      "type": "meute",
+      "vision": 22,
+      "abandon": 40,
+      "vitesse": 5.0,
+      "vitessePatrouille": 1.6,
+      "patrouille": 8,
+      "distancePreferee": 12
+    },
+    "attaques": [
+      {
+        "id": "fleche",
+        "coefficient": 1.0,
+        "portee": 22,
+        "recharge": 2.6,
+        "annonce": 0.9,
+        "forme": "projectile",
+        "vitesse": 24
+      }
+    ],
+    "modele": {
+      "forme": "humanoide",
+      "taille": 1.0,
+      "couleurs": [
+        "#4a5a3a",
+        "#8b2e2e"
+      ],
+      "arme": "arc"
+    },
+    "butin": "butin_bandit",
+    "texte": "monstre.bandit_archer"
+  },
+  {
+    "id": "gobelin_eclaireur",
+    "famille": "gobelins",
+    "monde": 1,
+    "niveaux": [
+      5,
+      8
     ],
     "multiplicateurs": {
       "vie": 1.0,
       "attaque": 1.1
     },
     "comportement": {
-      "type": "solitaire",
+      "type": "meute",
       "vision": 15,
       "abandon": 35,
       "vitesse": 5.2,
@@ -95,6 +409,147 @@
         "#6b4a2b"
       ]
     },
-    "butin": "butin_gobelin"
+    "butin": "butin_gobelin",
+    "texte": "monstre.gobelin_eclaireur"
+  },
+  {
+    "id": "gobelin_chaman",
+    "famille": "gobelins",
+    "monde": 1,
+    "niveaux": [
+      6,
+      8
+    ],
+    "multiplicateurs": {
+      "vie": 0.8,
+      "attaque": 1.15
+    },
+    "comportement": {
+      "type": "meute",
+      "vision": 20,
+      "abandon": 35,
+      "vitesse": 4.6,
+      "vitessePatrouille": 1.4,
+      "patrouille": 8,
+      "distancePreferee": 11
+    },
+    "attaques": [
+      {
+        "id": "boule_feu_verte",
+        "coefficient": 1.1,
+        "portee": 18,
+        "recharge": 3,
+        "annonce": 1.0,
+        "forme": "projectile",
+        "vitesse": 16,
+        "effets": [
+          {
+            "id": "brulure",
+            "chance": 0.6,
+            "duree": 3,
+            "degatsParSeconde": 0.15
+          }
+        ]
+      }
+    ],
+    "modele": {
+      "forme": "humanoide_trapu",
+      "taille": 0.8,
+      "couleurs": [
+        "#4f7a6a",
+        "#6e3a8a"
+      ],
+      "arme": "baton"
+    },
+    "butin": "butin_gobelin",
+    "texte": "monstre.gobelin_chaman"
+  },
+  {
+    "id": "chef_gobelin",
+    "famille": "gobelins",
+    "monde": 1,
+    "boss": true,
+    "niveaux": [
+      10,
+      10
+    ],
+    "comportement": {
+      "type": "boss",
+      "vision": 40,
+      "abandon": 999,
+      "vitesse": 4.6,
+      "vitessePatrouille": 1,
+      "patrouille": 2
+    },
+    "attaques": [],
+    "phases": [
+      {
+        "seuilVie": 1.0,
+        "attaques": [
+          {
+            "id": "coup_massue",
+            "coefficient": 1.2,
+            "portee": 3.4,
+            "recharge": 2.4,
+            "annonce": 0.9,
+            "forme": "cone"
+          },
+          {
+            "id": "charge",
+            "coefficient": 1.5,
+            "portee": 14,
+            "recharge": 8,
+            "annonce": 1.3,
+            "forme": "ligne"
+          }
+        ]
+      },
+      {
+        "seuilVie": 0.5,
+        "message": "boss.chef_gobelin.phase2",
+        "invocation": {
+          "monstre": "gobelin_eclaireur",
+          "nombre": 3
+        },
+        "attaques": [
+          {
+            "id": "tourbillon",
+            "coefficient": 1.3,
+            "portee": 5.5,
+            "recharge": 6,
+            "annonce": 1.1,
+            "forme": "cercle"
+          },
+          {
+            "id": "coup_massue",
+            "coefficient": 1.4,
+            "portee": 3.4,
+            "recharge": 2,
+            "annonce": 0.7,
+            "forme": "cone"
+          },
+          {
+            "id": "charge",
+            "coefficient": 1.6,
+            "portee": 16,
+            "recharge": 7,
+            "annonce": 1.1,
+            "forme": "ligne"
+          }
+        ]
+      }
+    ],
+    "modele": {
+      "forme": "humanoide_trapu",
+      "taille": 1.9,
+      "couleurs": [
+        "#4a7a24",
+        "#7a3a1a"
+      ],
+      "arme": "masse",
+      "couronne": true
+    },
+    "butin": "butin_chef_gobelin",
+    "texte": "monstre.chef_gobelin"
   }
 ]

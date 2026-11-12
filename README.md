@@ -6,7 +6,7 @@ Jeu d'aventure et de rôle fantasy en 3D, solo et en monde ouvert, jouable dans 
 
 ## État
 
-En développement : étape 1 (prototype jouable). Voir [ETAT.md](ETAT.md).
+En développement : étape 2 (monde 1 complet : Valdor, tour, brouillard, 2 donjons, boss, 10 quêtes). Voir [ETAT.md](ETAT.md).
 
 ## Lancer le jeu
 
@@ -27,9 +27,16 @@ Ajoute `?debug=1` à l'adresse pour afficher l'outil de test (FPS, triche).
 | Roulade d'esquive | C |
 | Attaquer | Clic gauche |
 | Bloquer | Clic droit |
-| Compétence | 1 ou E |
+| Compétence | 1 |
+| Interagir (parler, ouvrir, éveiller) | E |
+| Potion de vie | R |
+| Inventaire | I |
+| Journal de quêtes | J |
+| Carte | M |
 | Verrouiller une cible | Tab ou clic molette |
 | Menu | Échap |
+
+Escalade : marche contre la paroi d'une tour, puis Z/S pour monter/descendre, Q/D pour tourner autour, Espace pour sauter.
 
 ## Vérifier le contenu
 

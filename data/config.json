@@ -106,7 +106,8 @@
   },
   "monstres": {
     "reapparition": 60,
-    "distanceActivation": 120
+    "distanceActivation": 120,
+    "distanceAffichage": 260
   },
   "camera": {
     "distance": 6,
@@ -164,5 +165,17 @@
       "seuil": 0.85
     },
     "exposition": 1.0
+  },
+  "elite": {
+    "vie": 3,
+    "xp": 3
+  },
+  "interaction": {
+    "distance": 3.2
+  },
+  "escalade": {
+    "vitesse": 2.4,
+    "coutParSeconde": 9,
+    "coutSaut": 25
   }
 }

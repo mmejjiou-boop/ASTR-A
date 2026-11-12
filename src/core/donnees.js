@@ -9,9 +9,13 @@ const FICHIERS = {
   monstres: 'monstres.json',
   objets: 'objets.json',
   butin: 'butin.json',
+  pnj: 'pnj.json',
+  dialogues: 'dialogues.json',
+  donjons: 'donjons.json',
 };
 
-const MONDES = ['zone-test'];
+// Ajouter un monde : ajouter son nom ici (fichiers data/mondes/<nom>.json et data/quetes/<nom>.json).
+export const MONDES = ['zone-test', 'monde-01'];
 
 async function chargerJSON(base, chemin) {
   const reponse = await fetch(base + chemin, { cache: 'no-cache' });
@@ -33,6 +37,8 @@ export async function chargerDonnees(base = './data/') {
     })
   );
   brut.mondes = await Promise.all(MONDES.map((nom) => chargerJSON(base, `mondes/${nom}.json`)));
+  // Quêtes : un fichier par monde (la zone de test n'en a pas).
+  brut.quetes = (await Promise.all(MONDES.filter((n) => n !== 'zone-test').map((nom) => chargerJSON(base, `quetes/${nom}.json`)))).flat();
 
   return {
     brut,
@@ -44,5 +50,9 @@ export async function chargerDonnees(base = './data/') {
     objets: indexer(brut.objets),
     butin: indexer(brut.butin),
     mondes: indexer(brut.mondes),
+    pnj: indexer(brut.pnj),
+    dialogues: indexer(brut.dialogues),
+    donjons: indexer(brut.donjons),
+    quetes: indexer(brut.quetes),
   };
 }

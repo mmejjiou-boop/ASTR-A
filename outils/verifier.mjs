@@ -8,9 +8,10 @@ import { verifier, FICHIERS, MONDES } from './verification.js';
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..', 'data');
 const lire = async (chemin) => JSON.parse(await readFile(join(racine, chemin), 'utf8'));
 
-const [config, textes, classes, competences, monstres, objets, butin] = await Promise.all(FICHIERS.map(lire));
-const mondes = await Promise.all(MONDES.map(lire));
-const resultat = verifier({ config, textes, classes, competences, monstres, objets, butin, mondes });
+const [config, textes, classes, competences, monstres, objets, butin, pnj, dialogues, donjons] = await Promise.all(FICHIERS.map(lire));
+const mondes = await Promise.all(MONDES.map((n) => lire(`mondes/${n}.json`)));
+const quetes = (await Promise.all(MONDES.filter((n) => n !== 'zone-test').map((n) => lire(`quetes/${n}.json`)))).flat();
+const resultat = verifier({ config, textes, classes, competences, monstres, objets, butin, pnj, dialogues, donjons, quetes, mondes });
 
 console.log('\nASTRÉA — vérification du contenu\n');
 for (const t of resultat.totaux) {

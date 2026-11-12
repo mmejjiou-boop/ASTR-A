@@ -68,6 +68,96 @@ export function verifier(brut) {
   for (const o of brut.objets) texte(`${o.texte}.nom`, `objet ${o.id}`);
 
   const mondesReels = brut.mondes.filter((m) => !m.test);
+  const pnjs = ids(brut.pnj || []);
+  const donjons = ids(brut.donjons || []);
+  const dialogues = ids(brut.dialogues || []);
+  const SERVICES = ['auberge', 'marchand', 'armurier', 'forgeron', 'alchimiste', 'banque', 'maitreCompetences', 'tableauQuetes', 'portail'];
+
+  // PNJ et dialogues.
+  for (const p of brut.pnj || []) {
+    texte(`${p.texte}.nom`, `PNJ ${p.id}`);
+    if (!dialogues.has(p.dialogue)) erreurs.push(`PNJ ${p.id} : dialogue inconnu « ${p.dialogue} »`);
+    for (const id of p.boutique || []) if (!objets.has(id)) erreurs.push(`PNJ ${p.id} : objet en boutique inconnu « ${id} »`);
+  }
+  for (const d of brut.dialogues || []) {
+    for (const [cle, noeud] of Object.entries(d.noeuds)) {
+      texte(noeud.texte, `dialogue ${d.id}`);
+      for (const c of noeud.choix || []) {
+        texte(c.texte, `dialogue ${d.id}`);
+        if (c.suite && !d.noeuds[c.suite]) erreurs.push(`Dialogue ${d.id} : nœud « ${c.suite} » introuvable (depuis ${cle})`);
+      }
+    }
+  }
+
+  // Butin : objets existants.
+  for (const b of brut.butin) {
+    for (const e of [...(b.entrees || []), ...(b.quete || [])]) {
+      for (const id of [e.objet, ...(e.liste || [])].filter(Boolean)) if (!objets.has(id)) erreurs.push(`Butin ${b.id} : objet inconnu « ${id} »`);
+    }
+  }
+
+  // Mondes : village unique avec ses 9 services, tour, lieux, coffres.
+  const coffresVus = new Set();
+  for (const monde of mondesReels) {
+    const services = new Set((brut.pnj || []).filter((p) => p.monde === monde.id && p.service).map((p) => p.service));
+    for (const s of SERVICES) if (!services.has(s)) erreurs.push(`Monde ${monde.id} : le village n'a pas de service « ${s} »`);
+    if ((monde.lieux || []).length < 25) avertissements.push(`Monde ${monde.id} : ${(monde.lieux || []).length}/25 lieux à découvrir`);
+    if ((monde.coffres || []).length < 30) avertissements.push(`Monde ${monde.id} : ${(monde.coffres || []).length}/30 coffres`);
+    for (const c of monde.coffres || []) {
+      if (coffresVus.has(c.id)) erreurs.push(`Coffre en double « ${c.id} »`);
+      coffresVus.add(c.id);
+      if (!butins.has(c.butin)) erreurs.push(`Coffre ${c.id} : butin inconnu « ${c.butin} »`);
+    }
+    for (const l of monde.lieux || []) texte(`lieu.${l.id}`, `lieu ${l.id}`);
+    for (const d of monde.donjons || []) if (!donjons.has(d.id)) erreurs.push(`Monde ${monde.id} : donjon inconnu « ${d.id} »`);
+    if (monde.boss && !monstres.has(monde.boss)) erreurs.push(`Monde ${monde.id} : boss inconnu « ${monde.boss} »`);
+    const familles = new Set(brut.monstres.filter((m) => m.monde === monde.id && !m.boss).map((m) => m.famille));
+    if (familles.size < 5) avertissements.push(`Monde ${monde.id} : ${familles.size}/5 familles de monstres`);
+  }
+
+  // Donjons.
+  for (const d of brut.donjons || []) {
+    texte(d.texte, `donjon ${d.id}`);
+    if (!butins.has(d.coffreFinal)) erreurs.push(`Donjon ${d.id} : butin final inconnu « ${d.coffreFinal} »`);
+    for (const s of d.salles) {
+      for (const vague of s.vagues || []) for (const [id] of vague) if (!monstres.has(id)) erreurs.push(`Donjon ${d.id} : monstre inconnu « ${id} »`);
+      for (const id of [s.boss, s.monstre].filter(Boolean)) if (!monstres.has(id)) erreurs.push(`Donjon ${d.id} : monstre inconnu « ${id} »`);
+    }
+  }
+
+  // Quêtes : références, objectifs mesurables, répartition par monde.
+  const quetesIds = ids(brut.quetes || []);
+  const lieuxIds = new Set(brut.mondes.flatMap((m) => (m.lieux || []).map((l) => l.id)));
+  const toursIds = new Set(mondesReels.filter((m) => m.tour).map((m) => m.tour.id));
+  const TYPES = ['tuer', 'collecter', 'livrer', 'parler', 'explorer', 'activer_tour', 'terminer_donjon', 'vaincre_boss', 'ouvrir_coffre', 'escorter'];
+  for (const q of brut.quetes || []) {
+    for (const s of ['titre', 'resume', 'fin']) texte(`${q.texte}.${s}`, `quête ${q.id}`);
+    if (!pnjs.has(q.donneur)) erreurs.push(`Quête ${q.id} : donneur inconnu « ${q.donneur} »`);
+    if (!pnjs.has(q.rendu)) erreurs.push(`Quête ${q.id} : PNJ de rendu inconnu « ${q.rendu} »`);
+    for (const p of q.prerequis?.quetes || []) if (!quetesIds.has(p)) erreurs.push(`Quête ${q.id} : prérequis inconnu « ${p} »`);
+    if (!q.objectifs?.length) erreurs.push(`Quête ${q.id} : aucun objectif`);
+    for (const o of q.objectifs || []) {
+      if (!TYPES.includes(o.type)) erreurs.push(`Quête ${q.id} : type d'objectif inconnu « ${o.type} »`);
+      const c = o.cible;
+      const ok = {
+        tuer: () => monstres.has(c) || (c.startsWith('famille:') && brut.monstres.some((m) => m.famille === c.slice(8))),
+        collecter: () => objets.has(c), livrer: () => objets.has(c), parler: () => pnjs.has(c), escorter: () => pnjs.has(c),
+        explorer: () => lieuxIds.has(c), activer_tour: () => toursIds.has(c), terminer_donjon: () => donjons.has(c),
+        vaincre_boss: () => monstres.has(c), ouvrir_coffre: () => coffresVus.has(c),
+      }[o.type];
+      if (ok && !ok()) erreurs.push(`Quête ${q.id} : cible introuvable « ${c} » (${o.type})`);
+    }
+    for (const o of q.recompenses?.objets || []) if (!objets.has(o.id)) erreurs.push(`Quête ${q.id} : récompense inconnue « ${o.id} »`);
+  }
+  for (const monde of mondesReels) {
+    const qs = (brut.quetes || []).filter((q) => q.monde === monde.id);
+    const n = (cat) => qs.filter((q) => q.categorie === cat).length;
+    const impair = monde.id % 2 === 1;
+    const attendu = { principale: 2, secondaire: 3, chasse: 2, donjon: impair ? 2 : 1, legendaire: impair ? 1 : 2 };
+    for (const [cat, nombre] of Object.entries(attendu)) {
+      if (n(cat) < nombre) erreurs.push(`Monde ${monde.id} : ${n(cat)}/${nombre} quêtes « ${cat} »`);
+    }
+  }
   for (const monde of brut.mondes) {
     for (const zone of monde.zones || []) {
       for (const [id] of zone.monstres) if (!monstres.has(id)) erreurs.push(`Monde ${monde.id} : monstre inconnu « ${id} »`);
@@ -105,5 +195,6 @@ export function verifier(brut) {
   return { totaux, erreurs, avertissements };
 }
 
-export const FICHIERS = ['config.json', 'textes/fr.json', 'classes.json', 'competences.json', 'monstres.json', 'objets.json', 'butin.json'];
-export const MONDES = ['mondes/zone-test.json'];
+export const FICHIERS = ['config.json', 'textes/fr.json', 'classes.json', 'competences.json', 'monstres.json', 'objets.json', 'butin.json', 'pnj.json', 'dialogues.json', 'donjons.json'];
+// Même liste que src/core/donnees.js.
+export const MONDES = ['zone-test', 'monde-01'];

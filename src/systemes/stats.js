@@ -20,14 +20,20 @@ export function calculerStatsHeros(donnees, classe, niveau, equipement) {
   stats.vieMax = Math.round(classe.statsBase.vie * facteur);
   stats.manaMax = Math.round(classe.statsBase.mana * facteur);
 
+  // Équipement : attaque de l'arme, armure, et bonus de statistiques, de vie et de mana.
   stats.attaqueArme = 0;
   stats.armure = 0;
   for (const idObjet of Object.values(equipement)) {
     if (!idObjet) continue;
     const objet = donnees.objets.get(idObjet);
     if (!objet?.stats) continue;
-    stats.attaqueArme += objet.stats.attaque || 0;
-    stats.armure += objet.stats.defense || 0;
+    for (const [nom, valeur] of Object.entries(objet.stats)) {
+      if (nom === 'attaque') stats.attaqueArme += valeur;
+      else if (nom === 'defense') stats.armure += valeur;
+      else if (nom === 'vie') stats.vieMax += valeur;
+      else if (nom === 'mana') stats.manaMax += valeur;
+      else if (nom in stats) stats[nom] += valeur;
+    }
   }
   stats.defenseTotale = stats.defense + stats.armure;
   const d = config.degats;
@@ -44,7 +50,8 @@ export function attaqueHeros(config, stats, statUtilisee) {
 export function calculerStatsMonstre(config, monstre, niveau) {
   const f = config.monstre;
   const m = monstre.multiplicateurs || {};
-  const boss = monstre.boss ? config.boss : { vie: 1, xp: 1 };
+  // Boss : vie × 12, XP × 20. Élite (monstre nommé) : vie × 3, XP × 3.
+  const boss = monstre.boss ? config.boss : monstre.elite ? config.elite : { vie: 1, xp: 1 };
   return {
     vieMax: Math.round((f.vie[0] + f.vie[1] * niveau) * (m.vie || 1) * boss.vie),
     attaque: (f.attaque[0] + f.attaque[1] * niveau) * (m.attaque || 1),

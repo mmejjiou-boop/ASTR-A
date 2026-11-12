@@ -25,10 +25,14 @@ export class Monstre {
     this.attaqueEnCours = null; // { def, temps, telegraphe, direction }
     this.animAttaque = -1;
     this.mort = false;
+    this.phase = 0;            // phase d'un boss
+    this.endormi = false;      // monstre de donjon qui attend que le héros entre dans sa salle
     this.tempsMort = 0;
     this.dernierCoup = -99;
-    this.rayon = 0.55 * (def.modele.taille || 1);
-    this.hauteur = (def.modele.forme === 'quadrupede' ? 1.2 : 1.7) * (def.modele.taille || 1);
+    const taille = def.modele.taille || 1;
+    const forme = def.modele.forme;
+    this.rayon = (forme === 'sanglier' ? 0.7 : 0.55) * taille;
+    this.hauteur = (forme === 'quadrupede' || forme === 'sanglier' ? 1.2 : forme === 'insecte' ? 0.8 : 1.7) * taille;
     this.modele = creerModeleMonstre(def.modele);
     this.modele.traverse((o) => { if (o.isMesh) o.castShadow = true; });
   }
@@ -38,7 +42,8 @@ export class Monstre {
   }
 
   centre() {
-    return new THREE.Vector3(this.position.x, this.position.y + this.hauteur * 0.55, this.position.z);
+    const y = this.def.volant ? this.position.y : this.position.y + this.hauteur * 0.55;
+    return new THREE.Vector3(this.position.x, y, this.position.z);
   }
 
   recevoirDegats(montant, monde) {

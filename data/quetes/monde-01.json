@@ -1,0 +1,308 @@
+[
+  {
+    "id": "m01-p01",
+    "texte": "quete.m01-p01",
+    "categorie": "principale",
+    "monde": 1,
+    "donneur": "pnj_ancien_elric",
+    "rendu": "pnj_ancien_elric",
+    "niveauConseille": 1,
+    "prerequis": {
+      "quetes": [],
+      "niveau": 1
+    },
+    "objectifs": [
+      {
+        "type": "explorer",
+        "cible": "cercle_pierres_aube"
+      },
+      {
+        "type": "activer_tour",
+        "cible": "tour_m01"
+      }
+    ],
+    "recompenses": {
+      "xp": 320,
+      "or": 60,
+      "objets": [
+        {
+          "id": "potion_vie_moyenne",
+          "quantite": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "m01-s01",
+    "texte": "quete.m01-s01",
+    "categorie": "secondaire",
+    "monde": 1,
+    "donneur": "pnj_alchimiste_mirela",
+    "rendu": "pnj_alchimiste_mirela",
+    "niveauConseille": 2,
+    "prerequis": {
+      "quetes": [],
+      "niveau": 1
+    },
+    "objectifs": [
+      {
+        "type": "collecter",
+        "cible": "croc_loup",
+        "quantite": 4
+      }
+    ],
+    "recompenses": {
+      "xp": 220,
+      "or": 45,
+      "objets": [
+        {
+          "id": "potion_vie_petite",
+          "quantite": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "m01-c01",
+    "texte": "quete.m01-c01",
+    "categorie": "chasse",
+    "monde": 1,
+    "donneur": "tableau_valdor",
+    "rendu": "tableau_valdor",
+    "niveauConseille": 3,
+    "prerequis": {
+      "quetes": [],
+      "niveau": 1
+    },
+    "objectifs": [
+      {
+        "type": "tuer",
+        "cible": "sanglier",
+        "quantite": 8
+      }
+    ],
+    "recompenses": {
+      "xp": 380,
+      "or": 90
+    }
+  },
+  {
+    "id": "m01-s02",
+    "texte": "quete.m01-s02",
+    "categorie": "secondaire",
+    "monde": 1,
+    "donneur": "pnj_marchand_tobin",
+    "rendu": "pnj_marchand_tobin",
+    "niveauConseille": 5,
+    "prerequis": {
+      "quetes": [
+        "m01-p01"
+      ],
+      "niveau": 3
+    },
+    "objectifs": [
+      {
+        "type": "tuer",
+        "cible": "famille:bandits",
+        "quantite": 6
+      },
+      {
+        "type": "collecter",
+        "cible": "sacoche_tobin",
+        "quantite": 1
+      }
+    ],
+    "recompenses": {
+      "xp": 650,
+      "or": 120,
+      "objets": [
+        {
+          "id": "anneau_cuivre",
+          "quantite": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "m01-s03",
+    "texte": "quete.m01-s03",
+    "categorie": "secondaire",
+    "monde": 1,
+    "donneur": "pnj_garde_aldric",
+    "rendu": "pnj_garde_aldric",
+    "niveauConseille": 2,
+    "prerequis": {
+      "quetes": [],
+      "niveau": 1
+    },
+    "objectifs": [
+      {
+        "type": "ouvrir_coffre",
+        "cible": "coffre_m01_pont"
+      },
+      {
+        "type": "parler",
+        "cible": "pnj_garde_aldric"
+      }
+    ],
+    "recompenses": {
+      "xp": 260,
+      "or": 70
+    }
+  },
+  {
+    "id": "m01-d01",
+    "texte": "quete.m01-d01",
+    "categorie": "donjon",
+    "monde": 1,
+    "donneur": "pnj_chasseuse_ysolde",
+    "rendu": "pnj_chasseuse_ysolde",
+    "niveauConseille": 6,
+    "prerequis": {
+      "quetes": [
+        "m01-p01"
+      ],
+      "niveau": 4
+    },
+    "objectifs": [
+      {
+        "type": "terminer_donjon",
+        "cible": "d-m01-a"
+      }
+    ],
+    "recompenses": {
+      "xp": 1100,
+      "or": 180,
+      "objets": [
+        {
+          "id": "anneau_vigueur",
+          "quantite": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "m01-c02",
+    "texte": "quete.m01-c02",
+    "categorie": "chasse",
+    "monde": 1,
+    "donneur": "tableau_valdor",
+    "rendu": "tableau_valdor",
+    "niveauConseille": 5,
+    "prerequis": {
+      "quetes": [],
+      "niveau": 3
+    },
+    "objectifs": [
+      {
+        "type": "tuer",
+        "cible": "frelon_geant",
+        "quantite": 10
+      }
+    ],
+    "recompenses": {
+      "xp": 620,
+      "or": 110
+    }
+  },
+  {
+    "id": "m01-p02",
+    "texte": "quete.m01-p02",
+    "categorie": "principale",
+    "monde": 1,
+    "donneur": "pnj_ancien_elric",
+    "rendu": "pnj_capitaine_maelle",
+    "niveauConseille": 7,
+    "prerequis": {
+      "quetes": [
+        "m01-p01"
+      ],
+      "niveau": 5
+    },
+    "objectifs": [
+      {
+        "type": "parler",
+        "cible": "pnj_capitaine_maelle"
+      },
+      {
+        "type": "tuer",
+        "cible": "famille:gobelins",
+        "quantite": 8
+      },
+      {
+        "type": "collecter",
+        "cible": "insigne_gobelin",
+        "quantite": 3
+      }
+    ],
+    "recompenses": {
+      "xp": 1300,
+      "or": 160
+    }
+  },
+  {
+    "id": "m01-d02",
+    "texte": "quete.m01-d02",
+    "categorie": "donjon",
+    "monde": 1,
+    "donneur": "pnj_capitaine_maelle",
+    "rendu": "pnj_capitaine_maelle",
+    "niveauConseille": 9,
+    "prerequis": {
+      "quetes": [
+        "m01-p02"
+      ],
+      "niveau": 7
+    },
+    "objectifs": [
+      {
+        "type": "vaincre_boss",
+        "cible": "chef_gobelin"
+      },
+      {
+        "type": "terminer_donjon",
+        "cible": "d-m01-b"
+      }
+    ],
+    "recompenses": {
+      "xp": 2600,
+      "or": 400
+    }
+  },
+  {
+    "id": "m01-l01",
+    "texte": "quete.m01-l01",
+    "categorie": "legendaire",
+    "monde": 1,
+    "donneur": "pnj_ancien_elric",
+    "rendu": "pnj_ancien_elric",
+    "niveauConseille": 9,
+    "prerequis": {
+      "quetes": [
+        "m01-d02"
+      ],
+      "niveau": 7
+    },
+    "objectifs": [
+      {
+        "type": "tuer",
+        "cible": "loup_alpha",
+        "quantite": 1
+      },
+      {
+        "type": "explorer",
+        "cible": "sanctuaire_aube"
+      }
+    ],
+    "recompenses": {
+      "xp": 2200,
+      "or": 250,
+      "objets": [
+        {
+          "id": "pendentif_aube",
+          "quantite": 1
+        }
+      ]
+    }
+  }
+]

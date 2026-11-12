@@ -6,15 +6,396 @@
       6
     ],
     "tirages": 1,
-    "entrees": []
+    "entrees": [
+      {
+        "objet": "peau_loup",
+        "poids": 45
+      },
+      {
+        "objet": "potion_vie_petite",
+        "poids": 8
+      },
+      {
+        "liste": [
+          "casque_cuir",
+          "jambieres_cuir",
+          "bottes_cuir",
+          "gants_cuir",
+          "anneau_cuivre"
+        ],
+        "poids": 4
+      },
+      {
+        "rien": true,
+        "poids": 43
+      }
+    ],
+    "quete": [
+      {
+        "objet": "croc_loup",
+        "chance": 0.6,
+        "queteActive": "m01-s01"
+      }
+    ]
+  },
+  {
+    "id": "butin_loup_alpha",
+    "or": [
+      40,
+      80
+    ],
+    "tirages": 2,
+    "entrees": [
+      {
+        "objet": "peau_loup",
+        "poids": 40
+      },
+      {
+        "liste": [
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 40
+      },
+      {
+        "objet": "potion_vie_moyenne",
+        "poids": 20
+      }
+    ]
+  },
+  {
+    "id": "butin_sanglier",
+    "or": [
+      3,
+      8
+    ],
+    "tirages": 1,
+    "entrees": [
+      {
+        "objet": "defense_sanglier",
+        "poids": 50
+      },
+      {
+        "objet": "potion_vie_petite",
+        "poids": 8
+      },
+      {
+        "liste": [
+          "casque_cuir",
+          "jambieres_cuir",
+          "bottes_cuir",
+          "gants_cuir",
+          "anneau_cuivre"
+        ],
+        "poids": 5
+      },
+      {
+        "rien": true,
+        "poids": 37
+      }
+    ]
+  },
+  {
+    "id": "butin_frelon",
+    "or": [
+      4,
+      9
+    ],
+    "tirages": 1,
+    "entrees": [
+      {
+        "objet": "dard_frelon",
+        "poids": 45
+      },
+      {
+        "objet": "potion_mana_petite",
+        "poids": 10
+      },
+      {
+        "liste": [
+          "casque_cuir",
+          "jambieres_cuir",
+          "bottes_cuir",
+          "gants_cuir",
+          "anneau_cuivre",
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 5
+      },
+      {
+        "rien": true,
+        "poids": 40
+      }
+    ]
+  },
+  {
+    "id": "butin_reine",
+    "or": [
+      80,
+      140
+    ],
+    "tirages": 2,
+    "entrees": [
+      {
+        "objet": "gelee_royale",
+        "poids": 50
+      },
+      {
+        "liste": [
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 50
+      }
+    ]
+  },
+  {
+    "id": "butin_bandit",
+    "or": [
+      8,
+      18
+    ],
+    "tirages": 1,
+    "entrees": [
+      {
+        "objet": "tissu_bandit",
+        "poids": 40
+      },
+      {
+        "objet": "potion_vie_petite",
+        "poids": 12
+      },
+      {
+        "liste": [
+          "casque_cuir",
+          "jambieres_cuir",
+          "bottes_cuir",
+          "gants_cuir",
+          "anneau_cuivre",
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 8
+      },
+      {
+        "rien": true,
+        "poids": 40
+      }
+    ],
+    "quete": [
+      {
+        "objet": "sacoche_tobin",
+        "chance": 0.3,
+        "queteActive": "m01-s02",
+        "max": 1
+      }
+    ]
   },
   {
     "id": "butin_gobelin",
     "or": [
-      4,
-      10
+      6,
+      14
     ],
     "tirages": 1,
-    "entrees": []
+    "entrees": [
+      {
+        "objet": "oreille_gobelin",
+        "poids": 45
+      },
+      {
+        "objet": "potion_vie_moyenne",
+        "poids": 6
+      },
+      {
+        "liste": [
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 6
+      },
+      {
+        "rien": true,
+        "poids": 43
+      }
+    ],
+    "quete": [
+      {
+        "objet": "insigne_gobelin",
+        "chance": 0.5,
+        "queteActive": "m01-p02"
+      }
+    ]
+  },
+  {
+    "id": "butin_chef_gobelin",
+    "or": [
+      300,
+      400
+    ],
+    "tirages": 1,
+    "entrees": [
+      {
+        "objet": "cape_chef_gobelin",
+        "poids": 100
+      }
+    ]
+  },
+  {
+    "id": "butin_coffre_m01",
+    "or": [
+      15,
+      45
+    ],
+    "tirages": 2,
+    "entrees": [
+      {
+        "objet": "potion_vie_petite",
+        "poids": 30
+      },
+      {
+        "objet": "potion_mana_petite",
+        "poids": 20
+      },
+      {
+        "liste": [
+          "casque_cuir",
+          "jambieres_cuir",
+          "bottes_cuir",
+          "gants_cuir",
+          "anneau_cuivre"
+        ],
+        "poids": 25
+      },
+      {
+        "liste": [
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 10
+      },
+      {
+        "objet": "potion_vie_moyenne",
+        "poids": 15
+      }
+    ]
+  },
+  {
+    "id": "butin_coffre_m01_rare",
+    "or": [
+      60,
+      120
+    ],
+    "tirages": 2,
+    "entrees": [
+      {
+        "liste": [
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 60
+      },
+      {
+        "objet": "potion_vie_moyenne",
+        "poids": 40
+      }
+    ]
+  },
+  {
+    "id": "butin_donjon_a",
+    "or": [
+      120,
+      180
+    ],
+    "tirages": 2,
+    "entrees": [
+      {
+        "liste": [
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 70
+      },
+      {
+        "objet": "potion_vie_moyenne",
+        "poids": 30
+      }
+    ]
+  },
+  {
+    "id": "butin_donjon_b",
+    "or": [
+      200,
+      300
+    ],
+    "tirages": 3,
+    "entrees": [
+      {
+        "liste": [
+          "cotte_mailles",
+          "casque_fer",
+          "jambieres_fer",
+          "bouclier_fer",
+          "robe_mage",
+          "capuche_rodeur",
+          "amulette_chene",
+          "anneau_vigueur"
+        ],
+        "poids": 60
+      },
+      {
+        "objet": "potion_vie_moyenne",
+        "poids": 40
+      }
+    ]
   }
 ]

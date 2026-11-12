@@ -130,9 +130,10 @@ function creerBouclier(couleurs) {
 }
 
 // Héros humanoïde aux couleurs de sa classe.
-export function creerHeros(classe, arme, bouclier) {
+export function creerHeros(classe, arme, bouclier, options = {}) {
   const { principale, secondaire } = classe.couleurs;
-  const peau = '#e0b48a';
+  const peau = options.peau || '#e0b48a';
+  const couleurCheveux = options.cheveux || '#3a2a1a';
   const racine = new THREE.Group();
   const corps = new THREE.Group();
   corps.position.y = 0.95;
@@ -148,9 +149,9 @@ export function creerHeros(classe, arme, bouclier) {
   const tete = new THREE.Group();
   tete.position.y = 0.88;
   const visage = boite(0.32, 0.34, 0.32, peau);
-  const cheveux = boite(0.34, 0.12, 0.34, '#3a2a1a');
+  const cheveux = boite(0.34, 0.12, 0.34, couleurCheveux);
   cheveux.position.y = 0.17;
-  const nuque = boite(0.34, 0.26, 0.08, '#3a2a1a');
+  const nuque = boite(0.34, 0.26, 0.08, couleurCheveux);
   nuque.position.set(0, 0.04, -0.15);
   const yeux = boite(0.22, 0.05, 0.02, '#1a1a22');
   yeux.position.set(0, 0.03, 0.165);
@@ -163,9 +164,10 @@ export function creerHeros(classe, arme, bouclier) {
   brasD.position.set(-0.37, 0.62, 0);
   corps.add(brasG, brasD);
 
-  const jambeG = membre(0.2, 0.9, 0.2, '#3a3a44');
+  const couleurJambes = options.jambes || '#3a3a44';
+  const jambeG = membre(0.2, 0.9, 0.2, couleurJambes);
   jambeG.position.set(0.14, 0, 0);
-  const jambeD = membre(0.2, 0.9, 0.2, '#3a3a44');
+  const jambeD = membre(0.2, 0.9, 0.2, couleurJambes);
   jambeD.position.set(-0.14, 0, 0);
   corps.add(jambeG, jambeD);
 
@@ -196,24 +198,74 @@ export function creerHeros(classe, arme, bouclier) {
 
   racine.userData.parties = { corps, torse, tete, brasG, brasD, jambeG, jambeD, bulle };
   racine.userData.type = 'humanoide';
+  racine.userData.hauteurCorps = 0.95;
   return racine;
+}
+
+// Humanoïde générique (PNJ, bandits) : mêmes proportions que le héros.
+// apparence : { couleurs: [vêtement, accent], cheveux, peau, accessoire, age, taille, arme }
+export function creerHumanoide(apparence) {
+  const [principale, secondaire] = apparence.couleurs;
+  const classe = { couleurs: { principale, secondaire } };
+  const accessoire = apparence.arme || apparence.accessoire;
+  const armes = { baton: ['baton', ['#7ff0ff', '#6b4a2b']], epee: ['epee', ['#c9a227', '#3a2a1a']], arc: ['arc', ['#c9b37a', '#6b4a2b']], marteau: ['masse', ['#5a5f66', '#5a3d2b']], masse: ['masse', ['#5a5f66', '#5a3d2b']] };
+  const arme = armes[accessoire] ? { modele: { forme: armes[accessoire][0], couleurs: armes[accessoire][1] } } : null;
+  const modele = creerHeros(classe, arme, null, { cheveux: apparence.cheveux, peau: apparence.peau, jambes: apparence.age ? '#4a4038' : undefined });
+  if (apparence.age) modele.userData.parties.corps.rotation.x = 0.12;
+  modele.scale.setScalar(apparence.taille || 1);
+  return modele;
+}
+
+// Tableau des quêtes (objet du village).
+export function creerTableau(couleurs) {
+  const g = new THREE.Group();
+  for (const x of [-0.9, 0.9]) {
+    const poteau = boite(0.15, 2.2, 0.15, couleurs[0]);
+    poteau.position.set(x, 1.1, 0);
+    g.add(poteau);
+  }
+  const planche = boite(2, 1.2, 0.1, couleurs[0]);
+  planche.position.y = 1.5;
+  g.add(planche);
+  for (const [x, y] of [[-0.5, 1.6], [0.1, 1.45], [0.55, 1.65], [-0.2, 1.25]]) {
+    const affiche = boite(0.35, 0.42, 0.02, couleurs[1]);
+    affiche.position.set(x, y, 0.06);
+    affiche.rotation.z = (x * 7) % 0.2 - 0.1;
+    g.add(affiche);
+  }
+  const toit = boite(2.3, 0.1, 0.5, '#7a3a2a');
+  toit.position.y = 2.25;
+  g.add(toit);
+  g.userData.parties = null;
+  g.userData.type = 'objet';
+  return g;
 }
 
 // Monstres : quelques gabarits réutilisables, réglés par les données.
 export function creerModeleMonstre(modele) {
+  if (modele.forme === 'humanoide') {
+    const m = creerHumanoide({ couleurs: modele.couleurs, cheveux: '#2a1a1a', arme: modele.arme, taille: modele.taille });
+    return m;
+  }
   const [c1, c2] = modele.couleurs;
   const racine = new THREE.Group();
   const corps = new THREE.Group();
   racine.add(corps);
   let parties;
 
-  if (modele.forme === 'quadrupede') {
-    corps.position.y = 0.75;
-    const tronc = boite(0.55, 0.5, 1.2, c1);
+  if (modele.forme === 'quadrupede' || modele.forme === 'sanglier') {
+    const sanglier = modele.forme === 'sanglier';
+    corps.position.y = sanglier ? 0.6 : 0.75;
+    const tronc = boite(sanglier ? 0.75 : 0.55, sanglier ? 0.65 : 0.5, sanglier ? 1.15 : 1.2, c1);
     corps.add(tronc);
+    if (sanglier) {
+      const crete = boite(0.2, 0.18, 0.9, c2);
+      crete.position.set(0, 0.38, 0);
+      corps.add(crete);
+    }
     const tete = new THREE.Group();
-    tete.position.set(0, 0.25, 0.65);
-    const crane = boite(0.42, 0.38, 0.45, c1);
+    tete.position.set(0, sanglier ? 0.05 : 0.25, sanglier ? 0.68 : 0.65);
+    const crane = boite(sanglier ? 0.5 : 0.42, sanglier ? 0.45 : 0.38, 0.45, c1);
     const museau = boite(0.24, 0.2, 0.32, c2);
     museau.position.set(0, -0.06, 0.32);
     const oreilleG = boite(0.1, 0.18, 0.06, c2);
@@ -226,22 +278,72 @@ export function creerModeleMonstre(modele) {
     const oeilD = oeilG.clone();
     oeilD.position.x = -0.12;
     tete.add(crane, museau, oreilleG, oreilleD, oeilG, oeilD);
+    if (sanglier) {
+      for (const x of [0.14, -0.14]) {
+        const defense = boite(0.05, 0.22, 0.05, '#f2ead8');
+        defense.position.set(x, 0.02, 0.42);
+        defense.rotation.x = -0.5;
+        tete.add(defense);
+      }
+    }
     corps.add(tete);
-    const queue = boite(0.12, 0.12, 0.55, c2);
-    queue.position.set(0, 0.15, -0.8);
+    const queue = boite(0.12, 0.12, sanglier ? 0.2 : 0.55, c2);
+    queue.position.set(0, 0.15, sanglier ? -0.62 : -0.8);
     queue.rotation.x = 0.5;
     corps.add(queue);
     const pattes = [];
-    for (const [x, z] of [[0.2, 0.42], [-0.2, 0.42], [0.2, -0.42], [-0.2, -0.42]]) {
-      const patte = membre(0.13, 0.55, 0.13, c2);
+    const hauteurPatte = sanglier ? 0.45 : 0.55;
+    for (const [x, z] of [[0.22, 0.4], [-0.22, 0.4], [0.22, -0.4], [-0.22, -0.4]]) {
+      const patte = membre(0.15, hauteurPatte, 0.15, c2);
       patte.position.set(x, -0.15, z);
       corps.add(patte);
       pattes.push(patte);
     }
     parties = { corps, tete, pattes, queue };
     racine.userData.type = 'quadrupede';
+    racine.userData.hauteurCorps = corps.position.y;
+  } else if (modele.forme === 'insecte') {
+    // Frelon : corps rayé, ailes qui battent, dard.
+    corps.position.y = 0;
+    const thorax = sphere(0.32, c2, 0);
+    const abdomen = new THREE.Group();
+    abdomen.position.z = -0.45;
+    for (let k = 0; k < 3; k++) {
+      const anneau = sphere(0.3 - k * 0.05, k % 2 ? c2 : c1, 0);
+      anneau.position.z = -k * 0.22;
+      abdomen.add(anneau);
+    }
+    const dard = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.3, 5), materiau('#1a1a1a'));
+    dard.rotation.x = -Math.PI / 2;
+    dard.position.z = -0.85;
+    abdomen.add(dard);
+    abdomen.rotation.x = 0.35;
+    const tete = sphere(0.22, c2, 0);
+    tete.position.z = 0.35;
+    const oeilG = sphere(0.09, '#ff3a2a', 0);
+    oeilG.material = materiau('#ff3a2a', { emissive: '#ff2000', emissiveIntensity: 0.8 });
+    oeilG.position.set(0.12, 0.05, 0.5);
+    const oeilD = oeilG.clone();
+    oeilD.position.x = -0.12;
+    const ailes = [];
+    for (const sens of [1, -1]) {
+      const aile = new THREE.Group();
+      const membrane = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.9, 0.35),
+        materiauToon({ color: '#e8f4ff', transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false })
+      );
+      membrane.position.x = sens * 0.45;
+      membrane.rotation.x = -Math.PI / 2;
+      aile.add(membrane);
+      aile.position.set(sens * 0.15, 0.25, 0);
+      corps.add(aile);
+      ailes.push(aile);
+    }
+    corps.add(thorax, abdomen, tete, oeilG, oeilD);
+    parties = { corps, ailes, abdomen };
+    racine.userData.type = 'insecte';
   } else {
-    // humanoide_trapu
+    // humanoide_trapu (gobelins)
     corps.position.y = 0.75;
     const torse = boite(0.6, 0.55, 0.4, c1);
     torse.position.y = 0.3;
@@ -265,6 +367,19 @@ export function creerModeleMonstre(modele) {
     const oeilD = oeilG.clone();
     oeilD.position.x = -0.1;
     tete.add(crane, nez, oreilleG, oreilleD, oeilG, oeilD);
+    if (modele.couronne) {
+      const couronne = new THREE.Group();
+      const bandeau = cylindre(0.27, 0.27, 0.1, '#d4af37', 8);
+      couronne.add(bandeau);
+      for (let k = 0; k < 5; k++) {
+        const pointe = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.18, 4), materiau('#d4af37', { emissive: '#8a6a10', emissiveIntensity: 0.4 }));
+        const a = (k / 5) * Math.PI * 2;
+        pointe.position.set(Math.cos(a) * 0.24, 0.12, Math.sin(a) * 0.24);
+        couronne.add(pointe);
+      }
+      couronne.position.y = 0.25;
+      tete.add(couronne);
+    }
     corps.add(tete);
     const brasG = membre(0.16, 0.55, 0.16, c1);
     brasG.position.set(0.4, 0.5, 0);
@@ -274,10 +389,12 @@ export function creerModeleMonstre(modele) {
     const main = new THREE.Group();
     main.position.y = -0.55;
     brasD.add(main);
-    const lame = creerArme('epee', ['#7a5a3a', '#4a3a2a']);
-    lame.scale.setScalar(0.8);
-    lame.rotation.x = Math.PI / 2;
-    main.add(lame);
+    const arme = modele.arme === 'masse' ? creerArme('masse', ['#7a5a3a', '#4a3a2a'])
+      : modele.arme === 'baton' ? creerArme('baton', ['#7fff7a', '#4a3a2a'])
+        : creerArme('epee', ['#7a5a3a', '#4a3a2a']);
+    arme.scale.setScalar(0.8);
+    arme.rotation.x = Math.PI / 2;
+    main.add(arme);
     const jambeG = membre(0.2, 0.75, 0.2, c2);
     jambeG.position.set(0.15, 0, 0);
     const jambeD = membre(0.2, 0.75, 0.2, c2);
@@ -285,6 +402,7 @@ export function creerModeleMonstre(modele) {
     corps.add(jambeG, jambeD);
     parties = { corps, torse, tete, brasG, brasD, jambeG, jambeD };
     racine.userData.type = 'humanoide';
+    racine.userData.hauteurCorps = 0.75;
   }
   racine.scale.setScalar(modele.taille || 1);
   racine.userData.parties = parties;

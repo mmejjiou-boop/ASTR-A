@@ -1,0 +1,403 @@
+[
+  {
+    "id": "pnj_ancien_elric",
+    "texte": "pnj.pnj_ancien_elric",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "histoire",
+    "service": null,
+    "position": [
+      3,
+      4
+    ],
+    "dialogue": "dlg_pnj_ancien_elric",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#6b5a8a",
+        "#e8e0d0"
+      ],
+      "cheveux": "#e8e8e8",
+      "accessoire": "baton",
+      "age": true
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_aubergiste_berthe",
+    "texte": "pnj.pnj_aubergiste_berthe",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "auberge",
+    "position": [
+      19.2,
+      -9.9
+    ],
+    "dialogue": "dlg_pnj_aubergiste_berthe",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#a0522d",
+        "#f0e0c0"
+      ],
+      "cheveux": "#b5651d"
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_marchand_tobin",
+    "texte": "pnj.pnj_marchand_tobin",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "marchand",
+    "position": [
+      -21.6,
+      -5.6
+    ],
+    "dialogue": "dlg_pnj_marchand_tobin",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#2e6b4a",
+        "#d9c27a"
+      ],
+      "cheveux": "#3a2a1a"
+    },
+    "routine": "immobile",
+    "boutique": [
+      "potion_vie_petite",
+      "potion_vie_moyenne",
+      "potion_mana_petite",
+      "anneau_cuivre",
+      "amulette_chene"
+    ]
+  },
+  {
+    "id": "pnj_armurier_gunnar",
+    "texte": "pnj.pnj_armurier_gunnar",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "armurier",
+    "position": [
+      -25.3,
+      14.4
+    ],
+    "dialogue": "dlg_pnj_armurier_gunnar",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#5a5f66",
+        "#8b5a2b"
+      ],
+      "cheveux": "#c0392b"
+    },
+    "routine": "immobile",
+    "boutique": [
+      "casque_cuir",
+      "jambieres_cuir",
+      "bottes_cuir",
+      "gants_cuir",
+      "bouclier_bois",
+      "bouclier_fer",
+      "cotte_mailles",
+      "casque_fer",
+      "jambieres_fer",
+      "robe_mage",
+      "capuche_rodeur"
+    ]
+  },
+  {
+    "id": "pnj_forgeronne_brunhilde",
+    "texte": "pnj.pnj_forgeronne_brunhilde",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "forgeron",
+    "position": [
+      25.3,
+      14.4
+    ],
+    "dialogue": "dlg_pnj_forgeronne_brunhilde",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#3a3a3a",
+        "#c97a3a"
+      ],
+      "cheveux": "#e2b04a",
+      "accessoire": "marteau"
+    },
+    "routine": "immobile",
+    "boutique": [
+      "epee_rouillee_valdor",
+      "baton_apprenti_valdor",
+      "grimoire_use_valdor",
+      "arc_long_simple_valdor",
+      "dagues_usees_valdor",
+      "masse_fer_valdor",
+      "hache_lourde_valdor",
+      "baton_bois_vivant_valdor",
+      "faux_rouillee_valdor",
+      "sceptre_apprenti_valdor",
+      "katana_simple_valdor",
+      "orbe_terne_valdor",
+      "arc_court_valdor",
+      "gantelets_runiques_valdor",
+      "epee_noire_valdor"
+    ]
+  },
+  {
+    "id": "pnj_alchimiste_mirela",
+    "texte": "pnj.pnj_alchimiste_mirela",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "alchimiste",
+    "position": [
+      10.7,
+      27.1
+    ],
+    "dialogue": "dlg_pnj_alchimiste_mirela",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#6a3a8a",
+        "#9fe0a0"
+      ],
+      "cheveux": "#2a1a2a"
+    },
+    "routine": "immobile",
+    "boutique": [
+      "potion_vie_petite",
+      "potion_vie_moyenne",
+      "potion_mana_petite"
+    ]
+  },
+  {
+    "id": "pnj_banquier_orsino",
+    "texte": "pnj.pnj_banquier_orsino",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "banque",
+    "position": [
+      -12.7,
+      27.1
+    ],
+    "dialogue": "dlg_pnj_banquier_orsino",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#1f3a5a",
+        "#d4af37"
+      ],
+      "cheveux": "#5a5a5a"
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_maitre_kaelen",
+    "texte": "pnj.pnj_maitre_kaelen",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "maitreCompetences",
+    "position": [
+      0.0,
+      -29.0
+    ],
+    "dialogue": "dlg_pnj_maitre_kaelen",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#8b1e1e",
+        "#f2e6b0"
+      ],
+      "cheveux": "#1a1a1a"
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "tableau_valdor",
+    "texte": "pnj.tableau_valdor",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "tableauQuetes",
+    "position": [
+      8,
+      -6
+    ],
+    "dialogue": "dlg_tableau_valdor",
+    "apparence": {
+      "forme": "tableau",
+      "couleurs": [
+        "#8b5a2b",
+        "#e8dcc0"
+      ]
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_gardienne_sylva",
+    "texte": "pnj.pnj_gardienne_sylva",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "service",
+    "service": "portail",
+    "position": [
+      -6,
+      -45
+    ],
+    "dialogue": "dlg_pnj_gardienne_sylva",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#2a5d7a",
+        "#7ff0ff"
+      ],
+      "cheveux": "#f0f0ff"
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_capitaine_maelle",
+    "texte": "pnj.pnj_capitaine_maelle",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "quetes",
+    "service": null,
+    "position": [
+      -14,
+      -22
+    ],
+    "dialogue": "dlg_pnj_capitaine_maelle",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#4a5a7a",
+        "#c9a227"
+      ],
+      "cheveux": "#3a2a1a",
+      "accessoire": "epee"
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_chasseuse_ysolde",
+    "texte": "pnj.pnj_chasseuse_ysolde",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "quetes",
+    "service": null,
+    "position": [
+      56,
+      6
+    ],
+    "dialogue": "dlg_pnj_chasseuse_ysolde",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#3f6b35",
+        "#c9b37a"
+      ],
+      "cheveux": "#8b4513",
+      "accessoire": "arc"
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_garde_aldric",
+    "texte": "pnj.pnj_garde_aldric",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "quetes",
+    "service": null,
+    "position": [
+      60,
+      -6
+    ],
+    "dialogue": "dlg_pnj_garde_aldric",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#4a5a7a",
+        "#9aa0a8"
+      ],
+      "cheveux": "#5a3a1a",
+      "accessoire": "epee"
+    },
+    "routine": "immobile"
+  },
+  {
+    "id": "pnj_villageoise_lina",
+    "texte": "pnj.pnj_villageoise_lina",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "villageois",
+    "service": null,
+    "position": [
+      14,
+      10
+    ],
+    "dialogue": "dlg_pnj_villageoise_lina",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#c97a9a",
+        "#f0e0c0"
+      ],
+      "cheveux": "#e2b04a",
+      "taille": 0.8
+    },
+    "routine": "promenade"
+  },
+  {
+    "id": "pnj_villageois_bram",
+    "texte": "pnj.pnj_villageois_bram",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "villageois",
+    "service": null,
+    "position": [
+      -18,
+      12
+    ],
+    "dialogue": "dlg_pnj_villageois_bram",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#7a6a4a",
+        "#5a4a3a"
+      ],
+      "cheveux": "#2a1a0a"
+    },
+    "routine": "promenade"
+  },
+  {
+    "id": "pnj_villageois_odo",
+    "texte": "pnj.pnj_villageois_odo",
+    "monde": 1,
+    "lieu": "valdor",
+    "role": "villageois",
+    "service": null,
+    "position": [
+      24,
+      -30
+    ],
+    "dialogue": "dlg_pnj_villageois_odo",
+    "apparence": {
+      "forme": "humanoide",
+      "couleurs": [
+        "#5a7a8a",
+        "#d0c0a0"
+      ],
+      "cheveux": "#9a9a9a",
+      "age": true
+    },
+    "routine": "promenade"
+  }
+]

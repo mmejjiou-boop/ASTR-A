@@ -23,9 +23,10 @@
     const lire = async (c) => (await fetch(`../data/${c}`, { cache: 'no-cache' })).json();
     const zone = document.getElementById('resultat');
     try {
-      const [config, textes, classes, competences, monstres, objets, butin] = await Promise.all(FICHIERS.map(lire));
-      const mondes = await Promise.all(MONDES.map(lire));
-      const r = verifier({ config, textes, classes, competences, monstres, objets, butin, mondes });
+      const [config, textes, classes, competences, monstres, objets, butin, pnj, dialogues, donjons] = await Promise.all(FICHIERS.map(lire));
+      const mondes = await Promise.all(MONDES.map((n) => lire(`mondes/${n}.json`)));
+      const quetes = (await Promise.all(MONDES.filter((n) => n !== 'zone-test').map((n) => lire(`quetes/${n}.json`)))).flat();
+      const r = verifier({ config, textes, classes, competences, monstres, objets, butin, pnj, dialogues, donjons, quetes, mondes });
       const lignes = r.totaux.map((t) => `<tr><td>${t.libelle}</td><td class="nb">${t.actuel}</td><td class="nb">${t.exige} ${t.exact ? '(exactement)' : '(minimum)'}</td><td class="${t.depasse ? 'ko' : t.ok ? 'ok' : 'encours'}">${t.depasse ? 'Trop' : t.ok ? 'OK' : 'En cours'}</td></tr>`).join('');
       const liste = (items, classe) => items.length ? `<ul>${items.map((e) => `<li class="${classe}">${e}</li>`).join('')}</ul>` : '<p class="ok">Aucune.</p>';
       zone.innerHTML = `<table><tr><th>Élément</th><th>Actuel</th><th>Exigé</th><th>État</th></tr>${lignes}</table>

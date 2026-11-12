@@ -1,0 +1,217 @@
+[
+  {
+    "id": "dlg_pnj_ancien_elric",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_ancien_elric.accueil",
+        "choix": [
+          {
+            "texte": "dlg.pnj_ancien_elric.pacte.q",
+            "suite": "pacte"
+          },
+          {
+            "texte": "dlg.pnj_ancien_elric.marque.q",
+            "suite": "marque"
+          }
+        ]
+      },
+      "pacte": {
+        "texte": "dlg.pnj_ancien_elric.pacte.r",
+        "choix": [
+          {
+            "texte": "commun.retour",
+            "suite": "accueil"
+          }
+        ]
+      },
+      "marque": {
+        "texte": "dlg.pnj_ancien_elric.marque.r",
+        "choix": [
+          {
+            "texte": "commun.retour",
+            "suite": "accueil"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_aubergiste_berthe",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_aubergiste_berthe.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_marchand_tobin",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_marchand_tobin.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_armurier_gunnar",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_armurier_gunnar.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_forgeronne_brunhilde",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_forgeronne_brunhilde.accueil",
+        "choix": [
+          {
+            "texte": "dlg.pnj_forgeronne_brunhilde.forge.q",
+            "suite": "forge"
+          }
+        ]
+      },
+      "forge": {
+        "texte": "dlg.pnj_forgeronne_brunhilde.forge.r",
+        "choix": [
+          {
+            "texte": "commun.retour",
+            "suite": "accueil"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_alchimiste_mirela",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_alchimiste_mirela.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_banquier_orsino",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_banquier_orsino.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_maitre_kaelen",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_maitre_kaelen.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_tableau_valdor",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.tableau_valdor.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_gardienne_sylva",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_gardienne_sylva.accueil",
+        "choix": [
+          {
+            "texte": "dlg.pnj_gardienne_sylva.tours.q",
+            "suite": "tours"
+          }
+        ]
+      },
+      "tours": {
+        "texte": "dlg.pnj_gardienne_sylva.tours.r",
+        "choix": [
+          {
+            "texte": "commun.retour",
+            "suite": "accueil"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_capitaine_maelle",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_capitaine_maelle.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_chasseuse_ysolde",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_chasseuse_ysolde.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_garde_aldric",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_garde_aldric.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_villageoise_lina",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_villageoise_lina.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_villageois_bram",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_villageois_bram.accueil",
+        "choix": []
+      }
+    }
+  },
+  {
+    "id": "dlg_pnj_villageois_odo",
+    "debut": "accueil",
+    "noeuds": {
+      "accueil": {
+        "texte": "dlg.pnj_villageois_odo.accueil",
+        "choix": []
+      }
+    }
+  }
+]

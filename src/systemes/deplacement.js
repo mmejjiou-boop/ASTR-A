@@ -12,7 +12,8 @@ function angleVers(depuis, vers, facteur) {
   return depuis + ecart * Math.min(1, facteur);
 }
 
-export function deplacerHeros(heros, dt, entrees, camera, collisions, config, cible) {
+// tour : tour d'observation du monde (escalade), niveauEau : hauteur de l'eau (on avance moins vite dedans).
+export function deplacerHeros(heros, dt, entrees, camera, collisions, config, cible, tour = null, niveauEau = -Infinity) {
   const reglages = config.deplacement;
   const avant = heros.position.clone();
   const etourdi = estEtourdi(heros);
@@ -29,6 +30,20 @@ export function deplacerHeros(heros, dt, entrees, camera, collisions, config, ci
   }
   const bouge = direction.lengthSq() > 0;
   if (bouge) direction.normalize();
+
+  // Escalade de la tour : on s'accroche en marchant contre sa paroi.
+  if (tour && !heros.escalade && !heros.mort && bouge && !heros.roulade && !heros.ruee && !heros.epuise && heros.endurance > 5) {
+    const dx = tour.x - heros.position.x, dz = tour.z - heros.position.z;
+    const d = Math.hypot(dx, dz);
+    const sommet = tour.base + tour.hauteur;
+    if (d < tour.rayon + heros.rayon + 0.4 && heros.position.y < sommet - 0.5 && (direction.x * dx + direction.z * dz) / d > 0.55) {
+      heros.escalade = { angle: Math.atan2(heros.position.x - tour.x, heros.position.z - tour.z), mouvement: 0 };
+      heros.vitesse.set(0, 0, 0);
+      heros.vitesseY = 0;
+      heros.attaque = null;
+    }
+  }
+  if (heros.escalade) return escalader(heros, dt, entrees, collisions, config, tour);
 
   // Blocage (clic droit) : seulement au sol et sans autre action.
   heros.bloque = !heros.mort && !etourdi && entrees.souris.droite && heros.auSol && !heros.roulade && !heros.ruee && !heros.epuise;
@@ -95,8 +110,15 @@ export function deplacerHeros(heros, dt, entrees, camera, collisions, config, ci
   heros.position.x += heros.vitesse.x * dt;
   heros.position.z += heros.vitesse.z * dt;
 
-  // Pente trop raide : on ne monte pas en marchant (l'escalade viendra à l'étape 2).
-  if (heros.auSol) {
+  // Dans l'eau d'une rivière, on avance moins vite.
+  if (heros.position.y < niveauEau - 0.3) {
+    heros.position.x = avant.x + (heros.position.x - avant.x) * 0.55;
+    heros.position.z = avant.z + (heros.position.z - avant.z) * 0.55;
+  }
+
+  // Pente trop raide : on ne monte pas en marchant (seules les tours et parois marquées s'escaladent).
+  const surPlateforme = heros.position.y > collisions.hauteur(heros.position.x, heros.position.z) + 0.3;
+  if (heros.auSol && !surPlateforme) {
     const hAvant = collisions.hauteur(avant.x, avant.z);
     const hApres = collisions.hauteur(heros.position.x, heros.position.z);
     const distance = Math.hypot(heros.position.x - avant.x, heros.position.z - avant.z);
@@ -110,7 +132,7 @@ export function deplacerHeros(heros, dt, entrees, camera, collisions, config, ci
   // Gravité et sol.
   heros.vitesseY -= reglages.gravite * dt;
   heros.position.y += heros.vitesseY * dt;
-  const sol = collisions.hauteur(heros.position.x, heros.position.z);
+  const sol = collisions.hauteurSol(heros.position.x, heros.position.z, heros.position.y);
   if (heros.position.y <= sol) {
     heros.position.y = sol;
     heros.vitesseY = 0;
@@ -132,4 +154,69 @@ export function deplacerHeros(heros, dt, entrees, camera, collisions, config, ci
     }
   }
   return heros.vitesse.length();
+}
+
+// Escalade : Z/W monte, S descend, Q/D tourne autour de la tour, Espace saute en arrière.
+// L'endurance baisse ; à zéro, le héros lâche prise. Les paliers permettent de souffler.
+function escalader(heros, dt, entrees, collisions, config, tour) {
+  const e = heros.escalade;
+  const reglages = config.escalade;
+  const haut = entrees.appuye('KeyW') ? 1 : entrees.appuye('KeyS') ? -1 : 0;
+  const cote = entrees.appuye('KeyD') ? 1 : entrees.appuye('KeyA') ? -1 : 0;
+  const rayon = tour.rayon + 0.55;
+  e.mouvement = haut || cote ? (e.mouvement || 0) + dt * 6 : e.mouvement;
+
+  heros.endurance -= reglages.coutParSeconde * (haut || cote ? 1 : 0.25) * dt;
+  heros.delaiEndurance = config.deplacement.delaiRecuperation;
+  const lacher = () => {
+    heros.escalade = null;
+    heros.position.x = tour.x + Math.sin(e.angle) * (rayon + 0.6);
+    heros.position.z = tour.z + Math.cos(e.angle) * (rayon + 0.6);
+    heros.auSol = false;
+  };
+
+  if (heros.endurance <= 0) {
+    heros.endurance = 0;
+    heros.epuise = true;
+    emettre('message', { cle: 'msg.escalade' });
+    lacher();
+    return 0;
+  }
+  if (entrees.vientDAppuyer('Space')) {
+    heros.endurance = Math.max(0, heros.endurance - reglages.coutSaut);
+    lacher();
+    heros.vitesseY = 4;
+    heros.vitesse.set(Math.sin(e.angle) * 4, 0, Math.cos(e.angle) * 4);
+    return 0;
+  }
+
+  e.angle -= (cote * reglages.vitesse * 0.8 * dt) / rayon;
+  heros.position.y += haut * reglages.vitesse * dt;
+  heros.position.x = tour.x + Math.sin(e.angle) * rayon;
+  heros.position.z = tour.z + Math.cos(e.angle) * rayon;
+  heros.orientation = e.angle + Math.PI;
+  heros.vitesse.set(0, 0, 0);
+  heros.vitesseY = 0;
+
+  // Arrivée à un palier ou au sommet : on se hisse dessus.
+  const niveaux = [...tour.paliers.map((h) => tour.base + h), tour.base + tour.hauteur];
+  for (const h of niveaux) {
+    if (haut > 0 && heros.position.y >= h - 0.05 && heros.position.y - haut * reglages.vitesse * dt < h) {
+      heros.escalade = null;
+      heros.position.y = h;
+      const sortie = h === tour.base + tour.hauteur ? tour.rayon - 1.5 : tour.rayon + 1.4;
+      heros.position.x = tour.x + Math.sin(e.angle) * sortie;
+      heros.position.z = tour.z + Math.cos(e.angle) * sortie;
+      heros.auSol = true;
+      return 0;
+    }
+  }
+  // Redescendu jusqu'au sol.
+  const sol = collisions.hauteurSol(heros.position.x, heros.position.z, heros.position.y);
+  if (heros.position.y <= sol) {
+    heros.position.y = sol;
+    lacher();
+    heros.auSol = true;
+  }
+  return 0;
 }
