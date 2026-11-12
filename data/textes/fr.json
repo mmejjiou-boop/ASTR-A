@@ -390,6 +390,7 @@
   "objet.tissu_bandit.nom": "Foulard de bandit",
   "objet.tunique_cuir.nom": "Tunique de cuir",
   "options.bloom": "Effet lumineux (bloom)",
+  "options.details": "Herbe et particules",
   "options.inverserY": "Inverser l'axe vertical",
   "options.retour": "Retour",
   "options.sensibilite": "Sensibilité de la souris",
@@ -483,7 +484,7 @@
   "titre.continuer": "Continuer",
   "titre.importer": "Importer une sauvegarde",
   "titre.nouvelle": "Nouvelle partie",
-  "titre.prototype": "Version de développement — étape 2",
+  "titre.prototype": "Version de développement — étape 2 (rendu amélioré)",
   "touche.interagir": "E",
   "tour.tour_m01": "Tour de l'Aube",
   "village.valdor": "Valdor"

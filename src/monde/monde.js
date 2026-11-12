@@ -3,6 +3,7 @@
 // découverte des lieux et brouillard de la carte.
 import * as THREE from 'three';
 import { creerTerrain, creerSolPlat } from '../moteur3d/terrain.js';
+import { creerHerbe, creerNuages, creerPollen } from '../moteur3d/vegetation.js';
 import { creerCollisions } from '../moteur3d/collisions.js';
 import { creerEffetsVisuels } from '../moteur3d/effetsVisuels.js';
 import { animer } from '../moteur3d/animations.js';
@@ -56,6 +57,7 @@ export function creerMonde(contexte, def) {
     tempsMortHeros: 0,
     chronoBrouillard: 0,
     logiqueDonjon: null,
+    nature: null, // herbe, nuages et pollen (mondes extérieurs)
 
     planifier(delai, action) {
       this.taches.push({ temps: this.temps + delai, action });
@@ -204,6 +206,7 @@ export function creerMonde(contexte, def) {
       if (this.cible && (this.cible.mort || this.cible.position.distanceTo(heros.position) > 35)) this.cible = null;
 
       terrain.mettreAJour(heros.position);
+      this.mettreAJourNature(dt);
       for (const f of this.animations) f(this.temps);
 
       for (const m of this.monstres) {
@@ -262,6 +265,14 @@ export function creerMonde(contexte, def) {
       visuels.mettreAJour(dt);
     },
 
+    // Herbe autour du héros, nuages, pollen (aussi pendant la vue panoramique).
+    mettreAJourNature(dt) {
+      if (!this.nature) return;
+      this.nature.herbe.mettreAJour(heros.position);
+      this.nature.nuages.mettreAJour(dt);
+      this.nature.pollen.mettreAJour(dt, heros.position, terrain.hauteur);
+    },
+
     // Brouillard de la carte, lieux découverts, arrivée au village.
     decouvrir(dt) {
       this.chronoBrouillard -= dt;
@@ -311,6 +322,9 @@ export function creerMonde(contexte, def) {
     monde.logiqueDonjon = construireDonjon(def, contexte, monde);
   } else {
     construireMondeOuvert(monde, contexte, def, hasard);
+    const graine = def.terrain.graine;
+    monde.nature = { herbe: creerHerbe(terrain, graine), nuages: creerNuages(def.taille, graine), pollen: creerPollen() };
+    groupe.add(monde.nature.herbe.groupe, monde.nature.nuages.groupe, monde.nature.pollen.groupe);
   }
   groupe.add(heros.modele);
   return monde;

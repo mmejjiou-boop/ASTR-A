@@ -136,7 +136,7 @@
       1.0
     ],
     "ombre": {
-      "teinte": "#8580d8",
+      "teinte": "#a29ee0",
       "seuil": 0.6
     },
     "contour": {
@@ -164,7 +164,12 @@
       "rayon": 0.45,
       "seuil": 0.85
     },
-    "exposition": 1.0
+    "exposition": 1.0,
+    "etalonnage": {
+      "saturation": 1.12,
+      "vignette": 0.28,
+      "chaleur": 0.03
+    }
   },
   "elite": {
     "vie": 3,

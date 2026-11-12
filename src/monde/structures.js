@@ -205,14 +205,21 @@ function creerMaison(service) {
   const traverse = boite(8.1, 0.25, 0.25, '#6b4a2b');
   traverse.position.set(0, 2.2, 3.52);
   g.add(traverse);
-  // Toit en prisme.
-  const toit = new THREE.Mesh(new THREE.CylinderGeometry(4.9, 4.9, 9, 3, 1), mat(COULEURS_SERVICE[service] || '#a0522d'));
-  toit.rotation.z = Math.PI / 2;
-  toit.rotation.x = Math.PI / 2;
-  toit.scale.set(0.9, 1, 0.65);
-  toit.position.y = 5.55;
+  // Toit à deux pans (pignon sur la façade) qui dépasse un peu des murs.
+  const forme = new THREE.Shape([new THREE.Vector2(-4.7, 0), new THREE.Vector2(4.7, 0), new THREE.Vector2(0, 2.7)]);
+  const geoToit = new THREE.ExtrudeGeometry(forme, { depth: 8.2, bevelEnabled: false });
+  geoToit.translate(0, 0, -4.1);
+  const toit = new THREE.Mesh(geoToit, mat(COULEURS_SERVICE[service] || '#a0522d'));
+  toit.position.y = 3.95;
   toit.castShadow = true;
   g.add(toit);
+  // Pignon (triangle de mur sous le toit, à l'avant et à l'arrière).
+  const formePignon = new THREE.Shape([new THREE.Vector2(-4, 0), new THREE.Vector2(4, 0), new THREE.Vector2(0, 2.3)]);
+  for (const z of [3.5, -3.5]) {
+    const pignon = new THREE.Mesh(new THREE.ShapeGeometry(formePignon), mat('#efe3c8', { side: THREE.DoubleSide }));
+    pignon.position.set(0, 4, z);
+    g.add(pignon);
+  }
   const porte = boite(1.5, 2.4, 0.15, '#5a3d2b');
   porte.position.set(0, 1.2, 3.55);
   g.add(porte);

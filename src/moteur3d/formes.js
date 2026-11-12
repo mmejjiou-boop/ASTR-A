@@ -129,51 +129,98 @@ function creerBouclier(couleurs) {
   return g;
 }
 
-// Héros humanoïde aux couleurs de sa classe.
+// Membre arrondi (capsule) qui pivote à son sommet (épaule, hanche).
+function membreArrondi(rayon, longueur, couleur, couleurBout = null) {
+  const pivot = new THREE.Group();
+  const forme = new THREE.Mesh(new THREE.CapsuleGeometry(rayon, longueur, 3, 8), materiau(couleur));
+  forme.position.y = -longueur / 2 - rayon * 0.5;
+  forme.castShadow = true;
+  pivot.add(forme);
+  if (couleurBout) {
+    // Main ou botte au bout du membre.
+    const bout = new THREE.Mesh(new THREE.SphereGeometry(rayon * 1.25, 10, 8), materiau(couleurBout));
+    bout.position.y = -longueur - rayon * 0.8;
+    bout.castShadow = true;
+    pivot.add(bout);
+  }
+  return pivot;
+}
+
+// Héros humanoïde aux couleurs de sa classe : formes arrondies, tunique, visage.
 export function creerHeros(classe, arme, bouclier, options = {}) {
   const { principale, secondaire } = classe.couleurs;
-  const peau = options.peau || '#e0b48a';
+  const peau = options.peau || '#e9bf94';
   const couleurCheveux = options.cheveux || '#3a2a1a';
+  const couleurJambes = options.jambes || '#3d3a48';
   const racine = new THREE.Group();
   const corps = new THREE.Group();
   corps.position.y = 0.95;
   racine.add(corps);
 
-  const torse = boite(0.56, 0.62, 0.32, principale);
-  torse.position.y = 0.35;
-  corps.add(torse);
-  const ceinture = boite(0.58, 0.1, 0.34, secondaire);
-  ceinture.position.y = 0.06;
-  corps.add(ceinture);
+  // Buste (tronc de cône arrondi) et tunique qui descend sur les cuisses.
+  const torse = new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.22, 0.62, 12), materiau(principale));
+  torse.position.y = 0.36;
+  torse.castShadow = true;
+  const epaules = new THREE.Mesh(new THREE.SphereGeometry(0.28, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), materiau(principale));
+  epaules.position.y = 0.66;
+  epaules.scale.set(1.05, 0.45, 0.85);
+  const tunique = new THREE.Mesh(new THREE.CylinderGeometry(0.23, 0.33, 0.38, 12, 1, true), materiau(principale, { side: THREE.DoubleSide }));
+  tunique.position.y = -0.08;
+  tunique.castShadow = true;
+  const ceinture = new THREE.Mesh(new THREE.TorusGeometry(0.235, 0.045, 6, 16), materiau(secondaire));
+  ceinture.rotation.x = Math.PI / 2;
+  ceinture.position.y = 0.1;
+  const boucle = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.08, 0.04), materiau('#e8c35a', { emissive: '#8a6a10', emissiveIntensity: 0.25 }));
+  boucle.position.set(0, 0.1, 0.27);
+  // Col et bordure aux couleurs secondaires.
+  const col = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.04, 6, 14), materiau(secondaire));
+  col.rotation.x = Math.PI / 2;
+  col.position.y = 0.7;
+  corps.add(torse, epaules, tunique, ceinture, boucle, col);
 
+  // Tête ronde, cheveux, yeux et oreilles.
   const tete = new THREE.Group();
-  tete.position.y = 0.88;
-  const visage = boite(0.32, 0.34, 0.32, peau);
-  const cheveux = boite(0.34, 0.12, 0.34, couleurCheveux);
-  cheveux.position.y = 0.17;
-  const nuque = boite(0.34, 0.26, 0.08, couleurCheveux);
-  nuque.position.set(0, 0.04, -0.15);
-  const yeux = boite(0.22, 0.05, 0.02, '#1a1a22');
-  yeux.position.set(0, 0.03, 0.165);
-  tete.add(visage, cheveux, nuque, yeux);
+  tete.position.y = 0.94;
+  const visage = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 12), materiau(peau));
+  visage.scale.set(1, 1.08, 0.98);
+  visage.castShadow = true;
+  const cheveux = new THREE.Mesh(new THREE.SphereGeometry(0.215, 16, 10, 0, Math.PI * 2, 0, Math.PI * 0.55), materiau(couleurCheveux));
+  cheveux.position.y = 0.03;
+  cheveux.rotation.x = -0.25;
+  const meche = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.2, 6), materiau(couleurCheveux));
+  meche.position.set(0.08, 0.12, 0.15);
+  meche.rotation.set(1.2, 0, -0.5);
+  const nuque = new THREE.Mesh(new THREE.SphereGeometry(0.17, 12, 8), materiau(couleurCheveux));
+  nuque.position.set(0, -0.02, -0.08);
+  nuque.scale.set(1.1, 1, 0.8);
+  const oeilG = new THREE.Mesh(new THREE.SphereGeometry(0.032, 8, 6), materiau('#1c1c28'));
+  oeilG.position.set(0.075, -0.01, 0.185);
+  oeilG.scale.set(1, 1.35, 0.6);
+  const oeilD = oeilG.clone();
+  oeilD.position.x = -0.075;
+  const oreilleG = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), materiau(peau));
+  oreilleG.position.set(0.195, -0.01, 0);
+  oreilleG.scale.set(0.5, 1, 0.8);
+  const oreilleD = oreilleG.clone();
+  oreilleD.position.x = -0.195;
+  tete.add(visage, cheveux, meche, nuque, oeilG, oeilD, oreilleG, oreilleD);
   corps.add(tete);
 
-  const brasG = membre(0.16, 0.6, 0.16, principale);
-  brasG.position.set(0.37, 0.62, 0);
-  const brasD = membre(0.16, 0.6, 0.16, principale);
-  brasD.position.set(-0.37, 0.62, 0);
+  const brasG = membreArrondi(0.075, 0.42, principale, peau);
+  brasG.position.set(0.34, 0.62, 0);
+  const brasD = membreArrondi(0.075, 0.42, principale, peau);
+  brasD.position.set(-0.34, 0.62, 0);
   corps.add(brasG, brasD);
 
-  const couleurJambes = options.jambes || '#3a3a44';
-  const jambeG = membre(0.2, 0.9, 0.2, couleurJambes);
-  jambeG.position.set(0.14, 0, 0);
-  const jambeD = membre(0.2, 0.9, 0.2, couleurJambes);
-  jambeD.position.set(-0.14, 0, 0);
+  const jambeG = membreArrondi(0.09, 0.74, couleurJambes, '#4a3426');
+  jambeG.position.set(0.13, 0, 0);
+  const jambeD = membreArrondi(0.09, 0.74, couleurJambes, '#4a3426');
+  jambeD.position.set(-0.13, 0, 0);
   corps.add(jambeG, jambeD);
 
   // Arme dans la main droite.
   const main = new THREE.Group();
-  main.position.y = -0.6;
+  main.position.y = -0.58;
   brasD.add(main);
   if (arme) {
     const modeleArme = creerArme(arme.modele.forme, arme.modele.couleurs);

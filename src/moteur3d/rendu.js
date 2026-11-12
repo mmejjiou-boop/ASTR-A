@@ -7,7 +7,8 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { configurerStyle, creerCiel } from './materiaux.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { configurerStyle, creerCiel, mettreAJourTemps } from './materiaux.js';
 
 export function creerRendu(conteneur, reglages) {
   configurerStyle(reglages);
@@ -53,6 +54,31 @@ export function creerRendu(conteneur, reglages) {
   const b = reglages.bloom;
   const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2), b.force, b.rayon, b.seuil);
   composeur.addPass(bloom);
+  // Étalonnage : couleurs un peu plus vives et chaudes, léger assombrissement des bords (vignette).
+  const etalonnage = new ShaderPass({
+    uniforms: { tDiffuse: { value: null }, uSaturation: { value: reglages.etalonnage?.saturation ?? 1.12 }, uVignette: { value: reglages.etalonnage?.vignette ?? 0.28 }, uChaleur: { value: reglages.etalonnage?.chaleur ?? 0.03 } },
+    vertexShader: /* glsl */ `
+      varying vec2 vUv;
+      void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
+    `,
+    fragmentShader: /* glsl */ `
+      uniform sampler2D tDiffuse;
+      uniform float uSaturation;
+      uniform float uVignette;
+      uniform float uChaleur;
+      varying vec2 vUv;
+      void main() {
+        vec4 c = texture2D(tDiffuse, vUv);
+        float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));
+        c.rgb = mix(vec3(l), c.rgb, uSaturation);
+        c.rgb += vec3(uChaleur, uChaleur * 0.4, -uChaleur * 0.5) * (1.0 - l);
+        float d = distance(vUv, vec2(0.5));
+        c.rgb *= 1.0 - uVignette * smoothstep(0.35, 0.85, d);
+        gl_FragColor = c;
+      }
+    `,
+  });
+  composeur.addPass(etalonnage);
   composeur.addPass(new OutputPass());
   let bloomActif = true;
 
@@ -88,6 +114,7 @@ export function creerRendu(conteneur, reglages) {
       soleil.position.copy(position).addScaledVector(directionSoleil, 100);
     },
     dessiner() {
+      mettreAJourTemps(performance.now() / 1000);
       ciel.position.copy(camera.position);
       if (bloomActif) composeur.render();
       else rendu.render(scene, camera);

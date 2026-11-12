@@ -72,20 +72,59 @@ const STYLE = /* glsl */ `
   outgoingLight += uContourCouleur * fresnel * uContourIntensite * uContourLocal;
 `;
 
+// Temps partagé par les matériaux animés (vent dans l'herbe, reflets de l'eau).
+const uTemps = { value: 0 };
+export function mettreAJourTemps(t) {
+  uTemps.value = t;
+}
+
+// Vent : les sommets se balancent d'autant plus qu'ils sont hauts (herbe, fleurs, feuillage).
+const VENT = /* glsl */ `
+  #ifdef USE_INSTANCING
+    vec3 baseInstance = vec3(instanceMatrix[3][0], instanceMatrix[3][1], instanceMatrix[3][2]);
+  #else
+    vec3 baseInstance = vec3(0.0);
+  #endif
+  float phase = uTemps * 1.7 + baseInstance.x * 0.11 + baseInstance.z * 0.09;
+  float rafale = 0.6 + 0.4 * sin(uTemps * 0.35 + baseInstance.x * 0.013);
+  float souplesse = max(transformed.y, 0.0) * uVent * rafale;
+  transformed.x += sin(phase) * souplesse;
+  transformed.z += cos(phase * 0.8) * souplesse * 0.6;
+`;
+
+// Eau : reflets scintillants qui bougent avec le temps.
+const EAU_VERTEX = /* glsl */ `
+  vPosMonde = (modelMatrix * vec4(transformed, 1.0)).xyz;
+`;
+const EAU_FRAGMENT = /* glsl */ `
+  float onde1 = sin(vPosMonde.x * 0.21 + uTemps * 1.3) * sin(vPosMonde.z * 0.17 - uTemps * 0.9);
+  float onde2 = sin((vPosMonde.x + vPosMonde.z) * 0.33 - uTemps * 1.7);
+  float reflet = smoothstep(0.82, 0.97, onde1 * 0.6 + onde2 * 0.4);
+  outgoingLight = mix(outgoingLight, vec3(0.92, 0.97, 1.0), reflet * 0.7);
+  outgoingLight += vec3(0.05, 0.09, 0.12) * (0.5 + 0.5 * onde2);
+`;
+
 // Crée un matériau cel-shading.
 // options : celles de MeshToonMaterial (color, vertexColors, emissive, transparent…)
-//           + contour (0 à 1, intensité locale du liseré ; 0 pour le sol).
+//   + contour : intensité locale du liseré (0 à 1 ; 0 pour le sol) ;
+//   + vent : amplitude du balancement (herbe, fleurs) ;
+//   + eau : reflets animés.
 export function materiauToon(options = {}) {
-  const { contour = 1, ...reste } = options;
+  const { contour = 1, vent = 0, eau = false, ...reste } = options;
   const materiau = new THREE.MeshToonMaterial({ gradientMap: rampe, ...reste });
   materiau.onBeforeCompile = (shader) => {
-    Object.assign(shader.uniforms, uniformesGlobales, { uContourLocal: { value: contour } });
+    Object.assign(shader.uniforms, uniformesGlobales, { uContourLocal: { value: contour }, uVent: { value: vent }, uTemps });
     shader.fragmentShader = shader.fragmentShader
-      .replace('#include <common>', `#include <common>\n${DECLARATIONS}`)
-      .replace('#include <opaque_fragment>', `${STYLE}\n#include <opaque_fragment>`);
+      .replace('#include <common>', `#include <common>\n${DECLARATIONS}\nuniform float uTemps;\n${eau ? 'varying vec3 vPosMonde;' : ''}`)
+      .replace('#include <opaque_fragment>', `${STYLE}\n${eau ? EAU_FRAGMENT : ''}\n#include <opaque_fragment>`);
+    if (vent || eau) {
+      shader.vertexShader = shader.vertexShader
+        .replace('#include <common>', `#include <common>\nuniform float uTemps;\nuniform float uVent;\n${eau ? 'varying vec3 vPosMonde;' : ''}`)
+        .replace('#include <begin_vertex>', `#include <begin_vertex>\n${vent ? VENT : ''}\n${eau ? EAU_VERTEX : ''}`);
+    }
   };
-  // Même programme GPU pour tous les matériaux toon (le contour local est une uniforme).
-  materiau.customProgramCacheKey = () => 'astrea-toon';
+  // Un programme GPU par variante (normal, avec vent, eau) ; le reste passe par des uniformes.
+  materiau.customProgramCacheKey = () => `astrea-toon${vent ? '-vent' : ''}${eau ? '-eau' : ''}`;
   return materiau;
 }
 

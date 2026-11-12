@@ -1,6 +1,6 @@
 # État du projet ASTRÉA
 
-Dernière mise à jour : 12 novembre 2026, étape 2 (monde 1 complet).
+Dernière mise à jour : 12 novembre 2026, étape 2 (monde 1 complet) + passe visuelle.
 
 ## Étape en cours
 
@@ -17,6 +17,19 @@ Arborescence, formats des données, format de sauvegarde, risques : `docs/etape-
 
 ### Style visuel — cel-shading façon Breath of the Wild
 Matériau maison (`src/moteur3d/materiaux.js`) : 3 tons nets, ombres bleu-violet, liseré lumineux sur les bords. Lumière chaude/froide, ciel en dégradé, brouillard pastel, bloom désactivable. Réglages dans `data/config.json` → `rendu`.
+
+### Passe visuelle (demandée le 12/11/2026, après l'étape 2)
+- **Herbe** qui ondule au vent autour du héros (environ 16 000 touffes dans un rayon de 52 m), avec des **fleurs** de 5 couleurs. Elle prend la couleur du sol, et ses positions sont stables : rien ne « saute » quand on avance.
+- **Arbres plus détaillés** : sapins à trois étages, feuillus en plusieurs boules, **buissons** au pied des arbres.
+- **Nuages** qui dérivent dans le ciel et **pollens lumineux** qui flottent dans l'air.
+- **Eau** avec des reflets animés.
+- **Rivières dans des vallées douces** au lieu de canyons. Le terrain du monde 1 a légèrement changé autour des rivières.
+- **Personnages arrondis** : héros, PNJ et bandits, avec tunique, ceinture, visage, cheveux, mains et bottes.
+- **Maisons** avec un vrai toit à deux pans et un pignon.
+- **Étalonnage des couleurs** : couleurs un peu plus vives et chaudes, léger vignettage.
+- Ombres un peu moins violettes.
+- **Nouvelle option « Herbe et particules »** (menu Options), à décocher si le jeu manque de fluidité.
+- Tous les réglages sont dans `data/config.json` → `rendu` (tons, ombres, liseré, lumière, brouillard, bloom, étalonnage).
 
 ### Étape 2 — Monde 1 : Les Plaines de l'Aube
 - **Monde ouvert de 3,2 km × 3,2 km** : collines, montagnes sur les bords, 2 rivières (on y avance plus lentement), environ 5 500 arbres et 1 400 rochers. Le sol est affiché par tronçons de 200 m, détaillés près du héros et simplifiés au loin.
@@ -79,7 +92,7 @@ Matériau maison (`src/moteur3d/materiaux.js`) : 3 tons nets, ombres bleu-violet
 
 ## Bugs connus et limites actuelles
 
-- **Performance réelle inconnue** : je n'ai mesuré qu'en rendu logiciel (1 à 2 images par seconde, sans carte graphique). Lance avec `?debug=1` et donne-moi tes FPS. Si ça rame, décoche le bloom dans Options.
+- **Performance réelle inconnue** : je n'ai mesuré qu'en rendu logiciel, sans carte graphique (moins de 2 images par seconde). Lance avec `?debug=1` et donne-moi tes FPS. Si ça rame, décoche « Effet lumineux (bloom) » puis « Herbe et particules » dans Options.
 - **Chargement du monde 1** : environ 10 s en rendu logiciel, sans doute 2 à 3 s sur un vrai PC.
 - **Fines lignes au sol** entre un tronçon détaillé et un tronçon simplifié, visibles de haut (depuis la tour). À corriger à l'étape 7 (équilibrage et finitions).
 - **Forgeronne** : elle vend des armes, mais l'amélioration d'armes arrive à l'étape 3. Elle le dit dans son dialogue.
@@ -97,7 +110,7 @@ Matériau maison (`src/moteur3d/materiaux.js`) : 3 tons nets, ombres bleu-violet
 - Page admin complète, enrichie à chaque étape. Totaux = minimums, sauf 1 village et 1 tour par monde.
 - Au moins 25 lieux et 30 coffres par monde.
 - Attaque = arme + 2 × stat ; défense des monstres = 2 + 1,5N ; critique = 5 % + 0,1 % par point de chance (max 50 %).
-- **Rendu cel-shading obligatoire pour tout le monde d'ASTRÉA**.
+- **Rendu cel-shading obligatoire pour tout le monde d'ASTRÉA**. L'herbe, les nuages et le pollen (`src/moteur3d/vegetation.js`) sont ajoutés automatiquement à chaque monde extérieur.
 - Touches lues par position physique (ZQSD en AZERTY = WASD en QWERTY).
   - **Étape 2 : E sert maintenant à interagir.** La compétence est seulement sur 1.
   - R pour la potion, I pour l'inventaire, J pour le journal, M pour la carte.

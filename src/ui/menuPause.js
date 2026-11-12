@@ -38,11 +38,18 @@ export function afficherPause({ options, surReprendre, surExporter, surImporter,
       options.bloom = caseBloom.checked;
       surOptions(options);
     });
+    const caseDetails = el('input', { type: 'checkbox' });
+    caseDetails.checked = options.details !== false;
+    caseDetails.addEventListener('change', () => {
+      options.details = caseDetails.checked;
+      surOptions(options);
+    });
     boite.replaceChildren(
       el('h2', {}, t('pause.options')),
       el('label', {}, t('options.sensibilite'), el('span', {}, curseur, ' ', valeur)),
       el('label', {}, t('options.inverserY'), caseY),
       el('label', {}, t('options.bloom'), caseBloom),
+      el('label', {}, t('options.details'), caseDetails),
       el('button', { class: 'bouton', onclick: principal }, t('options.retour')),
     );
   }

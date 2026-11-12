@@ -30,7 +30,7 @@ import { ecouter, emettre } from './evenements.js';
 import * as sauvegarde from './sauvegarde.js';
 import { debugActif, creerTriche } from '../../outils/triche.js';
 
-const OPTIONS_PAR_DEFAUT = { sensibiliteSouris: 1, inverserY: false, volume: 0.8, bloom: true };
+const OPTIONS_PAR_DEFAUT = { sensibiliteSouris: 1, inverserY: false, volume: 0.8, bloom: true, details: true };
 const MONDE_DEPART = 1;
 
 export function creerJeu(donnees) {
@@ -150,7 +150,16 @@ export function creerJeu(donnees) {
   function chargerMonde(def) {
     jeu.monde?.detruire();
     jeu.monde = creerMonde({ donnees, rendu, heros: jeu.heros, camera: jeu.camera, progression: jeu.progression, quetes: jeu.quetes, actions }, def);
+    appliquerDetails();
     return jeu.monde;
+  }
+
+  // Option « Herbe et particules » : on peut la couper si le jeu manque de fluidité.
+  function appliquerDetails() {
+    const nature = jeu.monde?.nature;
+    if (!nature) return;
+    nature.herbe.groupe.visible = jeu.options.details !== false;
+    nature.pollen.groupe.visible = jeu.options.details !== false;
   }
 
   function defDonjon(id) {
@@ -416,6 +425,7 @@ export function creerJeu(donnees) {
         jeu.camera.etat.sensibilite = options.sensibiliteSouris;
         jeu.camera.etat.inverserY = options.inverserY;
         rendu.definirBloom(options.bloom);
+        appliquerDetails();
       },
     });
   }
@@ -478,6 +488,7 @@ export function creerJeu(donnees) {
         rendu.camera.position.set(c.centre.x + Math.sin(a) * 70, c.centre.y + 25, c.centre.z + Math.cos(a) * 70);
         rendu.camera.lookAt(c.centre.x, c.centre.y - 15, c.centre.z);
         monde.mettreAJour(0, 0);
+        monde.mettreAJourNature(dt);
         if (c.temps >= c.duree) jeu.cinematique = null;
       } else {
         camera.mettreAJour(actif ? dt : 0, actif ? entrees : { souris: { dx: 0, dy: 0, molette: 0 } }, heros.position, monde.cible?.position);

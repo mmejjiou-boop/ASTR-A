@@ -7,6 +7,7 @@
 import * as THREE from 'three';
 import { creerBruit, creerHasard } from '../core/hasard.js';
 import { materiauToon } from './materiaux.js';
+import { fusionner } from './vegetation.js';
 
 const lisser = (a, b, x) => {
   const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
@@ -63,6 +64,9 @@ export function creerTerrain(monde, zonesPlates = []) {
         for (let i = 0; i < r.points.length - 1; i++) {
           d = Math.min(d, distanceSegment(x, z, ...r.points[i], ...r.points[i + 1]));
         }
+        // Vallée large et douce, puis lit de la rivière sous l'eau.
+        const fondVallee = eau.niveau + 2.2;
+        if (d < r.largeur * 9 && h > fondVallee) h = fondVallee + (h - fondVallee) * Math.pow(lisser(r.largeur * 1.5, r.largeur * 9, d), 0.85);
         const lit = eau.niveau - 1.4;
         if (d < r.largeur * 2.2) h = lit + (h - lit) * lisser(r.largeur * 0.5, r.largeur * 2.2, d);
       }
@@ -218,9 +222,24 @@ export function creerTerrain(monde, zonesPlates = []) {
   const lotTaille = Math.min(800, taille);
   const nbLots = Math.max(1, Math.round(taille / lotTaille));
   const lots = [];
-  const geoTronc = new THREE.CylinderGeometry(0.25, 0.38, 2.2, 6);
-  const geoSapin = new THREE.ConeGeometry(1.8, 4.2, 7);
-  const geoFeuillu = new THREE.IcosahedronGeometry(2.1, 0);
+  const geoTronc = new THREE.CylinderGeometry(0.22, 0.4, 2.2, 7);
+  // Sapin : trois étages de cônes. Feuillu : plusieurs boules de feuillage.
+  const geoSapin = fusionner([
+    new THREE.ConeGeometry(1.9, 2.6, 8).translate(0, -1.0, 0),
+    new THREE.ConeGeometry(1.5, 2.3, 8).translate(0, 0.3, 0),
+    new THREE.ConeGeometry(1.05, 2.0, 8).translate(0, 1.5, 0),
+  ]);
+  const geoFeuillu = fusionner([
+    new THREE.IcosahedronGeometry(1.7, 1).translate(0, 0, 0),
+    new THREE.IcosahedronGeometry(1.25, 1).translate(1.1, -0.35, 0.4),
+    new THREE.IcosahedronGeometry(1.2, 1).translate(-0.9, -0.3, -0.6),
+    new THREE.IcosahedronGeometry(1.05, 1).translate(0.2, 0.95, -0.3),
+  ]);
+  const geoBuisson = fusionner([
+    new THREE.IcosahedronGeometry(0.8, 1),
+    new THREE.IcosahedronGeometry(0.6, 1).translate(0.6, -0.15, 0.2),
+    new THREE.IcosahedronGeometry(0.55, 1).translate(-0.5, -0.2, -0.3),
+  ]);
   const geoRocher = new THREE.DodecahedronGeometry(1, 0);
   const matTronc = materiauToon({ color: 0x7a5232, contour: 0.6 });
   const matFeuilles = materiauToon({ color: 0xffffff, contour: 0.8 });
@@ -233,7 +252,7 @@ export function creerTerrain(monde, zonesPlates = []) {
     const li = Math.min(nbLots - 1, Math.floor((x + demi) / lotTaille));
     const lj = Math.min(nbLots - 1, Math.floor((z + demi) / lotTaille));
     const k = lj * nbLots + li;
-    if (!listes.has(k)) listes.set(k, { sapins: [], feuillus: [], rochers: [], cx: -demi + (li + 0.5) * lotTaille, cz: -demi + (lj + 0.5) * lotTaille });
+    if (!listes.has(k)) listes.set(k, { sapins: [], feuillus: [], rochers: [], buissons: [], cx: -demi + (li + 0.5) * lotTaille, cz: -demi + (lj + 0.5) * lotTaille });
     return listes.get(k);
   }
 
@@ -247,6 +266,12 @@ export function creerTerrain(monde, zonesPlates = []) {
     lotDe(x, z)[sapin ? 'sapins' : 'feuillus'].push({ x, z, y: hauteur(x, z), e, a: hasard.entre(0, 6.28), teinte: hasard.entre(-0.05, 0.05) });
     obstacles.push({ type: 'cercle', x, z, r: 0.45 * e, h: 7 * e });
     places++;
+    // Quelques buissons au pied des arbres (on peut les traverser).
+    if (hasard.suivant() < 0.55) {
+      const a = hasard.entre(0, 6.28), d = hasard.entre(1.6, 3.5);
+      const bx = x + Math.cos(a) * d, bz = z + Math.sin(a) * d;
+      if (libre(bx, bz, 2)) lotDe(bx, bz).buissons.push({ x: bx, z: bz, y: hauteur(bx, bz), e: hasard.entre(0.7, 1.3), a: hasard.entre(0, 6.28), teinte: hasard.entre(-0.04, 0.04) });
+    }
   }
   for (let k = 0, places = 0; k < nbRochers * 3 && places < nbRochers; k++) {
     const x = hasard.entre(-demi, demi), z = hasard.entre(-demi, demi);
@@ -278,7 +303,7 @@ export function creerTerrain(monde, zonesPlates = []) {
       q.setFromAxisAngle(axeY, a.a);
       s.set(a.e, a.e, a.e);
       troncs.setMatrixAt(it++, m4.compose(p.set(a.x, a.y + 1.1 * a.e, a.z), q, s));
-      sapins.setMatrixAt(i, m4.compose(p.set(a.x, a.y + 4 * a.e, a.z), q, s));
+      sapins.setMatrixAt(i, m4.compose(p.set(a.x, a.y + 3.9 * a.e, a.z), q, s));
       sapins.setColorAt(i, vert.setHSL(0.3 + a.teinte, 0.5, 0.3));
     });
     liste.feuillus.forEach((a, i) => {
@@ -289,13 +314,20 @@ export function creerTerrain(monde, zonesPlates = []) {
       feuillus.setMatrixAt(i, m4.compose(p.set(a.x, a.y + 3.6 * a.e, a.z), q, s));
       feuillus.setColorAt(i, vert.setHSL(0.24 + a.teinte, 0.55, 0.42));
     });
+    const buissons = instances(geoBuisson, matFeuilles, liste.buissons.length);
+    liste.buissons.forEach((a, i) => {
+      q.setFromAxisAngle(axeY, a.a);
+      s.set(a.e, a.e * 0.8, a.e);
+      buissons.setMatrixAt(i, m4.compose(p.set(a.x, a.y + 0.35 * a.e, a.z), q, s));
+      buissons.setColorAt(i, vert.setHSL(0.26 + a.teinte, 0.5, 0.33));
+    });
     const rochers = instances(geoRocher, matRocher, liste.rochers.length);
     liste.rochers.forEach((r, i) => {
       q.setFromEuler(euler.set(r.rx, r.ry, r.rz));
       s.set(r.r, r.r * r.ay, r.r);
       rochers.setMatrixAt(i, m4.compose(p.set(r.x, r.y + r.r * 0.3, r.z), q, s));
     });
-    for (const im of [troncs, sapins, feuillus, rochers]) {
+    for (const im of [troncs, sapins, feuillus, buissons, rochers]) {
       if (im.count === 0) continue;
       im.computeBoundingSphere();
       groupe.add(im);
@@ -322,8 +354,17 @@ export function creerTerrain(monde, zonesPlates = []) {
     }
   }
 
+  // L'herbe pousse partout sauf dans l'eau, sur les pentes rocheuses et sur la place du village.
+  function surHerbe(x, z) {
+    const h = hauteur(x, z);
+    if (eau && h < eau.niveau + 1.4) return false;
+    if (Math.max(Math.abs(x), Math.abs(z)) > demi - 40) return false;
+    for (const p of plates) if (p.r >= 40 && Math.hypot(x - p.x, z - p.z) < p.r - 25) return false;
+    return normale(x, z, nTmp).y > 0.86;
+  }
+
   return {
-    groupe, hauteur, demi, taille, mettreAJour, couleur,
+    groupe, hauteur, demi, taille, mettreAJour, couleur, surHerbe,
     obstaclesNaturels: obstacles,
     niveauEau: eau ? eau.niveau : -Infinity,
   };
