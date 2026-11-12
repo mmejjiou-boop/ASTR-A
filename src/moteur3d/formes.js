@@ -1,12 +1,13 @@
 // Modèles 3D low poly construits en code (aucun fichier de modèle téléchargé).
 // Tous les modèles regardent vers +z. Les parties animées ont un nom.
 import * as THREE from 'three';
+import { materiauToon } from './materiaux.js';
 
 const cacheMateriaux = new Map();
 function materiau(couleur, options = {}) {
   const cle = couleur + JSON.stringify(options);
   if (!cacheMateriaux.has(cle)) {
-    cacheMateriaux.set(cle, new THREE.MeshStandardMaterial({ color: couleur, flatShading: true, roughness: 0.8, ...options }));
+    cacheMateriaux.set(cle, materiauToon({ color: couleur, ...options }));
   }
   return cacheMateriaux.get(cle);
 }
@@ -187,7 +188,7 @@ export function creerHeros(classe, arme, bouclier) {
   // Bulle du bouclier divin, masquée par défaut.
   const bulle = new THREE.Mesh(
     new THREE.IcosahedronGeometry(1.1, 1),
-    new THREE.MeshStandardMaterial({ color: 0x9fd0ff, transparent: true, opacity: 0.25, emissive: 0x5aa0ff, emissiveIntensity: 0.5, depthWrite: false })
+    materiauToon({ color: 0x9fd0ff, transparent: true, opacity: 0.25, emissive: 0x5aa0ff, emissiveIntensity: 0.6, depthWrite: false })
   );
   bulle.position.y = 1;
   bulle.visible = false;

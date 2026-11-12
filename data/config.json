@@ -126,5 +126,43 @@
   "brouillard": {
     "grille": 256,
     "rayonRevele": 60
+  },
+  "rendu": {
+    "style": "cel-shading",
+    "tons": [
+      0.42,
+      0.72,
+      1.0
+    ],
+    "ombre": {
+      "teinte": "#8580d8",
+      "seuil": 0.6
+    },
+    "contour": {
+      "couleur": "#e6f2ff",
+      "intensite": 0.45,
+      "puissance": 2.2
+    },
+    "hemisphere": {
+      "ciel": "#ffe4bd",
+      "sol": "#6c7cc4",
+      "intensite": 1.35
+    },
+    "soleil": {
+      "couleur": "#fff1d6",
+      "intensite": 2.3,
+      "direction": [
+        0.55,
+        1,
+        0.35
+      ]
+    },
+    "brouillard": 1.5,
+    "bloom": {
+      "force": 0.32,
+      "rayon": 0.45,
+      "seuil": 0.85
+    },
+    "exposition": 1.0
   }
 }

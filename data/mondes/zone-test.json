@@ -13,12 +13,12 @@
     "hauteurMax": 14,
     "echelle": 90,
     "palette": {
-      "sol": "#7fb34a",
-      "sol2": "#a9c95a",
-      "roche": "#8d8576",
-      "eau": "#3f88c5",
-      "ciel": "#9fd4ff",
-      "brume": "#cfe8f5"
+      "sol": "#74b84c",
+      "sol2": "#a8cf62",
+      "roche": "#a59c8a",
+      "eau": "#3f9be0",
+      "ciel": "#5fa8e6",
+      "brume": "#f3e4cf"
     },
     "vegetation": {
       "arbres": 260,

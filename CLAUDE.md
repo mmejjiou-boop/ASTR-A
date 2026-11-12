@@ -18,6 +18,7 @@ Ce fichier est relu au début de chaque session. Il remplace le « contexte perm
 - Combat en temps réel : attaque, compétences, esquive, blocage, verrouillage de la cible.
 - Jeu solo avec PNJ. Sauvegarde locale dans le navigateur + export/import d'un fichier. Pas de serveur avant l'étape 9.
 - Graphismes : 3D low poly générée par le code. Aucun modèle, image, musique ou police téléchargé ou protégé. Inspiré de Zelda BotW sans rien reprendre de Nintendo.
+- **Style de rendu : cel-shading (NPR) façon BotW pour TOUT le monde.** Ne jamais utiliser MeshStandardMaterial/Lambert/Phong : tout objet 3D utilise `materiauToon()` de `src/moteur3d/materiaux.js` (MeshToonMaterial à rampe 3 tons NearestFilter + ombres teintées bleu-violet + rim light Fresnel blanc-bleuté). Scène : HemisphereLight chaude/froide, ciel en dégradé, brouillard exponentiel pastel (FogExp2), bloom léger (UnrealBloomPass, désactivable dans les options). Réglages dans `data/config.json` → `rendu`. Exceptions : effets visuels translucides (MeshBasicMaterial) et ciel (ShaderMaterial).
 - Carte de 100 km² au total : 10 mondes d'environ 3,2 km × 3,2 km (~12 min à pied par monde), chargés par tronçons de 200 m, reliés par des portails. Le jeu doit rester fluide (c'est le plus gros risque technique).
 - Langue : français. Tous les textes affichés sont dans `data/textes/fr.json`.
 - Tout le contenu est dans `data/`. Ajouter un monde ne demande pas de nouveau code.

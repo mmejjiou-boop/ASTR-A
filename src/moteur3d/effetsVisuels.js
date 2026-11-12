@@ -1,6 +1,7 @@
 // Effets visuels : zones annoncées au sol (attaques des monstres), anneaux,
 // traînées de coup, éclats de particules et projectiles.
 import * as THREE from 'three';
+import { materiauToon } from './materiaux.js';
 
 export function creerEffetsVisuels(scene) {
   const actifs = [];
@@ -108,7 +109,7 @@ export function creerEffetsVisuels(scene) {
   // Racines qui sortent du sol.
   function pics(position, rayon, couleur) {
     const groupe = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({ color: couleur, flatShading: true });
+    const mat = materiauToon({ color: couleur });
     for (let i = 0; i < 14; i++) {
       const a = Math.random() * Math.PI * 2, d = Math.random() * rayon;
       const pic = new THREE.Mesh(new THREE.ConeGeometry(0.15, 1.2, 5), mat);

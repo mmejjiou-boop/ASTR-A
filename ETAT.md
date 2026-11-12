@@ -30,6 +30,14 @@ Ensuite : **étape 1b — page admin**, puis **étape 2 — monde 1 complet**.
 - Outil de test avec `?debug=1` : FPS, position, +1 niveau, +100 or, soin, tuer les monstres proches.
 - Vérification du contenu : `node outils/verifier.mjs` ou `outils/verification.html`.
 
+### Style visuel — cel-shading façon Breath of the Wild (demandé le 12/11/2026)
+- Tous les objets du jeu (héros, monstres, terrain, arbres, rochers, effets) utilisent un matériau cel-shading maison (`src/moteur3d/materiaux.js`) : MeshToonMaterial avec rampe à 3 tons (NearestFilter), **ombres teintées bleu-violet** et **liseré lumineux blanc-bleuté** sur les bords (effet Fresnel), ajoutés dans le shader GLSL.
+- Lumière d'hémisphère chaude (ciel) / froide (sol), soleil chaud avec ombres.
+- Ciel en dégradé bleu → horizon pastel, avec halo du soleil.
+- Brouillard exponentiel pastel à l'horizon (FogExp2).
+- Bloom léger en post-traitement (les sorts, gemmes et projectiles brillent). Désactivable dans Options si le jeu rame.
+- Tous les réglages sont dans `data/config.json` → `rendu` (ils seront modifiables depuis la page admin).
+
 ## Tests automatiques passés (navigateur sans écran)
 
 - Créer un personnage, tuer un loup, recharger la page, « Continuer » : même nom, classe, XP, or et position. ✓
@@ -46,7 +54,7 @@ Ensuite : **étape 1b — page admin**, puis **étape 2 — monde 1 complet**.
 
 ## Bugs connus et limites actuelles
 
-- **Performance réelle inconnue** : je n'ai mesuré qu'en rendu logiciel, qui est lent. Lance avec `?debug=1` et donne-moi ton nombre de FPS.
+- **Performance réelle inconnue** : je n'ai mesuré qu'en rendu logiciel, qui est lent (le bloom coûte un peu). Si ça rame, décoche « Effet lumineux (bloom) » dans Options. Lance avec `?debug=1` et donne-moi ton nombre de FPS.
 - L'escalade n'existe pas encore : elle arrive avec la tour à l'étape 2. Les pentes trop raides bloquent la marche.
 - Les 3 petites potions de l'inventaire de départ ne sont pas encore utilisables : l'inventaire arrive à l'étape 3. Elles ne sont affichées nulle part pour l'instant.
 - Pas de son (c'est une option de l'étape 8).
@@ -66,6 +74,8 @@ Ensuite : **étape 1b — page admin**, puis **étape 2 — monde 1 complet**.
 - Ajout des dossiers `src/entites/` (héros, monstre) et `src/monde/monde.js` (fait vivre un monde à partir de ses données).
 - La zone de test (`data/mondes/zone-test.json`) ne compte pas dans les 10 mondes.
 - Au plus 3 monstres annoncent une attaque en même temps, pour que les combats restent lisibles.
+- **Rendu cel-shading obligatoire pour tout le monde d'ASTRÉA** : plus aucun MeshStandardMaterial, tout passe par `materiauToon()`.
+- Post-traitement Three.js (EffectComposer, UnrealBloomPass, OutputPass) copié dans `vendor/addons/`.
 
 ## Totaux actuels (`node outils/verifier.mjs`)
 

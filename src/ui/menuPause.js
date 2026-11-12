@@ -32,10 +32,17 @@ export function afficherPause({ options, surReprendre, surExporter, surImporter,
       options.inverserY = caseY.checked;
       surOptions(options);
     });
+    const caseBloom = el('input', { type: 'checkbox' });
+    caseBloom.checked = options.bloom !== false;
+    caseBloom.addEventListener('change', () => {
+      options.bloom = caseBloom.checked;
+      surOptions(options);
+    });
     boite.replaceChildren(
       el('h2', {}, t('pause.options')),
       el('label', {}, t('options.sensibilite'), el('span', {}, curseur, ' ', valeur)),
       el('label', {}, t('options.inverserY'), caseY),
+      el('label', {}, t('options.bloom'), caseBloom),
       el('button', { class: 'bouton', onclick: principal }, t('options.retour')),
     );
   }

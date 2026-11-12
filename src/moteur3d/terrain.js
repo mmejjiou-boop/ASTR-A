@@ -2,6 +2,7 @@
 // Même graine = même terrain à chaque partie, sans stocker de carte.
 import * as THREE from 'three';
 import { creerBruit, creerHasard } from '../core/hasard.js';
+import { materiauToon } from './materiaux.js';
 
 export function creerTerrain(monde) {
   const { taille, terrain: def } = monde;
@@ -76,7 +77,7 @@ export function creerTerrain(monde) {
   geometrie.setAttribute('color', new THREE.BufferAttribute(couleurs, 3));
   const sol = new THREE.Mesh(
     geometrie,
-    new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.95 })
+    materiauToon({ vertexColors: true, contour: 0 })
   );
   sol.receiveShadow = true;
 
@@ -94,12 +95,12 @@ export function creerTerrain(monde) {
   const nbArbres = def.vegetation?.arbres || 0;
   const tronc = new THREE.InstancedMesh(
     new THREE.CylinderGeometry(0.25, 0.35, 2.2, 6),
-    new THREE.MeshStandardMaterial({ color: 0x6b4a2b, flatShading: true }),
+    materiauToon({ color: 0x7a5232, contour: 0.6 }),
     nbArbres
   );
   const feuillage = new THREE.InstancedMesh(
     new THREE.ConeGeometry(1.8, 4.2, 7),
-    new THREE.MeshStandardMaterial({ color: 0xffffff, flatShading: true, roughness: 0.9 }),
+    materiauToon({ color: 0xffffff, contour: 0.8 }),
     nbArbres
   );
   const m = new THREE.Matrix4();
@@ -131,7 +132,7 @@ export function creerTerrain(monde) {
   const nbRochers = def.vegetation?.rochers || 0;
   const rochers = new THREE.InstancedMesh(
     new THREE.DodecahedronGeometry(1, 0),
-    new THREE.MeshStandardMaterial({ color: def.palette.roche, flatShading: true, roughness: 1 }),
+    materiauToon({ color: def.palette.roche, contour: 0.7 }),
     nbRochers
   );
   let placesRochers = 0;

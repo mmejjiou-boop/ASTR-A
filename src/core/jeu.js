@@ -17,12 +17,12 @@ import { ecouter } from './evenements.js';
 import * as sauvegarde from './sauvegarde.js';
 import { debugActif, creerTriche } from '../../outils/triche.js';
 
-const OPTIONS_PAR_DEFAUT = { sensibiliteSouris: 1, inverserY: false, volume: 0.8 };
+const OPTIONS_PAR_DEFAUT = { sensibiliteSouris: 1, inverserY: false, volume: 0.8, bloom: true };
 
 export function creerJeu(donnees) {
   const { config } = donnees;
   sauvegarde.configurerSauvegarde(config);
-  const rendu = creerRendu(document.getElementById('jeu'));
+  const rendu = creerRendu(document.getElementById('jeu'), config.rendu);
   const entrees = creerEntrees(rendu.rendu.domElement);
   entrees.definirActif(false);
 
@@ -94,6 +94,7 @@ export function creerJeu(donnees) {
     monde = creerMonde(donnees, rendu, defMonde, heros, camera);
     camera.etat.sensibilite = jeu.options.sensibiliteSouris;
     camera.etat.inverserY = jeu.options.inverserY;
+    rendu.definirBloom(jeu.options.bloom);
     if (s) monde.placerHeros(s.position.x, s.position.z, s.position.orientation);
     else monde.placerHeros(defMonde.depart[0], defMonde.depart[1], 0);
     rendu.camera.position.set(heros.position.x, heros.position.y + 4, heros.position.z - 7);
@@ -198,6 +199,7 @@ export function creerJeu(donnees) {
       surOptions: (options) => {
         jeu.camera.etat.sensibilite = options.sensibiliteSouris;
         jeu.camera.etat.inverserY = options.inverserY;
+        rendu.definirBloom(options.bloom);
       },
     });
   }
